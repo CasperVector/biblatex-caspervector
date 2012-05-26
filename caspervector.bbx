@@ -1,0 +1,216 @@
+% vim:ft=tex:ts=2:sw=2
+
+\ProvidesFile{caspervector.bbx}%
+	[2012/?/? v0.1 Casper Ti. Vector's biblatex bibliography style]
+
+\RequireBibliographyStyle{numeric}
+
+\renewcommand{\bibrangedash}{--}
+\renewcommand{\bibdatedash}{-}
+
+\newcommand{\cegen}[2]{\iflistundef{note}{#2}{#1}}
+\newcommand{\mybibquote}[1]{\cegen{“{#1}”}{\mkbibquote{#1}}}
+\newcommand{\cepunct}[2]{\setunit{\cegen{#1}{#2}}}
+\newbibmacro{gencolon}{\cepunct{：}{\addcolon\addspace}}
+\newbibmacro{gencomma}{\cepunct{，}{\addcomma\addspace}}
+\newbibmacro{genscolon}{\cepunct{；}{\addcolon\addspace}}
+\newbibmacro{genperiod}{\cepunct{。}{\addperiod\addspace}}
+\newbibmacro{cein}{\cegen{\printtext{出自}}{\printtext{In}}}
+
+\DeclareFieldFormat*{booktitle}{\mkbibemph{#1}}
+\DeclareFieldFormat*{journaltitle}{\mkbibemph{#1}}
+\DeclareFieldFormat*{title}{\mkbibemph{#1}}
+\DeclareFieldFormat*{year}{\mkbibbold{#1}}
+\DeclareFieldFormat*{volume}{\mkbibemph{#1}}
+\DeclareFieldFormat*{pages}{#1}
+\DeclareFieldFormat*{url}{\url{#1}}
+
+\DeclareFieldFormat[incollection, article]{title}{\mybibquote{#1}}
+\DeclareFieldFormat*{type}{\mkbibbracket{\textsc{#1}}}
+\DeclareFieldFormat*{number}{\mkbibparens{#1}}
+\renewbibmacro{title}{\ifthenelse{\iffieldundef{title}}{}{\printfield{title}}}
+\newbibmacro{type}{\ifthenelse{\iffieldundef{type}}{}{\printfield{type}}}
+\newbibmacro{number}{\ifthenelse{\iffieldundef{number}}{}{\printfield{number}}}
+
+\newbibmacro{ceauthor}{%
+	\ifnameundef{author}{}{%
+		\cegen%
+		{\printnames{author}\printtext{著}}%
+		{\usebibmacro{byauthor}}%
+	}%
+}
+\newbibmacro{ceeditor}{%
+	\ifnameundef{editor}{}{%
+		\cegen%
+		{\printnames{editor}\printtext{编}}%
+		{\usebibmacro{byeditor}}%
+	}%
+}
+\newbibmacro{cetranslator}{%
+	\ifnameundef{translator}{}{%
+		\cegen%
+		{\printnames{translator}\printtext{译}}%
+		{\usebibmacro{bytranslator}}%
+	}%
+}
+\newbibmacro{author+others}{%
+	\ifthenelse%
+	{\ifnameundef{author} \and \ifnameundef{editor} \and \ifnameundef{translator}}%
+	{}%
+	{%
+		\ifthenelse{\ifnameundef{editor} \and \ifnameundef{translator}}%
+		{\printnames{author}}%
+		{%
+			\usebibmacro{ceauthor}\usebibmacro{genscolon}%
+			\usebibmacro{ceeditor}\usebibmacro{genscolon}%
+			\usebibmacro{cetranslator}%
+		}%
+	}%
+}
+
+\newbibmacro{author/holder}{%
+	\ifthenelse{\iffieldundef{author}}%
+		{\printnames{holder}}%
+		{\printnames{author}}%
+}
+\newbibmacro{journaltitle/title}{%
+	\ifthenelse{\iffieldundef{journaltitle}}%
+		{\usebibmacro{title}}%
+		{\printfield{journaltitle}}%
+}
+\newbibmacro{year/date}{%
+	\ifthenelse{\iffieldundef{date}}{\printfield{year}}{\printdate}%
+}
+\newbibmacro{year+volume+number/date}{%
+	\ifthenelse{\iffieldundef{date}}%
+	{%
+		\printfield{year}\usebibmacro{gencomma}%
+		\printfield{volume}%
+		\usebibmacro{number}%
+	}{\printdate}%
+}
+
+\DeclareBibliographyDriver{book}{%
+	\usebibmacro{bibindex}%
+	\newblock
+	\usebibmacro{author+others}\usebibmacro{genperiod}%
+	\newblock
+	\usebibmacro{title}%
+	\usebibmacro{type}\usebibmacro{genperiod}%
+	\newblock
+	\printlist{location}\usebibmacro{gencolon}%
+	\printlist{publisher}\usebibmacro{gencomma}%
+	\usebibmacro{year/date}\usebibmacro{gencolon}%
+	\printfield{pages}\usebibmacro{genperiod}%
+	\newblock
+	\printfield{url}\usebibmacro{gencomma}%
+	\printfield{urldate}\usebibmacro{genperiod}%
+	\usebibmacro{finentry}%
+	\newblock
+	\printfield{addendum}%
+}
+
+\DeclareBibliographyDriver{incollection}{%
+	\usebibmacro{bibindex}%
+	\newblock
+	\usebibmacro{author+others}\usebibmacro{genperiod}%
+	\newblock
+	\usebibmacro{title}%
+	\usebibmacro{type}\usebibmacro{genperiod}%
+	\newblock
+	\usebibmacro{cein}\usebibmacro{gencolon}%
+	\newblock
+	\printnames{bookauthor}\usebibmacro{genperiod}%
+	\newblock
+	\printnames{booktitle}\usebibmacro{genperiod}%
+	\newblock
+	\printlist{location}\usebibmacro{gencolon}%
+	\printlist{publisher}\usebibmacro{gencomma}%
+	\usebibmacro{year/date}\usebibmacro{gencolon}%
+	\printfield{pages}\usebibmacro{genperiod}%
+	\newblock
+	\printfield{url}\usebibmacro{gencomma}%
+	\printfield{urldate}\usebibmacro{genperiod}%
+	\usebibmacro{finentry}%
+	\newblock
+	\printfield{addendum}%
+}
+
+\DeclareBibliographyDriver{periodical}{
+	\usebibmacro{bibindex}%
+	\newblock
+	\usebibmacro{author+others}\usebibmacro{genperiod}%
+	\newblock
+	\usebibmacro{journaltitle/title}\usebibmacro{gencomma}%
+	\usebibmacro{type}\usebibmacro{genperiod}%
+	\newblock
+	\usebibmacro{year+volume+number/date}\usebibmacro{genperiod}%
+	\newblock
+	\printlist{location}\usebibmacro{gencolon}%
+	\printlist{publisher}\usebibmacro{genperiod}%
+	\newblock
+	\printfield{url}\usebibmacro{gencomma}%
+	\printfield{urldate}\usebibmacro{genperiod}%
+	\usebibmacro{finentry}%
+	\newblock
+	\printfield{addendum}%
+}
+
+\DeclareBibliographyDriver{article}{%
+	\usebibmacro{bibindex}%
+	\newblock
+	\printnames{author}\usebibmacro{genperiod}%
+	\newblock
+	\usebibmacro{title}%
+	\usebibmacro{type}\usebibmacro{genperiod}%
+	\newblock
+	\printfield{journaltitle}\usebibmacro{gencomma}%
+	\usebibmacro{year+volume+number/date}\usebibmacro{gencolon}%
+	\printfield{pages}\usebibmacro{genperiod}%
+	\newblock
+	\printfield{url}\usebibmacro{gencomma}%
+	\printfield{urldate}\usebibmacro{genperiod}%
+	\usebibmacro{finentry}%
+	\newblock
+	\printfield{addendum}%
+}
+
+\DeclareBibliographyDriver{patent}{%
+	\usebibmacro{bibindex}%
+	\newblock
+	\usebibmacro{author/holder}\usebibmacro{genperiod}%
+	\newblock
+	\usebibmacro{title}%
+	\usebibmacro{type}\usebibmacro{genperiod}%
+	\newblock
+	\printlist{location}\usebibmacro{gencolon}%
+	\usebibmacro{number}\usebibmacro{genperiod}%
+	\newblock
+	\usebibmacro{year/date}\usebibmacro{gencolon}%
+	\newblock
+	\printfield{url}\usebibmacro{gencomma}%
+	\printfield{urldate}\usebibmacro{genperiod}%
+	\usebibmacro{finentry}%
+	\newblock
+	\printfield{addendum}%
+}
+
+\DeclareBibliographyDriver{online}{%
+	\usebibmacro{bibindex}%
+	\newblock
+	\usebibmacro{author+others}\usebibmacro{genperiod}%
+	\newblock
+	\usebibmacro{title}%
+	\usebibmacro{type}\usebibmacro{genperiod}%
+	\newblock
+	\printlist{location}\usebibmacro{gencolon}%
+	\printlist{publisher}\usebibmacro{gencomma}%
+	\usebibmacro{year/date}\usebibmacro{genperiod}%
+	\newblock
+	\printfield{url}\usebibmacro{gencomma}%
+	\printfield{urldate}\usebibmacro{genperiod}%
+	\usebibmacro{finentry}%
+	\newblock
+	\printfield{addendum}%
+}
+
