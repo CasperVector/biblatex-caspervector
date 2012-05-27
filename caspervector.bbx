@@ -26,7 +26,7 @@
 \DeclareFieldFormat*{url}{\url{#1}}
 
 \DeclareFieldFormat[incollection, article]{title}{\mybibquote{#1}}
-\DeclareFieldFormat*{type}{\mkbibbracket{\textsc{#1}}}
+\DeclareFieldFormat*{type}{\mkbibbrackets{\textsc{#1}}}
 \DeclareFieldFormat*{number}{\mkbibparens{#1}}
 \renewbibmacro{title}{\iffieldundef{title}{}{\printfield{title}}}
 \newbibmacro{type}{\iffieldundef{type}{}{\printfield{type}}}
