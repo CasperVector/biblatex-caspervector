@@ -4,9 +4,9 @@
 	[2012/?/? v0.1 Casper Ti. Vector's biblatex bibliography style]
 
 \RequireBibliographyStyle{numeric}
-
-\renewcommand{\bibrangedash}{--}
-\renewcommand{\bibdatedash}{-}
+\ExecuteBibliographyOptions{
+	alldates = iso8601
+}
 
 \newcommand{\cegen}[2]{\iffieldundef{userf}{#2}{#1}}
 \newcommand{\mybibquote}[1]{\cegen{“{#1}”}{\mkbibquote{#1}}}
@@ -15,7 +15,12 @@
 \newbibmacro{gencomma}{\cepunct{，}{\addcomma\addspace}}
 \newbibmacro{genscolon}{\cepunct{；}{\addcolon\addspace}}
 \newbibmacro{genperiod}{\cepunct{。}{\addperiod\addspace}}
+\newbibmacro{cespace}{\cegen{}{\addspace}}
 \newbibmacro{cein}{\cegen{\printtext{出自}}{\printtext{In}}}
+
+\renewcommand{\bibrangedash}{--}
+\renewcommand{\bibdatedash}{-}
+\renewcommand{\finentrypunct}{\cegen{。}{.}}
 
 \DeclareFieldFormat*{booktitle}{\mkbibemph{#1}}
 \DeclareFieldFormat*{journaltitle}{\mkbibemph{#1}}
@@ -24,10 +29,12 @@
 \DeclareFieldFormat*{volume}{\mkbibemph{#1}}
 \DeclareFieldFormat*{pages}{#1}
 \DeclareFieldFormat*{url}{\url{#1}}
+\DeclareFieldFormat*{urldate}{#1}
 
-\DeclareFieldFormat[incollection, article]{title}{\mybibquote{#1}}
+\DeclareFieldFormat[incollection, article]{title}{\mybibquote{\mkbibemph{#1}}}
 \DeclareFieldFormat*{type}{\mkbibbrackets{\textsc{#1}}}
 \DeclareFieldFormat*{number}{\mkbibparens{#1}}
+\DeclareFieldFormat[patent]{number}{#1}
 \renewbibmacro{title}{\iffieldundef{title}{}{\printfield{title}}}
 \newbibmacro{type}{\iffieldundef{type}{}{\printfield{type}}}
 \newbibmacro{number}{\iffieldundef{number}{}{\printfield{number}}}
@@ -54,10 +61,10 @@
 	}%
 }
 \newbibmacro{urldate}{%
-	\ifnameundef{urldate}{}{%
-		\printtext{\cegen{引用于 }{referenced on\addspace}}%
-		\printfield{urldate}
-	}
+	\iffieldundef{urldate}{}{%
+		\printtext{\cegen{检索于 }{retrieved on\addspace}}%
+		\printurldate%
+	}%
 }
 
 \newbibmacro{author+others}{%
@@ -75,7 +82,10 @@
 	}%
 }
 \newbibmacro{author/holder}{%
-	\iffieldundef{author}{\printnames{holder}}{\printnames{author}}%
+	\iffieldundef{holder}{\printnames{author}}{\printnames{holder}}%
+}
+\newbibmacro{bookauthor/organization}{%
+	\iffieldundef{bookauthor}{\printnames{organization}}{\printnames{bookauthor}}%
 }
 \newbibmacro{journaltitle/title}{%
 	\iffieldundef{journaltitle}{\usebibmacro{title}}{\printfield{journaltitle}}%
@@ -97,7 +107,7 @@
 	\newblock
 	\usebibmacro{author+others}\usebibmacro{genperiod}%
 	\newblock
-	\usebibmacro{title}%
+	\usebibmacro{title}\usebibmacro{cespace}%
 	\usebibmacro{type}\usebibmacro{genperiod}%
 	\newblock
 	\printlist{location}\usebibmacro{gencolon}%
@@ -106,7 +116,7 @@
 	\printfield{pages}\usebibmacro{genperiod}%
 	\newblock
 	\printfield{url}\usebibmacro{gencomma}%
-	\printfield{urldate}\usebibmacro{genperiod}%
+	\usebibmacro{urldate}\usebibmacro{genperiod}%
 	\usebibmacro{finentry}%
 	\newblock
 	\printfield{addendum}%
@@ -117,12 +127,12 @@
 	\newblock
 	\usebibmacro{author+others}\usebibmacro{genperiod}%
 	\newblock
-	\usebibmacro{title}%
+	\usebibmacro{title}\usebibmacro{cespace}%
 	\usebibmacro{type}\usebibmacro{genperiod}%
 	\newblock
 	\usebibmacro{cein}\usebibmacro{gencolon}%
 	\newblock
-	\printnames{bookauthor}\usebibmacro{genperiod}%
+	\printnames{bookauthor/organization}\usebibmacro{genperiod}%
 	\newblock
 	\printnames{booktitle}\usebibmacro{genperiod}%
 	\newblock
@@ -132,18 +142,18 @@
 	\printfield{pages}\usebibmacro{genperiod}%
 	\newblock
 	\printfield{url}\usebibmacro{gencomma}%
-	\printfield{urldate}\usebibmacro{genperiod}%
+	\usebibmacro{urldate}\usebibmacro{genperiod}%
 	\usebibmacro{finentry}%
 	\newblock
 	\printfield{addendum}%
 }
 
-\DeclareBibliographyDriver{periodical}{
+\DeclareBibliographyDriver{periodical}{%
 	\usebibmacro{bibindex}%
 	\newblock
 	\usebibmacro{author+others}\usebibmacro{genperiod}%
 	\newblock
-	\usebibmacro{journaltitle/title}\usebibmacro{gencomma}%
+	\usebibmacro{journaltitle/title}\usebibmacro{cespace}%
 	\usebibmacro{type}\usebibmacro{genperiod}%
 	\newblock
 	\usebibmacro{year+volume+number/date}\usebibmacro{genperiod}%
@@ -152,7 +162,7 @@
 	\printlist{publisher}\usebibmacro{genperiod}%
 	\newblock
 	\printfield{url}\usebibmacro{gencomma}%
-	\printfield{urldate}\usebibmacro{genperiod}%
+	\usebibmacro{urldate}\usebibmacro{genperiod}%
 	\usebibmacro{finentry}%
 	\newblock
 	\printfield{addendum}%
@@ -163,7 +173,7 @@
 	\newblock
 	\printnames{author}\usebibmacro{genperiod}%
 	\newblock
-	\usebibmacro{title}%
+	\usebibmacro{title}\usebibmacro{cespace}%
 	\usebibmacro{type}\usebibmacro{genperiod}%
 	\newblock
 	\printfield{journaltitle}\usebibmacro{gencomma}%
@@ -171,7 +181,7 @@
 	\printfield{pages}\usebibmacro{genperiod}%
 	\newblock
 	\printfield{url}\usebibmacro{gencomma}%
-	\printfield{urldate}\usebibmacro{genperiod}%
+	\usebibmacro{urldate}\usebibmacro{genperiod}%
 	\usebibmacro{finentry}%
 	\newblock
 	\printfield{addendum}%
@@ -182,16 +192,16 @@
 	\newblock
 	\usebibmacro{author/holder}\usebibmacro{genperiod}%
 	\newblock
-	\usebibmacro{title}%
+	\usebibmacro{title}\usebibmacro{cespace}%
 	\usebibmacro{type}\usebibmacro{genperiod}%
 	\newblock
 	\printlist{location}\usebibmacro{gencolon}%
 	\usebibmacro{number}\usebibmacro{genperiod}%
 	\newblock
-	\usebibmacro{year/date}\usebibmacro{gencolon}%
+	\usebibmacro{year/date}\usebibmacro{genperiod}%
 	\newblock
 	\printfield{url}\usebibmacro{gencomma}%
-	\printfield{urldate}\usebibmacro{genperiod}%
+	\usebibmacro{urldate}\usebibmacro{genperiod}%
 	\usebibmacro{finentry}%
 	\newblock
 	\printfield{addendum}%
@@ -202,7 +212,7 @@
 	\newblock
 	\usebibmacro{author+others}\usebibmacro{genperiod}%
 	\newblock
-	\usebibmacro{title}%
+	\usebibmacro{title}\usebibmacro{cespace}%
 	\usebibmacro{type}\usebibmacro{genperiod}%
 	\newblock
 	\printlist{location}\usebibmacro{gencolon}%
@@ -210,9 +220,21 @@
 	\usebibmacro{year/date}\usebibmacro{genperiod}%
 	\newblock
 	\printfield{url}\usebibmacro{gencomma}%
-	\printfield{urldate}\usebibmacro{genperiod}%
+	\usebibmacro{urldate}\usebibmacro{genperiod}%
 	\usebibmacro{finentry}%
 	\newblock
 	\printfield{addendum}%
 }
+
+\DeclareBibliographyAlias{booklet}{book}
+\DeclareBibliographyAlias{collection}{book}
+\DeclareBibliographyAlias{manual}{book}
+\DeclareBibliographyAlias{misc}{book}
+\DeclareBibliographyAlias{proceedings}{book}
+\DeclareBibliographyAlias{report}{book}
+\DeclareBibliographyAlias{thesis}{book}
+\DeclareBibliographyAlias{unpublished}{book}
+\DeclareBibliographyAlias{inbook}{incollection}
+\DeclareBibliographyAlias{inproceedings}{incollection}
+\DeclareBibliographyAlias{*}{book}
 
