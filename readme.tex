@@ -1,5 +1,9 @@
-\documentclass{ctexart}
+\documentclass[UTF8, fancyhdr]{ctexart}
+\usepackage[margin = 2cm, centering, includefoot]{geometry}
 \usepackage[backend = biber, style = caspervector]{biblatex}
+
+\pagestyle{fancy}\fancyhf{}\cfoot{\thepage}
+\renewcommand{\headrulewidth}{0pt}
 \addbibresource{example.bib}
 
 \begin{document}
