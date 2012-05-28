@@ -10,17 +10,24 @@
 
 \newcommand{\cegen}[2]{\iffieldundef{userf}{#2}{#1}}
 \newcommand{\mybibquote}[1]{\cegen{“{#1}”}{\mkbibquote{#1}}}
-\newcommand{\cepunct}[2]{\setunit{\cegen{#1}{#2}}}
-\newbibmacro{gencolon}{\cepunct{：}{\addcolon\addspace}}
-\newbibmacro{gencomma}{\cepunct{，}{\addcomma\addspace}}
-\newbibmacro{genscolon}{\cepunct{；}{\addcolon\addspace}}
-\newbibmacro{genperiod}{\cepunct{。}{\addperiod\addspace}}
-\newbibmacro{cespace}{\cegen{}{\addspace}}
-\newbibmacro{cein}{\cegen{\printtext{出自}}{\printtext{In}}}
+\newcommand{\cecolon}{\cegen{：}{\addcolon\addspace}}
+\newcommand{\cecomma}{\cegen{，}{\addcomma\addspace}}
+\newcommand{\cescolon}{\cegen{；}{\addcolon\addspace}}
+\newcommand{\ceperiod}{\cegen{。}{\addperiod\addspace}}
+\newcommand{\cespace}{\cegen{}{\addspace}}
+\newbibmacro{cecolon}{\setunit{\cecolon}}
+\newbibmacro{cecomma}{\setunit{\cecomma}}
+\newbibmacro{cescolon}{\setunit{\cescolon}}
+\newbibmacro{ceperiod}{\setunit{\ceperiod}}
+\newbibmacro{cespace}{\setunit{\cespace}}
+\newbibmacro{cein}{\printtext{\cegen{出自}{In}}}
 
 \renewcommand{\bibrangedash}{--}
 \renewcommand{\bibdatedash}{-}
 \renewcommand{\finentrypunct}{\cegen{。}{.}}
+\renewcommand{\multinamedelim}{\cecomma}
+\renewcommand{\finalnamedelim}{\cegen{，}{\addspace\bibstring{and}\space}}
+\renewcommand{\andothersdelim}{\cespace}
 
 \DeclareFieldFormat*{booktitle}{\mkbibemph{#1}}
 \DeclareFieldFormat*{journaltitle}{\mkbibemph{#1}}
@@ -39,6 +46,10 @@
 \renewbibmacro{title}{\iffieldundef{title}{}{\printfield{title}}}
 \newbibmacro{type}{\iffieldundef{type}{}{\printfield{type}}}
 \newbibmacro{number}{\iffieldundef{number}{}{\printfield{number}}}
+
+\DefineBibliographyStrings{english}{%
+	andothers = {\cegen{等}{\mkbibemph{et{\addabbrvspace}al.}}}
+}
 
 \newbibmacro{ceauthor}{%
 	\ifnameundef{author}{}{%
@@ -62,7 +73,7 @@
 	}%
 }
 \newbibmacro{urldate}{%
-	\iffieldundef{urldate}{}{%
+	\iffieldundef{urlyear}{}{%
 		\printtext{\cegen{检索于 }{retrieved on\addspace}}%
 		\printurldate%
 	}%
@@ -76,8 +87,8 @@
 		\ifthenelse{\ifnameundef{editor} \and \ifnameundef{translator}}%
 		{\printnames{author}}%
 		{%
-			\usebibmacro{ceauthor}\usebibmacro{genscolon}%
-			\usebibmacro{ceeditor}\usebibmacro{genscolon}%
+			\usebibmacro{ceauthor}\usebibmacro{cescolon}%
+			\usebibmacro{ceeditor}\usebibmacro{cescolon}%
 			\usebibmacro{cetranslator}%
 		}%
 	}%
@@ -92,12 +103,13 @@
 	\iffieldundef{journaltitle}{\usebibmacro{title}}{\printfield{journaltitle}}%
 }
 \newbibmacro{year/date}{%
-	\iffieldundef{date}{\printfield{year}}{\printdate}%
+	\ifthenelse{\iffieldundef{month} \and \iffieldundef{day}}%
+	{\printfield{year}}{\printdate}%
 }
 \newbibmacro{year+volume+number/date}{%
-	\iffieldundef{date}%
+	\ifthenelse{\iffieldundef{month} \and \iffieldundef{day}}%
 	{%
-		\printfield{year}\usebibmacro{gencomma}%
+		\printfield{year}\usebibmacro{cecomma}%
 		\printfield{volume}%
 		\usebibmacro{number}%
 	}{\printdate}%
@@ -106,18 +118,18 @@
 \DeclareBibliographyDriver{book}{%
 	\usebibmacro{bibindex}%
 	\newblock
-	\usebibmacro{author+others}\usebibmacro{genperiod}%
+	\usebibmacro{author+others}\usebibmacro{ceperiod}%
 	\newblock
 	\usebibmacro{title}\usebibmacro{cespace}%
-	\usebibmacro{type}\usebibmacro{genperiod}%
+	\usebibmacro{type}\usebibmacro{ceperiod}%
 	\newblock
-	\printlist{location}\usebibmacro{gencolon}%
-	\printlist{publisher}\usebibmacro{gencomma}%
-	\usebibmacro{year/date}\usebibmacro{gencolon}%
-	\printfield{pages}\usebibmacro{genperiod}%
+	\printlist{location}\usebibmacro{cecolon}%
+	\printlist{publisher}\usebibmacro{cecomma}%
+	\usebibmacro{year/date}\usebibmacro{cecolon}%
+	\printfield{pages}\usebibmacro{ceperiod}%
 	\newblock
-	\printfield{url}\usebibmacro{gencomma}%
-	\usebibmacro{urldate}\usebibmacro{genperiod}%
+	\printfield{url}\usebibmacro{cecomma}%
+	\usebibmacro{urldate}\usebibmacro{ceperiod}%
 	\usebibmacro{finentry}%
 	\newblock
 	\printfield{addendum}%
@@ -126,24 +138,24 @@
 \DeclareBibliographyDriver{incollection}{%
 	\usebibmacro{bibindex}%
 	\newblock
-	\usebibmacro{author+others}\usebibmacro{genperiod}%
+	\usebibmacro{author+others}\usebibmacro{ceperiod}%
 	\newblock
 	\usebibmacro{title}\usebibmacro{cespace}%
-	\usebibmacro{type}\usebibmacro{genperiod}%
+	\usebibmacro{type}\usebibmacro{ceperiod}%
 	\newblock
-	\usebibmacro{cein}\usebibmacro{gencolon}%
+	\usebibmacro{cein}\usebibmacro{cecolon}%
 	\newblock
-	\usebibmacro{bookauthor/organization}\usebibmacro{genperiod}%
+	\usebibmacro{bookauthor/organization}\usebibmacro{ceperiod}%
 	\newblock
-	\printfield{booktitle}\usebibmacro{genperiod}%
+	\printfield{booktitle}\usebibmacro{ceperiod}%
 	\newblock
-	\printlist{location}\usebibmacro{gencolon}%
-	\printlist{publisher}\usebibmacro{gencomma}%
-	\usebibmacro{year/date}\usebibmacro{gencolon}%
-	\printfield{pages}\usebibmacro{genperiod}%
+	\printlist{location}\usebibmacro{cecolon}%
+	\printlist{publisher}\usebibmacro{cecomma}%
+	\usebibmacro{year/date}\usebibmacro{cecolon}%
+	\printfield{pages}\usebibmacro{ceperiod}%
 	\newblock
-	\printfield{url}\usebibmacro{gencomma}%
-	\usebibmacro{urldate}\usebibmacro{genperiod}%
+	\printfield{url}\usebibmacro{cecomma}%
+	\usebibmacro{urldate}\usebibmacro{ceperiod}%
 	\usebibmacro{finentry}%
 	\newblock
 	\printfield{addendum}%
@@ -152,18 +164,18 @@
 \DeclareBibliographyDriver{periodical}{%
 	\usebibmacro{bibindex}%
 	\newblock
-	\usebibmacro{author+others}\usebibmacro{genperiod}%
+	\usebibmacro{author+others}\usebibmacro{ceperiod}%
 	\newblock
 	\usebibmacro{journaltitle/title}\usebibmacro{cespace}%
-	\usebibmacro{type}\usebibmacro{genperiod}%
+	\usebibmacro{type}\usebibmacro{ceperiod}%
 	\newblock
-	\usebibmacro{year+volume+number/date}\usebibmacro{genperiod}%
+	\usebibmacro{year+volume+number/date}\usebibmacro{ceperiod}%
 	\newblock
-	\printlist{location}\usebibmacro{gencolon}%
-	\printlist{publisher}\usebibmacro{genperiod}%
+	\printlist{location}\usebibmacro{cecolon}%
+	\printlist{publisher}\usebibmacro{ceperiod}%
 	\newblock
-	\printfield{url}\usebibmacro{gencomma}%
-	\usebibmacro{urldate}\usebibmacro{genperiod}%
+	\printfield{url}\usebibmacro{cecomma}%
+	\usebibmacro{urldate}\usebibmacro{ceperiod}%
 	\usebibmacro{finentry}%
 	\newblock
 	\printfield{addendum}%
@@ -172,17 +184,17 @@
 \DeclareBibliographyDriver{article}{%
 	\usebibmacro{bibindex}%
 	\newblock
-	\printnames{author}\usebibmacro{genperiod}%
+	\printnames{author}\usebibmacro{ceperiod}%
 	\newblock
 	\usebibmacro{title}\usebibmacro{cespace}%
-	\usebibmacro{type}\usebibmacro{genperiod}%
+	\usebibmacro{type}\usebibmacro{ceperiod}%
 	\newblock
-	\printfield{journaltitle}\usebibmacro{gencomma}%
-	\usebibmacro{year+volume+number/date}\usebibmacro{gencolon}%
-	\printfield{pages}\usebibmacro{genperiod}%
+	\printfield{journaltitle}\usebibmacro{cecomma}%
+	\usebibmacro{year+volume+number/date}\usebibmacro{cecolon}%
+	\printfield{pages}\usebibmacro{ceperiod}%
 	\newblock
-	\printfield{url}\usebibmacro{gencomma}%
-	\usebibmacro{urldate}\usebibmacro{genperiod}%
+	\printfield{url}\usebibmacro{cecomma}%
+	\usebibmacro{urldate}\usebibmacro{ceperiod}%
 	\usebibmacro{finentry}%
 	\newblock
 	\printfield{addendum}%
@@ -191,18 +203,18 @@
 \DeclareBibliographyDriver{patent}{%
 	\usebibmacro{bibindex}%
 	\newblock
-	\usebibmacro{author/holder}\usebibmacro{genperiod}%
+	\usebibmacro{author/holder}\usebibmacro{ceperiod}%
 	\newblock
 	\usebibmacro{title}\usebibmacro{cespace}%
-	\usebibmacro{type}\usebibmacro{genperiod}%
+	\usebibmacro{type}\usebibmacro{ceperiod}%
 	\newblock
-	\printlist{location}\usebibmacro{gencolon}%
-	\usebibmacro{number}\usebibmacro{genperiod}%
+	\printlist{location}\usebibmacro{cecolon}%
+	\usebibmacro{number}\usebibmacro{ceperiod}%
 	\newblock
-	\usebibmacro{year/date}\usebibmacro{genperiod}%
+	\usebibmacro{year/date}\usebibmacro{ceperiod}%
 	\newblock
-	\printfield{url}\usebibmacro{gencomma}%
-	\usebibmacro{urldate}\usebibmacro{genperiod}%
+	\printfield{url}\usebibmacro{cecomma}%
+	\usebibmacro{urldate}\usebibmacro{ceperiod}%
 	\usebibmacro{finentry}%
 	\newblock
 	\printfield{addendum}%
@@ -211,17 +223,17 @@
 \DeclareBibliographyDriver{online}{%
 	\usebibmacro{bibindex}%
 	\newblock
-	\usebibmacro{author+others}\usebibmacro{genperiod}%
+	\usebibmacro{author+others}\usebibmacro{ceperiod}%
 	\newblock
 	\usebibmacro{title}\usebibmacro{cespace}%
-	\usebibmacro{type}\usebibmacro{genperiod}%
+	\usebibmacro{type}\usebibmacro{ceperiod}%
 	\newblock
-	\printlist{location}\usebibmacro{gencolon}%
-	\printlist{publisher}\usebibmacro{gencomma}%
-	\usebibmacro{year/date}\usebibmacro{genperiod}%
+	\printlist{location}\usebibmacro{cecolon}%
+	\printlist{publisher}\usebibmacro{cecomma}%
+	\usebibmacro{year/date}\usebibmacro{ceperiod}%
 	\newblock
-	\printfield{url}\usebibmacro{gencomma}%
-	\usebibmacro{urldate}\usebibmacro{genperiod}%
+	\printfield{url}\usebibmacro{cecomma}%
+	\usebibmacro{urldate}\usebibmacro{ceperiod}%
 	\usebibmacro{finentry}%
 	\newblock
 	\printfield{addendum}%
