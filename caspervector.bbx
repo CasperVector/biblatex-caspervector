@@ -31,7 +31,8 @@
 \DeclareFieldFormat*{url}{\url{#1}}
 \DeclareFieldFormat*{urldate}{#1}
 
-\DeclareFieldFormat[incollection, article]{title}{\mybibquote{\mkbibemph{#1}}}
+\DeclareFieldFormat[inbook, inproceedings, incollection, article]%
+	{title}{\mybibquote{\mkbibemph{#1}}}
 \DeclareFieldFormat*{type}{\mkbibbrackets{\textsc{#1}}}
 \DeclareFieldFormat*{number}{\mkbibparens{#1}}
 \DeclareFieldFormat[patent]{number}{#1}
@@ -82,10 +83,10 @@
 	}%
 }
 \newbibmacro{author/holder}{%
-	\iffieldundef{holder}{\printnames{author}}{\printnames{holder}}%
+	\ifnameundef{holder}{\printnames{author}}{\printnames{holder}}%
 }
 \newbibmacro{bookauthor/organization}{%
-	\iffieldundef{bookauthor}{\printnames{organization}}{\printnames{bookauthor}}%
+	\ifnameundef{bookauthor}{\printnames{organization}}{\printnames{bookauthor}}%
 }
 \newbibmacro{journaltitle/title}{%
 	\iffieldundef{journaltitle}{\usebibmacro{title}}{\printfield{journaltitle}}%
@@ -132,9 +133,9 @@
 	\newblock
 	\usebibmacro{cein}\usebibmacro{gencolon}%
 	\newblock
-	\printnames{bookauthor/organization}\usebibmacro{genperiod}%
+	\usebibmacro{bookauthor/organization}\usebibmacro{genperiod}%
 	\newblock
-	\printnames{booktitle}\usebibmacro{genperiod}%
+	\printfield{booktitle}\usebibmacro{genperiod}%
 	\newblock
 	\printlist{location}\usebibmacro{gencolon}%
 	\printlist{publisher}\usebibmacro{gencomma}%
