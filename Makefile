@@ -1,11 +1,11 @@
 doc:
 	xelatex readme
-	biber readme
+	biber -f -l zh_CN.UTF-8 readme
 	xelatex readme
 
-clear:
+clean:
 	rm -f readme.{aux,bbl,bcf,blg,log,run.xml}
 
-clean: clear
+dist-clean: clean
 	rm -f readme.pdf
 
