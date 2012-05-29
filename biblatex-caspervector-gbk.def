@@ -1,0 +1,48 @@
+% vim:ft=tex:ts=2:sw=2
+
+\ProvidesFile{biblatex-caspervector-gbk.def}%
+	[2012/?/? v0.1 Chinese punctuations in GBK]
+
+\AtBeginBibliography{%
+	\def\cncomma{，}
+	\def\cnscolon{；}
+	\def\cncolon{：}
+	\def\cnperiod{。}%
+}
+
+\DefineBibliographyStrings{english}{%
+	andmore = {\cegen{等}{\mkbibemph{et\addabbrvspace al\adddot}}},
+	andothers = {\cegen{等}{\mkbibemph{et\addabbrvspace al\adddot}}},
+	bibliography = {参考文献},
+	references = {参考文献}
+}
+
+\newbibmacro{cein:}{\printtext{\cegen{出自}{In}\cecolon}}
+\newbibmacro{cebyauthor}{%
+	\ifnameundef{author}{}{%
+		\cegen%
+		{\printnames{author}\printtext{著}}%
+		{\usebibmacro{byauthor}}%
+	}%
+}
+\newbibmacro{cebyeditor}{%
+	\ifnameundef{editor}{}{%
+		\cegen%
+		{\printnames{editor}\printtext{编}}%
+		{\usebibmacro{byeditor}}%
+	}%
+}
+\newbibmacro{cebytranslator}{%
+	\ifnameundef{translator}{}{%
+		\cegen%
+		{\printnames{translator}\printtext{译}}%
+		{\usebibmacro{bytranslator}}%
+	}%
+}
+\newbibmacro{urldate}{%
+	\iffieldundef{urlyear}{}{%
+		\printtext{\cegen{检索于 }{retrieved on\addspace}}%
+		\printurldate%
+	}%
+}
+

@@ -4,23 +4,36 @@
 	[2012/?/? v0.1 Casper Ti. Vector's biblatex bibliography style]
 
 \RequireBibliographyStyle{numeric}
+
+\newtoggle{bbx:utf8}
+\DeclareBibliographyOption{utf8}[true]{\settoggle{bbx:utf8}{#1}}
 \ExecuteBibliographyOptions{
-	alldates = iso8601
+	alldates = iso8601,
+	utf8 = false
+}
+\AtEndOfPackage{%
+	\iftoggle{bbx:utf8}{
+		\input{biblatex-caspervector-utf8.def}
+		\ExecuteBibliographyOptions{texencoding = UTF-8}
+	}{
+		\input{biblatex-caspervector-gbk.def}
+		\ExecuteBibliographyOptions{texencoding = GBK}
+	}%
 }
 
-\AtBeginBibliography{
+\AtBeginBibliography{%
 	\providecommand{\cegen}[2]{\iffieldundef{userf}{#2}{#1}}
 	\providecommand{\mybibquote}[1]{\cegen{“{#1}”}{\mkbibquote{#1}}}
-	\providecommand{\cecolon}{\cegen{：}{\addcolon\addspace}}
-	\providecommand{\cecomma}{\cegen{，}{\addcomma\addspace}}
-	\providecommand{\cescolon}{\cegen{；}{\addcolon\addspace}}
-	\providecommand{\ceperiod}{\cegen{。}{\addperiod\addspace}}
+	\providecommand{\cecomma}{\cegen{\cncomma}{\addcomma\addspace}}
+	\providecommand{\cecolon}{\cegen{\cncolon}{\addcolon\addspace}}
+	\providecommand{\cescolon}{\cegen{\cnscolon}{\addcolon\addspace}}
+	\providecommand{\ceperiod}{\cegen{\cnperiod}{\addperiod\addspace}}
 	\providecommand{\cespace}{\cegen{}{\addspace}}
 
-	\renewcommand{\finentrypunct}{\cegen{。}{.}}
+	\renewcommand{\finentrypunct}{\cegen{\cnperiod}{.}}
 	\renewcommand{\multinamedelim}{\cecomma}
-	\renewcommand{\finalnamedelim}{\cegen{，}{\addspace\bibstring{and}\space}}
-	\renewcommand{\andothersdelim}{\cespace}
+	\renewcommand{\finalnamedelim}{\cegen{\cncomma}{\addspace\bibstring{and}\space}}
+	\renewcommand{\andothersdelim}{\cespace}%
 }
 
 \DeclareFieldFormat*{booktitle}{\mkbibemph{#1}}
@@ -41,47 +54,11 @@
 \newbibmacro{type}{\iffieldundef{type}{}{\printfield{type}}}
 \newbibmacro{number}{\iffieldundef{number}{}{\printfield{number}}}
 
-\DefineBibliographyStrings{english}{%
-	andmore = {\cegen{等}{\mkbibemph{et\addabbrvspace al\adddot}}},
-	andothers = {\cegen{等}{\mkbibemph{et\addabbrvspace al\adddot}}},
-	bibliography = {参考文献},
-	references = {参考文献}
-}
-
 \newbibmacro{cecolon}{\setunit{\cecolon}}
 \newbibmacro{cecomma}{\setunit{\cecomma}}
 \newbibmacro{cescolon}{\setunit{\cescolon}}
 \newbibmacro{ceperiod}{\setunit{\ceperiod}}
 \newbibmacro{cespace}{\setunit{\cespace}}
-\newbibmacro{cein:}{\printtext{\cegen{出自}{In}\cecolon}}
-
-\newbibmacro{cebyauthor}{%
-	\ifnameundef{author}{}{%
-		\cegen%
-		{\printnames{author}\printtext{著}}%
-		{\usebibmacro{byauthor}}%
-	}%
-}
-\newbibmacro{cebyeditor}{%
-	\ifnameundef{editor}{}{%
-		\cegen%
-		{\printnames{editor}\printtext{编}}%
-		{\usebibmacro{byeditor}}%
-	}%
-}
-\newbibmacro{cebytranslator}{%
-	\ifnameundef{translator}{}{%
-		\cegen%
-		{\printnames{translator}\printtext{译}}%
-		{\usebibmacro{bytranslator}}%
-	}%
-}
-\newbibmacro{urldate}{%
-	\iffieldundef{urlyear}{}{%
-		\printtext{\cegen{检索于 }{retrieved on\addspace}}%
-		\printurldate%
-	}%
-}
 
 \newbibmacro{author+others}{%
 	\ifthenelse%
