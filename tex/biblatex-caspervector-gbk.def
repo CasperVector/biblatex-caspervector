@@ -4,6 +4,8 @@
 	[2012/?/? v0.1 Chinese punctuations in GBK]
 
 \InitializeBibliographyStyle{%
+	\def\cnldquot{¡°}
+	\def\cnrdquot{¡±}
 	\def\cncomma{£¬}
 	\def\cnscolon{£»}
 	\def\cncolon{£º}
