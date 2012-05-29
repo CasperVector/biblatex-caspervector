@@ -20,7 +20,7 @@
 \newbibmacro{cescolon}{\setunit{\cescolon}}
 \newbibmacro{ceperiod}{\setunit{\ceperiod}}
 \newbibmacro{cespace}{\setunit{\cespace}}
-\newbibmacro{cein}{\printtext{\cegen{出自}{In}}}
+\newbibmacro{cein:}{\printtext{\cegen{出自}{In}\cecolon}}
 
 \renewcommand{\finentrypunct}{\cegen{。}{.}}
 \renewcommand{\multinamedelim}{\cecomma}
@@ -47,24 +47,26 @@
 
 \DefineBibliographyStrings{english}{%
 	andmore = {\cegen{等}{\mkbibemph{et\addabbrvspace al\adddot}}},
-	andothers = {\cegen{等}{\mkbibemph{et\addabbrvspace al\adddot}}}
+	andothers = {\cegen{等}{\mkbibemph{et\addabbrvspace al\adddot}}},
+	bibliography = {参考文献},
+	references = {参考文献}
 }
 
-\newbibmacro{ceauthor}{%
+\newbibmacro{cebyauthor}{%
 	\ifnameundef{author}{}{%
 		\cegen%
 		{\printnames{author}\printtext{著}}%
 		{\usebibmacro{byauthor}}%
 	}%
 }
-\newbibmacro{ceeditor}{%
+\newbibmacro{cebyeditor}{%
 	\ifnameundef{editor}{}{%
 		\cegen%
 		{\printnames{editor}\printtext{编}}%
 		{\usebibmacro{byeditor}}%
 	}%
 }
-\newbibmacro{cetranslator}{%
+\newbibmacro{cebytranslator}{%
 	\ifnameundef{translator}{}{%
 		\cegen%
 		{\printnames{translator}\printtext{译}}%
@@ -86,19 +88,11 @@
 		\ifthenelse{\ifnameundef{editor} \and \ifnameundef{translator}}%
 		{\printnames{author}}%
 		{%
-			\usebibmacro{ceauthor}\usebibmacro{cescolon}%
-			\usebibmacro{ceeditor}\usebibmacro{cescolon}%
-			\usebibmacro{cetranslator}%
+			\usebibmacro{cebyauthor}\usebibmacro{cescolon}%
+			\usebibmacro{cebyeditor}\usebibmacro{cescolon}%
+			\usebibmacro{cebytranslator}%
 		}%
 	}%
-}
-\newbibmacro{holder/author}{%
-	\ifnameundef{holder}{\printnames{author}}{\printnames{holder}}%
-}
-\newbibmacro{organization/bookauthor+ceperiod}{%
-	\iflistundef{organization}
-	{\ifnameundef{bookauthor}{}{\printnames{bookauthor}\usebibmacro{ceperiod}}}%
-	{\printlist{organization}\usebibmacro{ceperiod}}%
 }
 \newbibmacro{journaltitle/title}{%
 	\iffieldundef{journaltitle}{\usebibmacro{title}}{\printfield{journaltitle}}%
@@ -144,9 +138,9 @@
 	\usebibmacro{title}\usebibmacro{cespace}%
 	\usebibmacro{type}\usebibmacro{ceperiod}%
 	\newblock
-	\usebibmacro{cein}\usebibmacro{cecolon}%
+	\usebibmacro{cein:}%
 	\newblock
-	\usebibmacro{organization/bookauthor+ceperiod}%
+	\printnames{bookauthor}\usebibmacro{ceperiod}%
 	\newblock
 	\printfield{booktitle}\usebibmacro{ceperiod}%
 	\newblock
@@ -204,7 +198,7 @@
 \DeclareBibliographyDriver{patent}{%
 	\usebibmacro{bibindex}%
 	\newblock
-	\usebibmacro{holder/author}\usebibmacro{ceperiod}%
+	\usebibmacro{author}\usebibmacro{ceperiod}%
 	\newblock
 	\usebibmacro{title}\usebibmacro{cespace}%
 	\usebibmacro{type}\usebibmacro{ceperiod}%
@@ -221,21 +215,8 @@
 	\printfield{addendum}%
 }
 
-\DeclareBibliographyDriver{online}{%
+\DeclareBibliographyDriver{customf}{%
 	\usebibmacro{bibindex}%
-	\newblock
-	\usebibmacro{author+others}\usebibmacro{ceperiod}%
-	\newblock
-	\usebibmacro{title}\usebibmacro{cespace}%
-	\usebibmacro{type}\usebibmacro{ceperiod}%
-	\newblock
-	\printlist{location}\usebibmacro{cecolon}%
-	\printlist{publisher}\usebibmacro{cecomma}%
-	\usebibmacro{year/date}\usebibmacro{ceperiod}%
-	\newblock
-	\printfield{url}\usebibmacro{cecomma}%
-	\usebibmacro{urldate}\usebibmacro{ceperiod}%
-	\usebibmacro{finentry}%
 	\newblock
 	\printfield{addendum}%
 }
@@ -244,6 +225,7 @@
 \DeclareBibliographyAlias{collection}{book}
 \DeclareBibliographyAlias{manual}{book}
 \DeclareBibliographyAlias{misc}{book}
+\DeclareBibliographyAlias{online}{book}
 \DeclareBibliographyAlias{proceedings}{book}
 \DeclareBibliographyAlias{report}{book}
 \DeclareBibliographyAlias{thesis}{book}
