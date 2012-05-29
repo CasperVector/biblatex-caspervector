@@ -3,7 +3,7 @@
 \usepackage[
 	backend = biber, defernumbers = true, style = caspervector, utf8
 ]{biblatex}
-\usepackage{CJKspace, enumitem, hologo}
+\usepackage{CJKspace, enumitem, fancyvrb, hologo}
 
 \pagestyle{fancy}\fancyhf{}\cfoot{\thepage}
 \renewcommand{\headrulewidth}{0pt}
@@ -42,13 +42,87 @@ biblatex\supercite{biblatex}/biber\supercite{biber}
 目前 \TeX{} 社区中尚无人发布为中文用户设计的 biblatex 样式。
 为了个人需要，同时也是为了给社区提供一个有益的参考，
 本文作者根据实际应用中遇到的常见需求编写了
-\verb|caspervector| 这个 biblatex 样式。
+\verb|caspervector| 这个用于顺序编码制的中英文 biblatex 样式。
 其逻辑框架基于
 国家标准 GB/T 7714--2005\supercite{gbt7714-2005}，
 但在其基础上根据个人审美趣味和 biblatex 所能实现的功能而
 对参考文献和引用格式进行了较大幅度的修改。
 
-\section{字段介绍}
+\section{使用简介}
+\subsection{样式调用}
+
+用户应当通过以下命令调用 \verb|caspervector| 样式：
+\begin{Verbatim}[frame = single]
+% “编码”为“gbk”或“utf8”，根据用户使用的字符编码而定；“...” 代表其它选项。
+\usepackage[style = caspervector, 编码, ...]{biblatex}
+\end{Verbatim}
+
+参考文献数据库
+（\verb|.bib| 文件，其格式见第 \ref{sec:fields}、\ref{sec:entries} 部分）
+通过 \verb|\addbibresource| 命令导入，%
+\emph{注意不要省略 \texttt{.bib} 的扩展名}。
+例如，本文的参考文献数据库就是通过下述命令导入的：
+\begin{Verbatim}[frame = single]
+\addbibresource{readme.bib}
+\end{Verbatim}
+用户可以多次使用 \verb|\addbibresource| 命令，
+从多个参考文献数据库中导入参考文献。
+
+\subsection{引用命令}
+
+\verb|caspervector| 样式提供 3 个引用命令：
+\verb|\cite|、\verb|\parencite| 和 \verb|\supercite|，
+三个命令的用法类似：
+\begin{Verbatim}[frame = single]
+% 可选参数 prenote 和 postnote 分别用于设定引用记号前、后的注释。
+\citecommand[prenote][postnote]{key}
+\end{Verbatim}
+其中 \verb|\cite| 产生无格式化的引用标记，
+\verb|\parencite| 产生带方括号的引用标记，
+而 \verb|\supercite| 产生上标且带方括号的引用标记。
+
+例如，在本文中，%
+\verb|\parencite{gbt7714-2005}| 的输出是“\parencite{gbt7714-2005}”，
+而
+\begin{Verbatim}[frame = single]
+\cite[文献][第 4 页]{gbt7714-2005}
+\end{Verbatim}
+的输出是“\cite[文献][第 4 页]{gbt7714-2005}”。
+
+\subsection{文献列表}
+
+使用 \verb|\printbibliography| 命令可以在相应位置排版文献列表。
+其可（在方括号内）带一些可选参数\cite{biblatex}，
+常见的有：
+\begin{itemize}
+	\item \verb|title = 标题|：
+		可以用于指定文献列表的标题（默认为“参考文献”）。
+	\item \verb|heading = 样式|：
+		最常用的是当“样式”为 \verb|bibnumbered| 时，
+		参考文献列表会有章节编号。
+\end{itemize}
+
+例如，用
+\begin{Verbatim}[frame = single]
+\printbibliography[title = {文献}, heading = bibnumbered]
+\end{Verbatim}
+可以将文献列表的标题改为 “文献”，
+并使文献列表参与章节编号。
+
+\subsection{编译方法}
+
+一般情况下，
+\begin{Verbatim}[frame = single]
+% “texfile”是被 TeX 编译的文件名中除去“.tex”的部分。
+% “xelatex”可改为其它 TeX 程序。
+% biber 可视情况改为 bibtex。
+xelatex texfile
+biber texfile
+xelatex texfile
+\end{Verbatim}
+即可实现正确的排版。
+
+\section{字段介绍}\label{sec:fields}
 \subsection{基本字段}
 
 除非特别指出，此部分字段在所有类型条目中均可用。
@@ -93,7 +167,7 @@ biblatex\supercite{biblatex}/biber\supercite{biber}
 	\item 其它通用特殊字段，见 biblatex 手册\supercite{biblatex}。
 \end{itemize}
 
-\section{条目类型}
+\section{条目类型}\label{sec:entries}
 \subsection{\texttt{@book} 类型}
 
 \verb|@book| 类型对应于 GB/T 7714--2005 中所指的“专著”和“电子文献”类型，
@@ -167,9 +241,23 @@ biblatex\supercite{biblatex}/biber\supercite{biber}
 此类条目必需且唯一支持的基本字段为 \verb|addendum|，
 用户可将其设为自己希望排版的内容。
 
+\section{其它使用提示}
+
+用户可以通过手动调用格式化命令来临时覆盖预设的格式设定，
+例如文献 \parencite{1-7} 中的出版年便是通过设定
+\begin{Verbatim}[frame = single]
+year = {1845\textmd{\emph{（清同治四年）}}}
+\end{Verbatim}
+得到的。
+
+\verb|caspervector| 样式不支持 \verb|edition| 字段，
+用户可以在 \verb|title| 等字段中手动标注。
+
 \printbibliography%
 	[heading = bibnumbered, title = {本文参考文献}, category = cited]
-\printbibliography%
-	[heading = bibnumbered, title = {其它参考文献示例}, notcategory = cited]
+\printbibliography[
+	heading = bibnumbered, notcategory = cited,
+	title = {其它参考文献示例（引自文献 \parencite{gbt7714-2005}）}
+]
 \end{document}
 
