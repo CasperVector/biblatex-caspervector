@@ -3,7 +3,7 @@
 \ProvidesFile{biblatex-caspervector-gbk.def}%
 	[2012/?/? v0.1 Chinese punctuations in GBK]
 
-\AtBeginBibliography{%
+\InitializeBibliographyStyle{%
 	\def\cncomma{£¬}
 	\def\cnscolon{£»}
 	\def\cncolon{£º}

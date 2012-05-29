@@ -5,19 +5,17 @@
 
 \RequireBibliographyStyle{numeric}
 
-\newtoggle{bbx:utf8}
-\DeclareBibliographyOption{utf8}[true]{\settoggle{bbx:utf8}{#1}}
-\ExecuteBibliographyOptions{
-	alldates = iso8601,
-	utf8 = false
-}
+\newtoggle{bbx:gbk}
+\DeclareBibliographyOption{utf8}[true]{\togglefalse{bbx:gbk}}
+\DeclareBibliographyOption{gbk}[true]{\toggletrue{bbx:gbk}}
+\ExecuteBibliographyOptions{alldates = iso8601, gbk}
 \AtEndOfPackage{%
-	\iftoggle{bbx:utf8}{
-		\input{biblatex-caspervector-utf8.def}
-		\ExecuteBibliographyOptions{texencoding = UTF-8}
-	}{
+	\iftoggle{bbx:gbk}{
 		\input{biblatex-caspervector-gbk.def}
 		\ExecuteBibliographyOptions{texencoding = GBK}
+	}{
+		\input{biblatex-caspervector-utf8.def}
+		\ExecuteBibliographyOptions{texencoding = UTF-8}
 	}%
 }
 

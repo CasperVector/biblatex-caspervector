@@ -3,7 +3,7 @@
 \ProvidesFile{biblatex-caspervector-utf8.def}%
 	[2012/?/? v0.1 Chinese punctuations in UTF-8]
 
-\AtBeginBibliography{%
+\InitializeBibliographyStyle{%
 	\def\cncomma{，}
 	\def\cnscolon{；}
 	\def\cncolon{：}

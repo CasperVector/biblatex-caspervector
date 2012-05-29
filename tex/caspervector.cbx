@@ -4,11 +4,11 @@
 	[2012/?/? v0.1 Casper Ti. Vector's biblatex citation style]
 
 \RequireCitationStyle{numeric-comp}
-\ExecuteBibliographyOptions{
-	autocite = superscript
-}
+\ExecuteBibliographyOptions{autocite = superscript}
 
-\newcommand{\mksuperbrackets}[1]{\mkbibsuperscript{\mkbibbrackets{#1}}}
+\InitializeCitationStyle{
+	\providecommand{\mksuperbrackets}[1]{\mkbibsuperscript{\mkbibbrackets{#1}}}
+}
 
 \DeclareCiteCommand{\cite}
 {%
