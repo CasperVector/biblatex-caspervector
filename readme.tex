@@ -1,13 +1,174 @@
-\documentclass[UTF8, fancyhdr]{ctexart}
+\documentclass[UTF8, fancyhdr, hyperref]{ctexart}
 \usepackage[margin = 2cm, centering, includefoot]{geometry}
-\usepackage[backend = biber, style = caspervector]{biblatex}
+\usepackage[backend = biber, style = caspervector, defernumbers = true]{biblatex}
+\usepackage{hologo}
+\usepackage{enumitem}
 
 \pagestyle{fancy}\fancyhf{}\cfoot{\thepage}
 \renewcommand{\headrulewidth}{0pt}
-\addbibresource{example.bib}
+\setlist{nolistsep}
+
+\DeclareBibliographyCategory{cited}
+\AtEveryCitekey{\addtocategory{cited}{\thefield{entrykey}}}
+\addbibresource{readme.bib}
+\nocite{*}
 
 \begin{document}
-\nocite{*}
-\printbibliography
+\title{\textbf{biblatex 参考文献和引用样式：\texttt{caspervector}}}
+\author{%
+	Casper Ti.\ Vector\thanks{%
+		\href{mailto:CasperVector@gmail.com}{\texttt{CasperVector@gmail.com}}.%
+	}%
+}
+\date{2012/?/?}
+\maketitle
+
+\section{引言}
+
+传统的 \hologo{BibTeX} 引擎存在一些固有的问题：
+首先，其样式文件（\verb|bst| 文件）使用后缀式的栈语言编写，
+使开发者难以入门和精通，更不便于一般用户进行自定义；
+其次，其排序方式很单一，
+无法直接实现中文 \TeX{} 用户常常遇到的按汉语拼音排序等需求。
+
+与此相对应，
+biblatex\supercite{biblatex}/biber\supercite{biber}
+是一套新兴的 \TeX{} 参考文献排版引擎，
+其样式文件（设定参考文献样式的 \verb|bbx| 文件和设定引用样式的 \verb|cbx| 文件）
+使用 \LaTeX{} 编写，便于学习；
+同时，其支持根据 locale 进行排序。
+
+目前 \TeX{} 社区中尚无人发布为中文用户设计的 biblatex 样式。
+为了个人需要，同时也是为了给社区提供一个有益的参考，
+本文作者根据实际应用中遇到的常见需求编写了
+\verb|caspervector| 这个 biblatex 样式。
+其逻辑框架基于
+国家标准 GB/T 7714--2005\supercite{gbt7714-2005}，
+但在其基础上根据个人审美趣味和 biblatex 所能实现的功能而
+对参考文献和引用格式进行了较大幅度的修改。
+
+\section{字段介绍}
+\subsection{基本字段}
+
+除非特别指出，此部分字段在所有类型条目中均可用。
+
+\begin{itemize}
+	\item \verb|author|、\verb|editor|、\verb|translator|：
+		作者、编者、译者。\\
+		\emph{%
+			注：
+			在析出文献条目中，
+			\texttt{author}、\texttt{editor}、\texttt{translator}
+			专指析出文献的作者、编者、译者。
+			在 \texttt{@patent} 类条目中，
+			\texttt{author} 也可指专利的持有者。%
+		}
+	\item \verb|bookauthor|、\verb|booktitle|：析出文献所出自文献的作者和题名。
+	\item \verb|title|：文献题名。
+	\item \verb|type|：文献类型和电子文献载体标志代码\supercite{gbt7714-2005}。
+	\item \verb|location|：出版地，或（在 \verb|@patent| 类条目中）专利申请地。
+	\item \verb|publisher|：出版者。
+	\item \verb|journal|/\verb|journaltitle|：连续出版物题名，这两个字段是等价的。
+	\item \verb|year|/\verb|date|：出版年、日期，这两个字段只需填写一个即可。
+	\item \verb|volume|：期刊中文献所处的卷号。
+	\item \verb|number|：期刊中文献所处的期号，或专利的申请号。
+	\item \verb|pages|：文献页码。
+	\item \verb|url|：文献的 URL。
+	\item \verb|urldate|：检索日期，或 URL 的访问日期。
+	\item \verb|addendum|：补充说明，排版在文献列表中相应条目的最后。
+\end{itemize}
+
+\subsection{特殊字段}
+
+\begin{itemize}
+	\item \verb|userf|：
+		未定义时，相应条目在文献列表中用英文排版，否则用中文排版。\\
+		\emph{%
+			注：
+			不可用 \texttt{language} 字段区分中英文文献，
+			因为 biblatex 使用 babel\supercite{babel} 宏包处理此字段，
+			但后者不支持中文，所以可能出错。%
+		}
+	\item 其它通用特殊字段，见 biblatex 手册\supercite{biblatex}。
+\end{itemize}
+
+\section{条目类型}
+\subsection{\texttt{@book} 类型}
+
+\verb|@book| 类型对应于 GB/T 7714--2005 中所指的“专著”和“电子文献”类型，
+其支持的常见别名包括 \verb|@booklet|、\verb|@proceedings|、
+\verb|@report|、\verb|@thesis|、\verb|@unpublished|。
+
+\verb|@book| 类条目必需的基本字段为 \verb|title|。
+
+除必需字段之外，\verb|@book| 类条目也支持以下基本字段：
+\verb|author|、\verb|editor|、\verb|translator|、
+\verb|type|、\verb|location|、\verb|publisher|、
+\verb|year|/\verb|date|、\verb|pages|、
+\verb|url|、\verb|urldate|、\verb|addendum|。
+
+\subsection{\texttt{@incollection} 类型}
+
+\verb|@incollection| 类型对应于 GB/T 7714--2005 中所指的“专著中的析出文献”，
+其支持的常见别名包括
+\verb|@bookinbook|、\verb|@conference|、\verb|@inbook|、\verb|@inproceedings|。
+
+\verb|@incollection| 类条目必需的基本字段为 \verb|title| 以及 \verb|booktitle|。
+
+除必需字段之外，\verb|@incollection| 类条目也支持以下基本字段：
+\verb|author|、\verb|editor|、\verb|translator|、\verb|bookauthor|、
+\verb|type|、\verb|location|、\verb|publisher|、
+\verb|year|/\verb|date|、\verb|pages|、
+\verb|url|、\verb|urldate|、\verb|addendum|。
+
+\subsection{\texttt{@periodical} 类型}
+
+\verb|@periodical| 类型对应于 GB/T 7714--2005 中所指的“连续出版物”。
+
+\verb|@periodical| 类条目必需的基本字段为
+\verb|title|/\verb|journal|/\verb|journaltitle| 三者中的至少一个。
+
+除必需字段之外，\verb|@periodical| 类条目也支持以下基本字段：
+\verb|author|/\verb|editor|/\verb|translator| 
+\verb|type|、\verb|location|、\verb|publisher|、
+\verb|year|/\verb|date|、\verb|volume|、\verb|number|、\verb|pages|、
+\verb|url|、\verb|urldate|、\verb|addendum|。
+
+\subsection{\texttt{@article} 类型}
+
+\verb|@article| 类型对应于 GB/T 7714--2005 中所指的“连续出版物”。
+
+\verb|@article| 类条目必需的基本字段为
+\verb|journal|/\verb|journaltitle| 两者中的至少一个，
+以及 \verb|year|/\verb|date| 两者中的至少一个。
+
+除必需字段之外，\verb|@article| 类条目也支持以下基本字段：
+\verb|author|、\verb|title|、\verb|type|、
+\verb|volume|、\verb|number|、\verb|pages|、
+\verb|url|、\verb|urldate|、\verb|addendum|。
+
+\subsection{\texttt{@patent} 类型}
+
+\verb|@patent| 类型用于专利文献。
+
+\verb|@patent| 类条目必需的基本字段为 \verb|title|，
+以及 \verb|year|/\verb|date| 两者中的至少一个。
+
+除必需字段之外，\verb|@article| 类条目也支持以下基本字段：
+\verb|author|、\verb|title|、\verb|type|、
+\verb|location|、\verb|number|、
+\verb|url|、\verb|urldate|、\verb|addendum|。
+
+\subsection{\texttt{@customf} 类型}
+
+\verb|@patent| 类型为特殊类型，
+专用于在文献列表的相应条目中排版自定义的文字。
+此类条目必需且唯一支持的基本字段为 \verb|addendum|，
+用户可将其设为自己希望排版的内容。
+
+\printbibliography%
+	[heading = bibnumbered, title = {本文参考文献}, category = cited]
+\printbibliography%
+	[heading = bibnumbered, title = {其它参考文献示例}, notcategory = cited]
 \end{document}
 
