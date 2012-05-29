@@ -1,6 +1,6 @@
 doc:
 	latex readme
-	biber -f -l zh_CN readme
+	biber -f -l zh_CN.UTF-8 readme
 	latex readme
 	latex readme
 	dvipdfmx readme
