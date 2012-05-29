@@ -22,8 +22,6 @@
 \newbibmacro{cespace}{\setunit{\cespace}}
 \newbibmacro{cein}{\printtext{\cegen{出自}{In}}}
 
-\renewcommand{\bibrangedash}{--}
-\renewcommand{\bibdatedash}{-}
 \renewcommand{\finentrypunct}{\cegen{。}{.}}
 \renewcommand{\multinamedelim}{\cecomma}
 \renewcommand{\finalnamedelim}{\cegen{，}{\addspace\bibstring{and}\space}}
@@ -48,7 +46,8 @@
 \newbibmacro{number}{\iffieldundef{number}{}{\printfield{number}}}
 
 \DefineBibliographyStrings{english}{%
-	andothers = {\cegen{等}{\mkbibemph{et{\addabbrvspace}al.}}}
+	andmore = {\cegen{等}{\mkbibemph{et\addabbrvspace al\adddot}}},
+	andothers = {\cegen{等}{\mkbibemph{et\addabbrvspace al\adddot}}}
 }
 
 \newbibmacro{ceauthor}{%
@@ -93,11 +92,13 @@
 		}%
 	}%
 }
-\newbibmacro{author/holder}{%
+\newbibmacro{holder/author}{%
 	\ifnameundef{holder}{\printnames{author}}{\printnames{holder}}%
 }
-\newbibmacro{bookauthor/organization}{%
-	\ifnameundef{bookauthor}{\printnames{organization}}{\printnames{bookauthor}}%
+\newbibmacro{organization/bookauthor+ceperiod}{%
+	\iflistundef{organization}
+	{\ifnameundef{bookauthor}{}{\printnames{bookauthor}\usebibmacro{ceperiod}}}%
+	{\printlist{organization}\usebibmacro{ceperiod}}%
 }
 \newbibmacro{journaltitle/title}{%
 	\iffieldundef{journaltitle}{\usebibmacro{title}}{\printfield{journaltitle}}%
@@ -106,7 +107,7 @@
 	\ifthenelse{\iffieldundef{month} \and \iffieldundef{day}}%
 	{\printfield{year}}{\printdate}%
 }
-\newbibmacro{year+volume+number/date}{%
+\newbibmacro{(year+volume+number)/date}{%
 	\ifthenelse{\iffieldundef{month} \and \iffieldundef{day}}%
 	{%
 		\printfield{year}\usebibmacro{cecomma}%
@@ -145,7 +146,7 @@
 	\newblock
 	\usebibmacro{cein}\usebibmacro{cecolon}%
 	\newblock
-	\usebibmacro{bookauthor/organization}\usebibmacro{ceperiod}%
+	\usebibmacro{organization/bookauthor+ceperiod}%
 	\newblock
 	\printfield{booktitle}\usebibmacro{ceperiod}%
 	\newblock
@@ -169,7 +170,7 @@
 	\usebibmacro{journaltitle/title}\usebibmacro{cespace}%
 	\usebibmacro{type}\usebibmacro{ceperiod}%
 	\newblock
-	\usebibmacro{year+volume+number/date}\usebibmacro{ceperiod}%
+	\usebibmacro{(year+volume+number)/date}\usebibmacro{ceperiod}%
 	\newblock
 	\printlist{location}\usebibmacro{cecolon}%
 	\printlist{publisher}\usebibmacro{ceperiod}%
@@ -190,7 +191,7 @@
 	\usebibmacro{type}\usebibmacro{ceperiod}%
 	\newblock
 	\printfield{journaltitle}\usebibmacro{cecomma}%
-	\usebibmacro{year+volume+number/date}\usebibmacro{cecolon}%
+	\usebibmacro{(year+volume+number)/date}\usebibmacro{cecolon}%
 	\printfield{pages}\usebibmacro{ceperiod}%
 	\newblock
 	\printfield{url}\usebibmacro{cecomma}%
@@ -203,7 +204,7 @@
 \DeclareBibliographyDriver{patent}{%
 	\usebibmacro{bibindex}%
 	\newblock
-	\usebibmacro{author/holder}\usebibmacro{ceperiod}%
+	\usebibmacro{holder/author}\usebibmacro{ceperiod}%
 	\newblock
 	\usebibmacro{title}\usebibmacro{cespace}%
 	\usebibmacro{type}\usebibmacro{ceperiod}%
