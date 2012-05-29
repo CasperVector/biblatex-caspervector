@@ -8,24 +8,20 @@
 	alldates = iso8601
 }
 
-\newcommand{\cegen}[2]{\iffieldundef{userf}{#2}{#1}}
-\newcommand{\mybibquote}[1]{\cegen{“{#1}”}{\mkbibquote{#1}}}
-\newcommand{\cecolon}{\cegen{：}{\addcolon\addspace}}
-\newcommand{\cecomma}{\cegen{，}{\addcomma\addspace}}
-\newcommand{\cescolon}{\cegen{；}{\addcolon\addspace}}
-\newcommand{\ceperiod}{\cegen{。}{\addperiod\addspace}}
-\newcommand{\cespace}{\cegen{}{\addspace}}
-\newbibmacro{cecolon}{\setunit{\cecolon}}
-\newbibmacro{cecomma}{\setunit{\cecomma}}
-\newbibmacro{cescolon}{\setunit{\cescolon}}
-\newbibmacro{ceperiod}{\setunit{\ceperiod}}
-\newbibmacro{cespace}{\setunit{\cespace}}
-\newbibmacro{cein:}{\printtext{\cegen{出自}{In}\cecolon}}
+\AtBeginBibliography{
+	\providecommand{\cegen}[2]{\iffieldundef{userf}{#2}{#1}}
+	\providecommand{\mybibquote}[1]{\cegen{“{#1}”}{\mkbibquote{#1}}}
+	\providecommand{\cecolon}{\cegen{：}{\addcolon\addspace}}
+	\providecommand{\cecomma}{\cegen{，}{\addcomma\addspace}}
+	\providecommand{\cescolon}{\cegen{；}{\addcolon\addspace}}
+	\providecommand{\ceperiod}{\cegen{。}{\addperiod\addspace}}
+	\providecommand{\cespace}{\cegen{}{\addspace}}
 
-\renewcommand{\finentrypunct}{\cegen{。}{.}}
-\renewcommand{\multinamedelim}{\cecomma}
-\renewcommand{\finalnamedelim}{\cegen{，}{\addspace\bibstring{and}\space}}
-\renewcommand{\andothersdelim}{\cespace}
+	\renewcommand{\finentrypunct}{\cegen{。}{.}}
+	\renewcommand{\multinamedelim}{\cecomma}
+	\renewcommand{\finalnamedelim}{\cegen{，}{\addspace\bibstring{and}\space}}
+	\renewcommand{\andothersdelim}{\cespace}
+}
 
 \DeclareFieldFormat*{booktitle}{\mkbibemph{#1}}
 \DeclareFieldFormat*{journaltitle}{\mkbibemph{#1}}
@@ -51,6 +47,13 @@
 	bibliography = {参考文献},
 	references = {参考文献}
 }
+
+\newbibmacro{cecolon}{\setunit{\cecolon}}
+\newbibmacro{cecomma}{\setunit{\cecomma}}
+\newbibmacro{cescolon}{\setunit{\cescolon}}
+\newbibmacro{ceperiod}{\setunit{\ceperiod}}
+\newbibmacro{cespace}{\setunit{\cespace}}
+\newbibmacro{cein:}{\printtext{\cegen{出自}{In}\cecolon}}
 
 \newbibmacro{cebyauthor}{%
 	\ifnameundef{author}{}{%
