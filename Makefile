@@ -1,12 +1,13 @@
 doc:
-	xelatex readme
-	biber -f -l zh_CN.UTF-8 readme
-	xelatex readme
-	xelatex readme
+	latex README
+	biber -f -l zh_CN README
+	latex README
+	latex README
+	dvipdfmx README
 
 clean:
-	rm -f readme.{aux,bbl,bcf,blg,log,run.xml,out} texput.log
+	rm -f README.{aux,bbl,bcf,blg,dvi,log,run.xml,out} texput.log
 
 dist-clean: clean
-	rm -f readme.pdf
+	rm -f README.pdf
 
