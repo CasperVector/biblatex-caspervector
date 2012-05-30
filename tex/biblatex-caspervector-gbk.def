@@ -1,7 +1,7 @@
 % vim:ft=tex:ts=2:sw=2
 
 \ProvidesFile{biblatex-caspervector-gbk.def}%
-	[2012/?/? v0.1 Chinese punctuations in GBK]
+	[2012/5/30 v0.1 Chinese punctuations in GBK]
 
 \InitializeBibliographyStyle{%
 	\def\cnldquot{¡°}

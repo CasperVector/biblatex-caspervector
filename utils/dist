@@ -1,0 +1,28 @@
+#!/usr/bin/make -f
+# vim:ts=4:sw=4
+#
+# Copyright (c) 2011-2012 Casper Ti. Vector
+# Public domain.
+
+PROJECT = $(TITLE)-$(VERSION)
+DOC = $(PROJECT)/doc
+
+dist: dist-clean dist-dir doc dist-zip
+
+dist-dir: tex/ doc/
+	mkdir -p $(PROJECT)/
+	cp -r tex/ $(PROJECT)/
+	cp -r doc/ $(PROJECT)/
+
+doc:
+	cd $(DOC)/ && make
+	mv $(DOC)/readme.pdf $(PROJECT)/$(README).pdf
+	cd $(DOC)/ && make dist-clean
+
+dist-zip: $(PROJECT)
+	zip -rmT $(PROJECT).zip $(PROJECT)/
+
+dist-clean:
+	cd doc && make dist-clean
+	rm -rf $(PROJECT)/ $(PROJECT).zip
+

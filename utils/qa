@@ -1,0 +1,40 @@
+#!/usr/bin/make -f
+# vim:ts=4:sw=4
+#
+# Copyright (c) 2012 Casper Ti. Vector
+# Public domain.
+
+FIND_GBK = '(' -name '*gbk*' ')'
+FIND_VCS = '(' -type d -name '.git' -prune ')'
+
+# IGNORE "error"s intentionally.
+.IGNORE qa: enc lt sync tail
+
+enc:
+	@echo '======================================================================'
+	@echo '$@: check file encodings'
+	@echo '======================================================================'
+	! find . -not $(FIND_VCS) $(FIND_GBK) \
+		-type f -exec file '{}' '+' | grep -vE 'GB|ISO-8859|ASCII'
+	! find . -not $(FIND_VCS) -not $(FIND_GBK) \
+		-type f -exec file '{}' '+' | grep -E 'GB|ISO-8859'
+
+lt:
+	@echo '======================================================================'
+	@echo '$@: check line terminators'
+	@echo '======================================================================'
+	! find . -not $(FIND_VCS) -type f -exec file '{}' '+' | grep -E 'CRLF'
+
+sync:
+	@echo '======================================================================'
+	@echo '$@: keep GBK and UTF-8 files synchronised'
+	@echo '======================================================================'
+	iconv -f GBK tex/biblatex-caspervector-gbk.def | \
+		diff - tex/biblatex-caspervector-utf8.def
+
+tail:
+	@echo '======================================================================'
+	@echo '$@: remember to update documentation after modifications'
+	@echo '$@: remember to review `git diff`'
+	@echo '======================================================================'
+
