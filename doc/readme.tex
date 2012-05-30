@@ -8,11 +8,14 @@
 \pagestyle{fancy}\fancyhf{}\cfoot{\thepage}
 \renewcommand{\headrulewidth}{0pt}
 \setlist{nolistsep}
+\hypersetup{allcolors = blue}
 
 \DeclareBibliographyCategory{cited}
 \AtEveryCitekey{\addtocategory{cited}{\thefield{entrykey}}}
 \addbibresource{readme.bib}
 \nocite{*}
+
+\newcommand{\myemph}[1]{\emph{\textcolor{red}{#1}}}
 
 \begin{document}
 \title{\textbf{biblatex 参考文献和引用样式：\texttt{caspervector} v0.1.1}}
@@ -61,17 +64,18 @@ biblatex\supercite{biblatex}/biber\supercite{biber}
 \subsection{系统要求}
 
 \begin{itemize}
-	\item biblatex 宏包（\emph{必需}）：
+	\item biblatex 宏包（\myemph{必需}）：
 		\verb|caspervector| 样式基于 biblatex 宏包。
-	\item 中文环境（\emph{必需}）：
+	\item 中文环境（\myemph{必需}）：
 		\verb|caspervector| 样式虽支持中文，但其本身不提供中文环境。
 		用户仍然需要中文环境才能排版出文档。
-	\item biber（\emph{可选}）：
+	\item biber（\myemph{可选}）：
 		用 biber 可以方便地实现文献按英文文献在前且按作者姓排序、
 		中文文献在后且按作者姓名拼音排序。
 \end{itemize}
 
-以上要求在\emph{最新}的\emph{完全版} \CTeX{} 套装和 \TeX{}Live 中都有完善的支持。
+以上要求在\myemph{最新}的\myemph{完全版}
+\CTeX{} 套装和 \TeX{}Live 中都有完善的支持。
 
 \subsection{“绿色”安装}
 
@@ -138,7 +142,7 @@ $HOME/texmf
 参考文献数据库
 （\verb|.bib| 文件，其格式见第 \ref{sec:fields}、\ref{sec:entries} 部分）
 通过 \verb|\addbibresource| 命令导入，%
-\emph{注意不要省略 \texttt{.bib} 的扩展名}。
+\myemph{注意不要省略 \texttt{.bib} 的扩展名}。
 例如，本文的参考文献数据库就是通过下述命令导入的：
 \begin{Verbatim}[frame = single]
 \addbibresource{readme.bib}
@@ -196,12 +200,12 @@ $HOME/texmf
 % “texfile”是被 TeX 编译的文件名中除去“.tex”的部分。
 % “pdflatex”可改为其它 TeX 程序，使用纯 latex 编译时可能还需要运行 dvipdfmx。
 % 如果系统上无法使用 biber，可将
-%   biber -l zh_CN.UTF-8 texfile
+%   biber -f -l zh_CN.UTF-8 texfile
 % 改为
 %   bibtex texfile
 % 但将无法按拼音排序。
 pdflatex texfile
-biber -l zh_CN.UTF-8 texfile
+biber -f -l zh_CN.UTF-8 texfile
 pdflatex texfile
 \end{Verbatim}
 即可实现正确的排版。
@@ -218,7 +222,7 @@ pdflatex texfile
 \begin{itemize}
 	\item \verb|author|、\verb|editor|、\verb|translator|：
 		作者、编者、译者。\\
-		\emph{%
+		\myemph{%
 			注：
 			在析出文献条目中，
 			\texttt{author}、\texttt{editor}、\texttt{translator}
@@ -246,7 +250,7 @@ pdflatex texfile
 \begin{itemize}
 	\item \verb|userf|：
 		未定义时，相应条目在文献列表中用英文排版，否则用中文排版。\\
-		\emph{%
+		\myemph{%
 			注：
 			不可用 \texttt{language} 字段区分中英文文献，
 			因为 biblatex 使用 babel\supercite{babel} 宏包处理此字段，
@@ -329,9 +333,9 @@ pdflatex texfile
 此类条目必需且唯一支持的基本字段为 \verb|addendum|，
 用户可将其设为自己希望排版的内容。
 
-\emph{%
+\myemph{%
 	注：
-	\texttt{@userf} 类型虽不支持 \texttt{author} 等字段，
+	\texttt{@customf} 类型虽不支持 \texttt{author} 等字段，
 	但用户仍可以设定它们的值。
 	这样虽不能自动根据这些字段排版，
 	但在仍可以根据它们
