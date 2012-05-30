@@ -48,13 +48,82 @@ biblatex\supercite{biblatex}/biber\supercite{biber}
 但在其基础上根据个人审美趣味和 biblatex 所能实现的功能而
 对参考文献和引用格式进行了较大幅度的修改。
 
+\section{系统要求和安装方式}
+\subsection{系统要求}
+
+\begin{itemize}
+	\item biblatex 宏包（\emph{必需}）：
+		\verb|caspervector| 样式基于 biblatex 宏包。
+	\item 中文环境（\emph{必需}）：
+		\verb|caspervector| 样式虽支持中文，但其本身不提供中文环境。
+		用户仍然需要中文环境才能排版出文档。
+	\item biber（\emph{可选}）：
+		用 biber 可以方便地实现文献按英文文献在前且按作者姓排序、
+		中文文献在后且按作者姓名拼音排序。
+\end{itemize}
+
+以上要求在\emph{最新}的\emph{完全版} \CTeX{} 套装和 \TeX{}Live 中都有完善的支持。
+
+\subsection{“绿色”安装}
+
+将 \verb|tex/| 中的所有文件复制到被编译的 \verb|.tex| 文件所在的目录中即可。
+
+\subsection{非“绿色”安装}
+
+对于支持 \TeX{} 目录结构（TDS）标准的 \TeX{} 发行版%
+（其中包括 \TeX{}Live 和 \CTeX{}），
+安装 pkuthss 文档模版都可以通过类似的方式：
+将 \verb|tex/| 中内容放在 \verb|$TEXMF/tex/latex/pkuthss/|，
+将本文档（\verb|README.pdf|）和 \verb|doc/| 中内容%
+放在 \verb|$TEXMF/doc/latex/pkuthss/|。
+其中 \verb|$TEXMF| 是用户系统上的 texmf 目录，
+我们推荐使用 \verb|$TEXMFHOME| 或者 \verb|$TEXMFLOCAL|：
+\begin{itemize}
+	\item 在 Windows 下，%
+		\TeX{}Live 和 \CTeX{} 套装默认的 \verb|$TEXMFHOME| %
+		通常可能都是
+\begin{Verbatim}[frame = single]
+# user 也可改为其它名字，依你的用户名而定。
+C:\Documents and Settings\user\texmf
+\end{Verbatim}
+		而 \verb|$TEXMFLOCAL| 通常可能分别是
+\begin{Verbatim}[frame = single]
+# C:\Program Files\CTEX 也可改为其它目录，依安装位置而定。
+C:\Program Files\CTEX\MiKTeX\texmf-local
+\end{Verbatim}
+		和
+\begin{Verbatim}[frame = single]
+# 2010 也可改为其它年份，依 TeXLive 版本而定。
+C:\Program Files\texlive\2010\texmf-local
+\end{Verbatim}
+	\item 在 Linux 和其它类 UNIX 操作系统下，
+		\TeX{}Live 默认的 \verb|$TEXMFHOME| 通常可能是
+\begin{Verbatim}[frame = single]
+$HOME/texmf
+\end{Verbatim}
+		而 \verb|$TEXMFLOCAL| 通常可能是
+\begin{Verbatim}[frame = single]
+# 2010 也可改为其它年份，依 TeXLive 版本而定。
+/usr/local/texlive/2010/texmf-local
+\end{Verbatim}
+\end{itemize}
+
+用这样的方法安装完宏包后，可能需要刷新一次文件名数据库。
+关于这一步如何操作，详见 \CTeX{} FAQ\supercite{ctex-faq}\footnote{%
+	在类 UNIX 操作系统的终端或 Windows 的命令提示符中%
+	用 \texttt{texdoc ctex-faq} 调出文档，
+	然后在其中搜索“文件名数据库”即可找到。%
+}。
+
 \section{使用简介}
 \subsection{样式调用}
 
 用户应当通过以下命令调用 \verb|caspervector| 样式：
 \begin{Verbatim}[frame = single]
-% “编码”为“gbk”或“utf8”，根据用户使用的字符编码而定；“...” 代表其它选项。
-\usepackage[style = caspervector, 编码, ...]{biblatex}
+% 如果系统上无法使用 biber，可将“biber”改为“bibtex”。
+% “gbk”可能需要改为“utf8”，根据用户使用的字符编码而定。
+% “...” 代表其它选项。
+\usepackage[backend = biber, style = caspervector, gbk, ...]{biblatex}
 \end{Verbatim}
 
 参考文献数据库
@@ -92,7 +161,7 @@ biblatex\supercite{biblatex}/biber\supercite{biber}
 \subsection{文献列表}
 
 使用 \verb|\printbibliography| 命令可以在相应位置排版文献列表。
-其可（在方括号内）带一些可选参数\cite{biblatex}，
+其可（在方括号内）带一些可选参数\supercite{biblatex}，
 常见的有：
 \begin{itemize}
 	\item \verb|title = 标题|：
@@ -114,13 +183,21 @@ biblatex\supercite{biblatex}/biber\supercite{biber}
 一般情况下，
 \begin{Verbatim}[frame = single]
 % “texfile”是被 TeX 编译的文件名中除去“.tex”的部分。
-% “xelatex”可改为其它 TeX 程序。
-% biber 可视情况改为 bibtex。
-xelatex texfile
-biber texfile
-xelatex texfile
+% “pdflatex”可改为其它 TeX 程序，使用纯 latex 编译时可能还需要运行 dvipdfmx。
+% 如果系统上无法使用 biber，可将
+%   biber -l zh_CN.UTF-8 texfile
+% 改为
+%   bibtex texfile
+% 但将无法按拼音排序。
+pdflatex texfile
+biber -l zh_CN.UTF-8 texfile
+pdflatex texfile
 \end{Verbatim}
 即可实现正确的排版。
+某些情况下（详见 biblatex 手册\supercite{biblatex}），
+用户可能需要在运行 \verb|biber|（或 \verb|bibtex|）
+之后运行两次 \verb|pdflatex|（或 \verb|xelatex|、\verb|latex|）
+才能获得正确的引用标记。
 
 \section{字段介绍}\label{sec:fields}
 \subsection{基本字段}
@@ -162,7 +239,7 @@ xelatex texfile
 			注：
 			不可用 \texttt{language} 字段区分中英文文献，
 			因为 biblatex 使用 babel\supercite{babel} 宏包处理此字段，
-			但后者不支持中文，所以可能出错。%
+			但后者目前不支持中文，所以可能出错。%
 		}
 	\item 其它通用特殊字段，见 biblatex 手册\supercite{biblatex}。
 \end{itemize}
@@ -236,10 +313,20 @@ xelatex texfile
 
 \subsection{\texttt{@customf} 类型}
 
-\verb|@patent| 类型为特殊类型，
+\verb|@customf| 类型为特殊类型，
 专用于在文献列表的相应条目中排版自定义的文字。
 此类条目必需且唯一支持的基本字段为 \verb|addendum|，
 用户可将其设为自己希望排版的内容。
+
+\emph{%
+	注：
+	\texttt{@userf} 类型虽不支持 \texttt{author} 等字段，
+	但用户仍可以设定它们的值。
+	这样虽不能自动根据这些字段排版，
+	但在仍可以根据它们
+	（主要是 \texttt{author}、\texttt{title} 和 \texttt{year} 三个字段）
+	进行排序。 %
+}
 
 \section{其它使用提示}
 
@@ -252,6 +339,16 @@ year = {1845\textmd{\emph{（清同治四年）}}}
 
 \verb|caspervector| 样式不支持 \verb|edition| 字段，
 用户可以在 \verb|title| 等字段中手动标注。
+
+\section{存在的问题}
+
+如上文所述，因为 babel 宏包目前不支持中文，
+故对中英文的分别处理只能通过比较麻烦的方式实现，
+指定语言也只能通过一个自定义的字段（\verb|userf|）进行。
+
+biblatex/biber 所支持的排序方式仍有一定限制，例如这样的需求目前就无法实现：
+参考文献数据库中被引用过的参考文献按引用顺序排在最前，
+未被引用的参考文献按字母和拼音顺序排序。
 
 \printbibliography%
 	[heading = bibnumbered, title = {本文参考文献}, category = cited]
