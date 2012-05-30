@@ -14,7 +14,7 @@ togbk:
 	enca -L zh -x GBK readme.*
 
 clean:
-	rm -f readme.{aux,bbl,bcf,blg,dvi,log,run.xml,out} texput.log
+	rm -f readme.{aux,bbl,bcf,blg,dvi,log,run.xml,out} {missfont,texput}.log
 
 dist-clean: clean
 	rm -f readme.pdf
