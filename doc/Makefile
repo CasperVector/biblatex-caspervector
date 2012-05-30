@@ -1,3 +1,8 @@
+# vim:ts=4:sw=4
+#
+# Copyright (c) 2011-2012 Casper Ti. Vector
+# Public domain.
+
 doc:
 	latex readme
 	biber -f -l zh_CN.UTF-8 readme
