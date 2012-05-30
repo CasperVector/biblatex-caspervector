@@ -22,7 +22,7 @@
 %   biblatex-caspervector-utf8.def
 
 \ProvidesFile{biblatex-caspervector-utf8.def}%
-	[2012/05/30 v0.1 Chinese punctuations in UTF-8]
+	[2012/05/30 v0.1.1 Chinese punctuations in UTF-8]
 
 \InitializeBibliographyStyle{%
 	\def\cnldquot{“}

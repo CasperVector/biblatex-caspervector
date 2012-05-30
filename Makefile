@@ -5,7 +5,7 @@
 
 TITLE = biblatex-caspervector
 README = README
-VERSION = 0.1
+VERSION = 0.1.1
 
 dist:
 	utils/dist TITLE=$(TITLE) README=$(README) VERSION=$(VERSION)
