@@ -7,9 +7,8 @@
 NUMDATE = $(shell date '+%Y/%m/%d')
 
 revbump:
-	sed -i '/\\Provides/,+1 s/\[[^ ]* [^ ]*/[$(NUMDATE) v$(VERSION)/' \
-		tex/*
-	sed -i -e '/^\\date/ s/^.*\$$/\\date{$(NUMDATE)}/' \
+	sed -i '/\\Provides/,+1 s;\[[^ ]* [^ ]*;[$(NUMDATE) v$(VERSION);' tex/*
+	sed -i -e '/^\\date/ s;^.*$$;\\date{$(NUMDATE)};' \
 		-e '/^\\title/ s/v[0-9.]\+}}$$/v$(VERSION)}}/' \
 		doc/readme.tex
 	@echo '$@: remember to update the ChangeLog'

@@ -17,11 +17,11 @@
 \begin{document}
 \title{\textbf{biblatex 参考文献和引用样式：\texttt{caspervector} v0.1}}
 \author{%
-	Casper Ti.\ Vector\thanks{%
+	Casper Ti.\ Vector\thanks{\ %
 		\href{mailto:CasperVector@gmail.com}{\texttt{CasperVector@gmail.com}}.%
 	}%
 }
-\date{2012/5/30}
+\date{2012/05/30}
 \maketitle
 
 \section{引言}
@@ -50,9 +50,9 @@ biblatex\supercite{biblatex}/biber\supercite{biber}
 
 \section{许可协议}
 
-版权所有 \copyright\ 2012 Casper Ti. Vector。
+版权所有 \copyright\ 2012 Casper Ti. Vector。%
 \verb|caspervector| 参考文献和引用样式以
-\LaTeX{} Project Public License\footnote{%
+\LaTeX{} Project Public License\footnote{\ %
 	\url{http://www.latex-project.org/lppl/}.%
 }发布。
 \verb|caspervector| 样式目前由其作者维护。
@@ -118,7 +118,7 @@ $HOME/texmf
 \end{itemize}
 
 用这样的方法安装完宏包后，可能需要刷新一次文件名数据库。
-关于这一步如何操作，详见 \CTeX{} FAQ\supercite{ctex-faq}\footnote{%
+关于这一步如何操作，详见 \CTeX{} FAQ\supercite{ctex-faq}\footnote{\ %
 	在类 UNIX 操作系统的终端或 Windows 的命令提示符中%
 	用 \texttt{texdoc ctex-faq} 调出文档，
 	然后在其中搜索“文件名数据库”即可找到。%
@@ -359,11 +359,17 @@ biblatex/biber 所支持的排序方式仍有一定限制，例如这样的需�
 参考文献数据库中被引用过的参考文献按引用顺序排在最前，
 未被引用的参考文献按字母和拼音顺序排序。
 
+\section{更新记录}
+\VerbatimInput[tabsize = 4]{ChangeLog.txt}
+
 \printbibliography%
 	[heading = bibnumbered, title = {本文参考文献}, category = cited]
 \printbibliography[
 	heading = bibnumbered, notcategory = cited,
-	title = {其它参考文献示例（引自文献 \parencite{gbt7714-2005}）}
+	title = {%
+		其它参考文献示例
+		（引自\texorpdfstring{文献 \parencite{gbt7714-2005}}{ GB/T 7714-2005}）
+	}
 ]
 \end{document}
 

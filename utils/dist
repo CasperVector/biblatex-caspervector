@@ -7,14 +7,14 @@
 PROJECT = $(TITLE)-$(VERSION)
 DOC = $(PROJECT)/doc
 
-dist: dist-clean dist-dir doc dist-zip
+dist: dist-clean dist-dir doc-pdf dist-zip
 
 dist-dir: tex/ doc/
 	mkdir -p $(PROJECT)/
 	cp -r tex/ $(PROJECT)/
 	cp -r doc/ $(PROJECT)/
 
-doc:
+doc-pdf:
 	cd $(DOC)/ && make
 	mv $(DOC)/readme.pdf $(PROJECT)/$(README).pdf
 	cd $(DOC)/ && make dist-clean
