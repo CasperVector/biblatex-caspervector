@@ -29,7 +29,7 @@
 \newtoggle{bbx:gbk}
 \DeclareBibliographyOption{utf8}[true]{\togglefalse{bbx:gbk}}
 \DeclareBibliographyOption{gbk}[true]{\toggletrue{bbx:gbk}}
-\ExecuteBibliographyOptions{alldates = iso8601, gbk}
+\ExecuteBibliographyOptions{alldates = iso8601, gbk, sorting = ecnty}
 \AtEndOfPackage{%
 	\iftoggle{bbx:gbk}{
 		\input{biblatex-caspervector-gbk.def}
@@ -40,7 +40,11 @@
 	}%
 }
 
-\providecommand{\cegen}[2]{\iffieldundef{userf}{#2}{#1}}
+\providecommand{\cegen}[2]{%
+	\ifthenelse%
+	{\iffieldequalstr{userf}{zh} \or \iffieldequalstr{userf}{cn}}%
+	{#1}{#2}%
+}
 \providecommand{\mybibquote}[1]{\cegen{\cnldquot{#1}\cnrdquot}{\mkbibquote{#1}}}
 \providecommand{\cecomma}{\cegen{\cncomma}{\addcomma\addspace}}
 \providecommand{\cecolon}{\cegen{\cncolon}{\addcolon\addspace}}
@@ -224,4 +228,54 @@
 \DeclareBibliographyAlias{inbook}{incollection}
 \DeclareBibliographyAlias{inproceedings}{incollection}
 \DeclareBibliographyAlias{*}{book}
+
+\DeclareSortingScheme{ecnty}{
+	\sort{\field{presort}}
+	\sort[final]{\field{sortkey}}
+	\sort{
+		\field{userf}
+		\literal{en}
+	}
+	\sort{
+		\name{sortname}
+		\name{author}
+		\name{editor}
+		\name{translator}
+		\field{sorttitle}
+		\field{title}
+	}
+	\sort{
+		\field{sorttitle}
+		\field{title}
+	}
+	\sort{
+		\field{sortyear}
+		\field{year}
+	}
+}
+
+\DeclareSortingScheme{centy}{
+	\sort{\field{presort}}
+	\sort[final]{\field{sortkey}}
+	\sort[direction = descending]{
+		\field{userf}
+		\literal{en}
+	}
+	\sort{
+		\name{sortname}
+		\name{author}
+		\name{editor}
+		\name{translator}
+		\field{sorttitle}
+		\field{title}
+	}
+	\sort{
+		\field{sorttitle}
+		\field{title}
+	}
+	\sort{
+		\field{sortyear}
+		\field{year}
+	}
+}
 

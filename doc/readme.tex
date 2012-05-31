@@ -69,12 +69,12 @@ biblatex\supercite{biblatex}/biber\supercite{biber}
 	\item 中文环境（\myemph{必需}）：
 		\verb|caspervector| 样式虽支持中文，但其本身不提供中文环境。
 		用户仍然需要中文环境才能排版出文档。
-	\item biber（\myemph{可选}）：
+	\item biber 程序（\myemph{可选}）：
 		用 biber 可以方便地实现文献按英文文献在前且按字母和拼音排序。
 \end{itemize}
 
 以上要求在\myemph{最新}的\myemph{完全版}
-\CTeX{} 套装和 \TeX{}Live 中都有完善的支持。
+\TeX{}Live 系统和 \CTeX{} 套装中都有完善的支持。
 
 \subsection{“绿色”安装}
 
@@ -135,13 +135,24 @@ $HOME/texmf
 % 如果系统上无法使用 biber，可将“biber”改为“bibtex”。
 % “gbk”可能需要改为“utf8”，根据用户使用的字符编码而定。
 % “...” 代表其它选项。
-\usepackage[backend = biber, style = caspervector, gbk, ...]{biblatex}
+\usepackage[
+	backend = biber, style = caspervector, gbk, sorting = centy, ...
+]{biblatex}
 \end{Verbatim}
+其中 \verb|sorting| 选项用于指定按哪些字段排序，
+除 biblatex 提供的标准选项\supercite{biblatex}外，
+\verb|caspervector| 样式还提供 \verb|centy| 和 \verb|ecnty| 两种排序方案
+（后者为 \verb|caspervector| 的默认选择），
+表示依次按文献语言
+（\textbf{ce}nyt 表示中文文献在前，\textbf{ec}nyt 表示英文文献在前；
+文献语言根据 \verb|userf| 字段进行区分，详见第 \ref{sec:fields} 部分）、
+编著者姓名（\textbf{n}ame）、标题（\textbf{t}itle）
+和出版年（\textbf{y}ear）排序。
 
 参考文献数据库
 （\verb|.bib| 文件，其格式见第 \ref{sec:fields}、\ref{sec:entries} 部分）
 通过 \verb|\addbibresource| 命令导入，%
-\myemph{注意不要省略 \texttt{.bib} 的扩展名}。
+\myemph{注意不要省略扩展名 \texttt{.bib}}。
 例如，本文的参考文献数据库就是通过下述命令导入的：
 \begin{Verbatim}[frame = single]
 \addbibresource{readme.bib}
@@ -152,7 +163,7 @@ $HOME/texmf
 \subsection{引用命令}
 
 \verb|caspervector| 样式支持 biblatex 所提供的引用命令，
-其中最常用的是 \verb|\cite|、\verb|\parencite| 和 \verb|\supercite|。
+其中最常用的是 \verb|\supercite|、\verb|\parencite| 和 \verb|\cite|。
 三个命令的用法类似：
 \begin{Verbatim}[frame = single]
 % 可选参数 prenote 和 postnote 分别用于设定引用记号前、后的注释。
@@ -258,7 +269,8 @@ pdflatex texfile
 
 \begin{itemize}
 	\item \verb|userf|：
-		未定义时，相应条目在文献列表中用英文排版，否则用中文排版。\\
+		值为 \verb|zh| 或 \verb|cn| 时，相应条目在文献列表中用中文排版；
+		否则（为其他值或未定义时）用中文排版。\\
 		\myemph{%
 			注：
 			不可用 \texttt{language} 字段区分中英文文献，
@@ -376,8 +388,9 @@ year = {1845\textmd{\emph{（清同治四年）}}}
 biblatex/biber 所支持的排序方式仍有一定限制，例如这样的需求目前就无法实现：
 参考文献数据库中被引用过的参考文献按引用顺序排在最前，
 未被引用的参考文献按字母和拼音顺序排序。
-不过根据 biber 主页\footnote{\ http://biblatex-biber.sourceforge.net/}上的说明，%
-biblatex 2.x 系列将支持这一功能。
+不过根据 biber 主页\footnote{\ %
+	\url{http://biblatex-biber.sourceforge.net/}.%
+}上的说明，biblatex 2.x 系列将支持这一功能。
 
 \section{更新记录}
 \VerbatimInput[tabsize = 4, baselinestretch = 1]{ChangeLog.txt}
