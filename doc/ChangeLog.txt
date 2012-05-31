@@ -1,6 +1,26 @@
+2012-05-13, v0.1.3
+
+	* Changes to API:
+	- Chinese references now require (userf == 'zh' || userf == 'cn').
+	- Add {ce,ec}nty sorting scheme, default to ecnty.
+
+	* Changes to documentation:
+	- Fix biber collating/locale problem.
+	- Unify the `userf' field in `readme.bib'.
+	- Update FAQs and notices.
+
+	* Changes to package code:
+	- Fix and improve spacing and punctuation.
+	- Unify name formatting as well as sorting.
+	- Fix \footfullcite errors. Now the commands are defined globally.
+
+	* Misc:
+	- Add QA check for spaces and tabs on blank lines.
+	- Minor fixes and improvements.
+
 2012-05-12, v0.1.2
 
-	* Changes to the documentation:
+	* Changes to documentation:
 	- Add notice for the `bibintoc' heading.
 	- Conform to the style of pkuthss.
 
