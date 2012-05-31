@@ -57,7 +57,7 @@ biblatex\supercite{biblatex}/biber\supercite{biber}
 \verb|caspervector| 参考文献和引用样式以
 \LaTeX{} Project Public License\footnote{\ %
 	\url{http://www.latex-project.org/lppl/}.%
-}发布。
+}发布。%
 \verb|caspervector| 样式目前由其作者维护。
 
 \section{系统要求和安装方式}
@@ -345,6 +345,9 @@ pdflatex texfile
 
 \section{其它使用提示}
 
+用户可以通过省略可选字段的方式来避免排版相应的内容。
+例如，省略 \verb|type| 字段便可使相应条目不排版文献类型和电子文献载体标志代码。
+
 用户可以通过手动调用格式化命令来临时覆盖预设的格式设定，
 例如文献 \parencite{1-7} 中的出版年便是通过设定
 \begin{Verbatim}[frame = single]
@@ -364,9 +367,14 @@ year = {1845\textmd{\emph{（清同治四年）}}}
 biblatex/biber 所支持的排序方式仍有一定限制，例如这样的需求目前就无法实现：
 参考文献数据库中被引用过的参考文献按引用顺序排在最前，
 未被引用的参考文献按字母和拼音顺序排序。
+不过根据 biber 主页\footnote{\ http://biblatex-biber.sourceforge.net/}上的说明，%
+biblatex 2.x 系列将支持这一功能。
 
 \section{更新记录}
+\begingroup
+\linespread{1}\selectfont
 \VerbatimInput[tabsize = 4]{ChangeLog.txt}
+\endgroup
 
 \printbibliography%
 	[heading = bibnumbered, title = {本文参考文献}, category = cited]
