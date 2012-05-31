@@ -5,7 +5,7 @@
 
 doc:
 	latex readme
-	biber -f -l zh_CN.UTF-8 readme
+	biber -l zh__pinyin readme
 	latex readme
 	latex readme
 	dvipdfmx readme

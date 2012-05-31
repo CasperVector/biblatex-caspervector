@@ -203,13 +203,11 @@ $HOME/texmf
 \begin{Verbatim}[frame = single]
 # “texfile”是被 TeX 编译的文件名中除去“.tex”的部分。
 # “pdflatex”可改为其它 TeX 程序，使用纯 latex 编译时可能还需要运行 dvipdfmx。
-# 如果系统上无法使用 biber，可将
-#   biber -f -l zh_CN.UTF-8 texfile
-# 改为
+# 如果系统上无法使用 biber，可将执行 biber 的一行改为
 #   bibtex texfile
 # 但将无法按拼音排序。
 pdflatex texfile
-biber -f -l zh_CN.UTF-8 texfile
+biber -l zh__pinyin texfile
 pdflatex texfile
 \end{Verbatim}
 即可实现正确的排版。
@@ -217,6 +215,13 @@ pdflatex texfile
 用户可能需要在运行 \verb|biber|（或 \verb|bibtex|）
 之后运行两次 \verb|pdflatex|（或 \verb|xelatex|、\verb|latex|）
 才能获得正确的引用标记。
+
+另外，上述执行 \verb|biber| 的一行命令中，
+\verb|-l| 的参数 \verb|zh__pinyin| 可改为其它
+被 Perl 的 \verb|Unicode::Collate| 模块支持的 locale\footnote{\ %
+	\url{http://search.cpan.org/~sadahiro/Unicode-Collate/Collate/Locale.pm}.%
+}，这样在排序时将使用相应的排序规则。
+例如，如果要按笔画排序的话，可以将 \verb|zh__pinyin| 改为 \verb|zh__stroke|。
 
 \section{字段介绍}\label{sec:fields}
 \subsection{基本字段}
