@@ -197,13 +197,13 @@ $HOME/texmf
 
 一般情况下，
 \begin{Verbatim}[frame = single]
-% “texfile”是被 TeX 编译的文件名中除去“.tex”的部分。
-% “pdflatex”可改为其它 TeX 程序，使用纯 latex 编译时可能还需要运行 dvipdfmx。
-% 如果系统上无法使用 biber，可将
-%   biber -f -l zh_CN.UTF-8 texfile
-% 改为
-%   bibtex texfile
-% 但将无法按拼音排序。
+# “texfile”是被 TeX 编译的文件名中除去“.tex”的部分。
+# “pdflatex”可改为其它 TeX 程序，使用纯 latex 编译时可能还需要运行 dvipdfmx。
+# 如果系统上无法使用 biber，可将
+#   biber -f -l zh_CN.UTF-8 texfile
+# 改为
+#   bibtex texfile
+# 但将无法按拼音排序。
 pdflatex texfile
 biber -f -l zh_CN.UTF-8 texfile
 pdflatex texfile
