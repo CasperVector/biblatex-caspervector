@@ -8,7 +8,7 @@ FIND_GBK = '(' -name '*gbk*' ')'
 FIND_VCS = '(' -type d -name '.git' -prune ')'
 
 # IGNORE "error"s intentionally.
-.IGNORE qa: enc lt sync tail
+.IGNORE qa: enc lt sync blank tail
 
 enc:
 	@echo '======================================================================'
@@ -31,6 +31,12 @@ sync:
 	@echo '======================================================================'
 	iconv -f GBK tex/biblatex-caspervector-gbk.def | \
 		diff - tex/biblatex-caspervector-utf8.def
+
+blank:
+	@echo '======================================================================'
+	@echo '$@: check for spaces and tabs on blank lines'
+	@echo '======================================================================'
+	! grep -r --exclude-dir=.git '^[ 	]\+$$' .
 
 tail:
 	@echo '======================================================================'
