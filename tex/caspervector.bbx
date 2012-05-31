@@ -55,6 +55,9 @@
 \renewcommand{\multinamedelim}{\cecomma}
 \renewcommand{\finalnamedelim}{\cegen{\cncomma}{\addspace\bibstring{and}\space}}
 \renewcommand{\andothersdelim}{\cespace}
+\renewcommand{\postnotedelim}{\cecomma}
+\renewcommand{\bibendnotewrapper}[1]{\bibsentence #1\cnperiod}
+\renewcommand{\bibfootnotewrapper}[1]{\bibsentence #1\cnperiod}
 
 \DeclareFieldFormat*{booktitle}{\mkbibemph{#1}}
 \DeclareFieldFormat*{journaltitle}{\mkbibemph{#1}}
