@@ -24,16 +24,14 @@
 \ProvidesFile{biblatex-caspervector-utf8.def}%
 	[2012/05/30 v0.1.2 Chinese punctuations in UTF-8]
 
-\InitializeBibliographyStyle{%
-	\def\cnldquot{“}
-	\def\cnrdquot{”}
-	\def\cncomma{，}
-	\def\cnscolon{；}
-	\def\cncolon{：}
-	\def\cnperiod{。}%
-}
+\providecommand\cnldquot{“}
+\providecommand\cnrdquot{”}
+\providecommand\cncomma{，}
+\providecommand\cnscolon{；}
+\providecommand\cncolon{：}
+\providecommand\cnperiod{。}
 
-\DefineBibliographyStrings{english}{%
+\DefineBibliographyStrings{english}{
 	andmore = {\cegen{等}{\mkbibemph{et\addabbrvspace al\adddot}}},
 	andothers = {\cegen{等}{\mkbibemph{et\addabbrvspace al\adddot}}},
 	bibliography = {参考文献},

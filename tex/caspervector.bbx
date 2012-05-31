@@ -40,20 +40,17 @@
 	}%
 }
 
-\InitializeBibliographyStyle{
-	\providecommand{\cegen}[2]{\iffieldundef{userf}{#2}{#1}}
-	\providecommand{\mybibquote}[1]{\cegen{\cnldquot{#1}\cnrdquot}{\mkbibquote{#1}}}
-	\providecommand{\cecomma}{\cegen{\cncomma}{\addcomma\addspace}}
-	\providecommand{\cecolon}{\cegen{\cncolon}{\addcolon\addspace}}
-	\providecommand{\cescolon}{\cegen{\cnscolon}{\addcolon\addspace}}
-	\providecommand{\ceperiod}{\cegen{\cnperiod}{\addperiod\addspace}}
-	\providecommand{\cespace}{\cegen{}{\addspace}}
-
-	\renewcommand{\finentrypunct}{\cegen{\cnperiod}{.}}
-	\renewcommand{\multinamedelim}{\cecomma}
-	\renewcommand{\finalnamedelim}{\cegen{\cncomma}{\addspace\bibstring{and}\space}}
-	\renewcommand{\andothersdelim}{\cespace}
-}
+\providecommand{\cegen}[2]{\iffieldundef{userf}{#2}{#1}}
+\providecommand{\mybibquote}[1]{\cegen{\cnldquot{#1}\cnrdquot}{\mkbibquote{#1}}}
+\providecommand{\cecomma}{\cegen{\cncomma}{\addcomma\addspace}}
+\providecommand{\cecolon}{\cegen{\cncolon}{\addcolon\addspace}}
+\providecommand{\cescolon}{\cegen{\cnscolon}{\addcolon\addspace}}
+\providecommand{\ceperiod}{\cegen{\cnperiod}{\addperiod\addspace}}
+\providecommand{\cespace}{\cegen{}{\addspace}}
+\renewcommand{\finentrypunct}{\cegen{\cnperiod}{.}}
+\renewcommand{\multinamedelim}{\cecomma}
+\renewcommand{\finalnamedelim}{\cegen{\cncomma}{\addspace\bibstring{and}\space}}
+\renewcommand{\andothersdelim}{\cespace}
 
 \DeclareFieldFormat*{booktitle}{\mkbibemph{#1}}
 \DeclareFieldFormat*{journaltitle}{\mkbibemph{#1}}

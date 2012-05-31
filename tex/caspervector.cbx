@@ -25,11 +25,12 @@
 	[2012/05/30 v0.1.2 Casper Ti. Vector's biblatex citation style]
 
 \RequireCitationStyle{numeric-comp}
-\ExecuteBibliographyOptions{autocite = superscript}
-
-\InitializeCitationStyle{
-	\providecommand{\mksuperbrackets}[1]{\mkbibsuperscript{\mkbibbrackets{#1}}}
+\ExecuteBibliographyOptions{
+	autocite = superscript,
+	autopunct = false
 }
+
+\providecommand{\mksuperbrackets}[1]{\mkbibsuperscript{\mkbibbrackets{#1}}}
 
 \DeclareCiteCommand{\cite}
 {%

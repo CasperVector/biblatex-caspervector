@@ -152,16 +152,21 @@ $HOME/texmf
 
 \subsection{引用命令}
 
-\verb|caspervector| 样式提供 3 个引用命令：
-\verb|\cite|、\verb|\parencite| 和 \verb|\supercite|，
+\verb|caspervector| 样式支持 biblatex 所提供的引用命令，
+其中最常用的是 \verb|\cite|、\verb|\parencite| 和 \verb|\supercite|。
 三个命令的用法类似：
 \begin{Verbatim}[frame = single]
 % 可选参数 prenote 和 postnote 分别用于设定引用记号前、后的注释。
 \citecommand[prenote][postnote]{key}
 \end{Verbatim}
-其中 \verb|\cite| 产生无格式化的引用标记，
-\verb|\parencite| 产生带方括号的引用标记，
-而 \verb|\supercite| 产生上标且带方括号的引用标记。
+其中 \verb|\cite| 产生无格式化的引用标记\footnote{\ %
+	biblatex 的默认设置是带方括号，
+	而 \texttt{caspervector} 样式中出于功能完备性的考虑去掉了方括号。%
+}，\verb|\parencite| 产生带方括号的引用标记，
+而 \verb|\supercite| 产生上标且带方括号的引用标记\footnote{\ %
+	biblatex 的默认设置是只上标、不带方括号，
+	而 \texttt{caspervector} 样式中根据作者见到的常见需求加上了方括号。%
+}。
 
 例如，在本文中，%
 \verb|\parencite{gbt7714-2005}| 的输出是“\parencite{gbt7714-2005}”，
