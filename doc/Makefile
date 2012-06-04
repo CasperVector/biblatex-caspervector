@@ -10,13 +10,15 @@ doc:
 	latex readme
 	dvipdfmx readme
 
-toutf8:
+toutf8lf:
 	sed -i '1,10 s/GBK/UTF8/; 1,10 s/gbk/utf8/' readme.tex
 	enca -L zh -x UTF-8 readme.*
+	dos2unix readme.*
 
-togbk:
+togbkcrlf:
 	sed -i '1,10 s/UTF8/GBK/; 1,10 s/utf8/gbk/' readme.tex
 	enca -L zh -x GBK readme.*
+	unix2dos readme.*
 
 clean:
 	rm -f readme.{aux,bbl,bcf,blg,dvi,log,run.xml,out} {missfont,texput}.log
