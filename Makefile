@@ -4,14 +4,26 @@
 # Public domain.
 
 TITLE = biblatex-caspervector
-README = README
 VERSION = 0.1.3
+DIST_FLAGS = TITLE=$(TITLE) VERSION=$(VERSION)
 
 dist:
-	utils/dist TITLE=$(TITLE) README=$(README) VERSION=$(VERSION)
+	utils/dist $(DIST_FLAGS)
+
+doc-pdf:
+	utils/dist $(DIST_FLAGS) doc-pdf
+
+dist-ctan:
+	utils/dist $(DIST_FLAGS) dist-ctan
+
+dist-tds:
+	utils/dist $(DIST_FLAGS) dist-tds
+
+clean:
+	utils/dist $(DIST_FLAGS) clean
 
 distclean:
-	utils/dist TITLE=$(TITLE) README=$(README) VERSION=$(VERSION) distclean
+	utils/dist $(DIST_FLAGS) distclean
 
 qa:
 	utils/qa
