@@ -10,8 +10,8 @@ VERSION = 0.1.3
 dist:
 	utils/dist TITLE=$(TITLE) README=$(README) VERSION=$(VERSION)
 
-dist-clean:
-	utils/dist TITLE=$(TITLE) README=$(README) VERSION=$(VERSION) dist-clean
+distclean:
+	utils/dist TITLE=$(TITLE) README=$(README) VERSION=$(VERSION) distclean
 
 qa:
 	utils/qa

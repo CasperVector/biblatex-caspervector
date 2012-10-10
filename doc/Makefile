@@ -23,6 +23,6 @@ togbkcrlf:
 clean:
 	rm -f readme.{aux,bbl,bcf,blg,dvi,log,run.xml,out} {missfont,texput}.log
 
-dist-clean: clean
+distclean: clean
 	rm -f readme.pdf
 
