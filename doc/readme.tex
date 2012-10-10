@@ -76,56 +76,19 @@ biblatex\supercite{biblatex}/biber\supercite{biber}
 以上要求在\myemph{最新}的\myemph{完全版}
 \TeX{}Live 系统和 \CTeX{} 套装中都有完善的支持。
 
-\subsection{“绿色”安装}
+\subsection{安装方式}
 
-将 \verb|tex/| 中的所有文件复制到被编译的 \verb|.tex| 文件所在的目录中即可。
+使用 \TeX{}Live 的用户可以通过在终端中以管理员权限执行
+\begin{Verbatim}[frame = single]
+tlmgr install biblatex-caspervector
+\end{Verbatim}
+来安装 \verb|caspervector| 样式。
 
-\subsection{非“绿色”安装}
-
-对于支持 \TeX{} 目录结构（TDS）标准的 \TeX{} 发行版%
-（其中包括 \TeX{}Live 和 \CTeX{}），
-安装 pkuthss 文档模版都可以通过类似的方式：
-将 \verb|tex/| 中内容放在 \verb|$TEXMF/tex/latex/pkuthss/|，
-将本文档（\verb|readme.pdf|）和 \verb|doc/| 中内容%
-放在 \verb|$TEXMF/doc/latex/pkuthss/|。
-其中 \verb|$TEXMF| 是用户系统上的 texmf 目录，
-我们推荐使用 \verb|$TEXMFHOME| 或者 \verb|$TEXMFLOCAL|：
-\begin{itemize}
-	\item 在 Windows 下，%
-		\TeX{}Live 和 \CTeX{} 套装默认的 \verb|$TEXMFHOME| %
-		通常可能都是
+使用 \CTeX{} 套装的用户可以通过在命令提示符中执行
 \begin{Verbatim}[frame = single]
-# user 也可改为其它名字，依你的用户名而定。
-C:\Documents and Settings\user\texmf
+mpm --install=biblatex-caspervector
 \end{Verbatim}
-		而 \verb|$TEXMFLOCAL| 通常可能分别是
-\begin{Verbatim}[frame = single]
-# C:\Program Files\CTEX 也可改为其它目录，依安装位置而定。
-C:\Program Files\CTEX\MiKTeX\texmf-local
-\end{Verbatim}
-		和
-\begin{Verbatim}[frame = single]
-# 2010 也可改为其它年份，依 TeXLive 版本而定。
-C:\Program Files\texlive\2010\texmf-local
-\end{Verbatim}
-	\item 在 Linux 和其它类 UNIX 操作系统下，
-		\TeX{}Live 默认的 \verb|$TEXMFHOME| 通常可能是
-\begin{Verbatim}[frame = single]
-$HOME/texmf
-\end{Verbatim}
-		而 \verb|$TEXMFLOCAL| 通常可能是
-\begin{Verbatim}[frame = single]
-# 2010 也可改为其它年份，依 TeXLive 版本而定。
-/usr/local/texlive/2010/texmf-local
-\end{Verbatim}
-\end{itemize}
-
-用这样的方法安装完宏包后，可能需要刷新一次文件名数据库。
-关于这一步如何操作，详见 \CTeX{} FAQ\supercite{ctex-faq}\footnote{\ %
-	在类 UNIX 操作系统的终端或 Windows 的命令提示符中%
-	用 \texttt{texdoc ctex-faq} 调出文档，
-	然后在其中搜索“文件名数据库”即可找到。%
-}。
+来安装 \verb|caspervector| 样式。
 
 \section{使用简介}
 \subsection{样式调用}
