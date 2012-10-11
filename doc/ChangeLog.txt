@@ -1,3 +1,13 @@
+2012-10-11. v0.1.4
+	* Changes to documentation:
+	- Fix wrong description: s/cenyt/centy/g
+	- Refine bibliography.
+	- Update instructions for installation wrt addition of CTAN support.
+
+	* Misc:
+	- Add support for utf8lf/gbkcrlf conversion in doc/Makefile.
+	- Add CTAN support.
+
 2012-05-13, v0.1.3
 
 	* Changes to API:
