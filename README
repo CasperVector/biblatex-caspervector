@@ -8,5 +8,6 @@ Homepage: <http://code.google.com/p/caspervector/>
 This package provides a simple, nice and easily extensible
 biblography/citation style for Chinese LaTeX users.
 
-See the file `readme.pdf' for details.
+This file (README) is *NOT* intended as the documentation for this
+package; please see the file `readme.pdf' instead.
 
