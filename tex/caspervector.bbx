@@ -91,8 +91,8 @@
 		\ifthenelse{\ifnameundef{editor} \and \ifnameundef{translator}}%
 		{\printnames{author}}%
 		{%
-			\usebibmacro{cebyauthor}\setunit{\cescolon}%
-			\usebibmacro{cebyeditor}\setunit{\cescolon}%
+			\usebibmacro{cebyauthor}\setunit*{\cescolon}%
+			\usebibmacro{cebyeditor}\setunit*{\cescolon}%
 			\usebibmacro{cebytranslator}%
 		}%
 	}%
@@ -107,7 +107,7 @@
 \newbibmacro{(year+volume+number)/date}{%
 	\ifthenelse{\iffieldundef{month} \and \iffieldundef{day}}%
 	{%
-		\printfield{year}\setunit{\cecomma}%
+		\printfield{year}\setunit*{\cecomma}%
 		\printfield{volume}%
 		\usebibmacro{number}%
 	}{\printdate}%
@@ -116,14 +116,14 @@
 \DeclareBibliographyDriver{book}{%
 	\usebibmacro{bibindex}%
 	\newblock
-	\usebibmacro{author+others}\setunit*{\ceperiod}%
+	\usebibmacro{author+others}\setunit{\ceperiod}%
 	\newblock
 	\usebibmacro{title}\setunit*{\addspace}%
 	\usebibmacro{type}\setunit{\ceperiod}%
 	\newblock
 	\printlist{location}\setunit*{\cecolon}%
 	\printlist{publisher}\setunit{\cecomma}%
-	\usebibmacro{year/date}\setunit{\cecolon}%
+	\usebibmacro{year/date}\setunit*{\cecolon}%
 	\printfield{pages}\setunit{\ceperiod}%
 	\newblock
 	\printfield{url}\setunit*{\cecomma}%
@@ -135,20 +135,20 @@
 \DeclareBibliographyDriver{incollection}{%
 	\usebibmacro{bibindex}%
 	\newblock
-	\usebibmacro{author+others}\setunit*{\ceperiod}%
+	\usebibmacro{author+others}\setunit{\ceperiod}%
 	\newblock
 	\usebibmacro{title}\setunit*{\cespace}%
 	\usebibmacro{type}\setunit{\ceperiod}%
 	\newblock
 	\usebibmacro{cein:}%
 	\newblock
-	\printnames{bookauthor}\setunit*{\ceperiod}%
+	\printnames{bookauthor}setunit{\ceperiod}%
 	\newblock
-	\printfield{booktitle}\setunit*{\ceperiod}%
+	\printfield{booktitle}\setunit{\ceperiod}%
 	\newblock
 	\printlist{location}\setunit*{\cecolon}%
 	\printlist{publisher}\setunit{\cecomma}%
-	\usebibmacro{year/date}\setunit{\cecolon}%
+	\usebibmacro{year/date}\setunit*{\cecolon}%
 	\printfield{pages}\setunit{\ceperiod}%
 	\newblock
 	\printfield{url}\setunit*{\cecomma}%
@@ -160,12 +160,12 @@
 \DeclareBibliographyDriver{periodical}{%
 	\usebibmacro{bibindex}%
 	\newblock
-	\usebibmacro{author+others}\setunit*{\ceperiod}%
+	\usebibmacro{author+others}\setunit{\ceperiod}%
 	\newblock
 	\usebibmacro{journaltitle/title}\setunit*{\addspace}%
 	\usebibmacro{type}\setunit{\ceperiod}%
 	\newblock
-	\usebibmacro{(year+volume+number)/date}\setunit*{\ceperiod}%
+	\usebibmacro{(year+volume+number)/date}\setunit{\ceperiod}%
 	\newblock
 	\printlist{location}\setunit*{\cecolon}%
 	\printlist{publisher}\setunit{\ceperiod}%
@@ -179,7 +179,7 @@
 \DeclareBibliographyDriver{article}{%
 	\usebibmacro{bibindex}%
 	\newblock
-	\printnames{author}\setunit*{\ceperiod}%
+	\printnames{author}\setunit{\ceperiod}%
 	\newblock
 	\usebibmacro{title}\setunit*{\cespace}%
 	\usebibmacro{type}\setunit{\ceperiod}%
@@ -197,7 +197,7 @@
 \DeclareBibliographyDriver{patent}{%
 	\usebibmacro{bibindex}%
 	\newblock
-	\usebibmacro{author}\setunit*{\ceperiod}%
+	\usebibmacro{author}\setunit{\ceperiod}%
 	\newblock
 	\usebibmacro{title}\setunit*{\addspace}%
 	\usebibmacro{type}\setunit{\ceperiod}%
@@ -205,7 +205,7 @@
 	\printlist{location}\setunit*{\cecolon}%
 	\usebibmacro{number}\setunit{\ceperiod}%
 	\newblock
-	\usebibmacro{year/date}\setunit*{\ceperiod}%
+	\usebibmacro{year/date}\setunit{\ceperiod}%
 	\newblock
 	\printfield{url}\setunit*{\cecomma}%
 	\usebibmacro{urldate}\usebibmacro{finentry}%
