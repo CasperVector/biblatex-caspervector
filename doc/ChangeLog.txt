@@ -1,4 +1,18 @@
+2013-01-10, v0.1.6
+
+	* Changes to package code:
+	- Make (more) proper use of `\setunit'/`\setunit*'.
+
+	* Misc:
+	- Minor fixes and improvements.
+
+2012-11-12, v0.1.5
+
+	* Misc:
+	- Fix incorrect TDS packaging.
+
 2012-10-11. v0.1.4
+
 	* Changes to documentation:
 	- Fix wrong description: s/cenyt/centy/g
 	- Refine bibliography.
@@ -14,15 +28,15 @@
 	- Chinese references now require (userf == 'zh' || userf == 'cn').
 	- Add {ce,ec}nty sorting scheme, default to ecnty.
 
-	* Changes to documentation:
-	- Fix biber collating/locale problem.
-	- Unify the `userf' field in `readme.bib'.
-	- Update FAQs and notices.
-
 	* Changes to package code:
 	- Fix and improve spacing and punctuation.
 	- Unify name formatting as well as sorting.
 	- Fix \footfullcite errors. Now the commands are defined globally.
+
+	* Changes to documentation:
+	- Fix biber collating/locale problem.
+	- Unify the `userf' field in `readme.bib'.
+	- Update FAQs and notices.
 
 	* Misc:
 	- Add QA check for spaces and tabs on blank lines.
