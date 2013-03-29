@@ -160,6 +160,12 @@ mpm --install=biblatex-caspervector
 		可以将参考文献加入目录中；
 		当其值为 \verb|bibnumbered| 时，
 		参考文献列表参与章节编号（当然也会被自动加入目录中）。
+	\item \verb|sorting = 排序方案|：
+		对这一部分的文献按照指定的方案排序。\myemph{%
+			注：
+			只有同时使用 2.x 或之后版本的 biblatex 和相应兼容版本的 biber，
+			才能对每个 \texttt{\string\printbibliography} 命令采用不同的排序方案。%
+		}
 \end{itemize}
 
 例如，用
@@ -346,20 +352,13 @@ year = {1845\textmd{\emph{（清同治四年）}}}
 故对中英文的分别处理只能通过比较麻烦的方式实现，
 指定语言也只能通过一个自定义的字段（\verb|userf|）进行。
 
-biblatex/biber 所支持的排序方式仍有一定限制，例如这样的需求目前就无法实现：
-参考文献数据库中被引用过的参考文献按引用顺序排在最前，
-未被引用的参考文献按字母和拼音顺序排序。
-不过根据 biber 主页\footnote{\ %
-	\url{http://biblatex-biber.sourceforge.net/}.%
-}上的说明，biblatex 2.x 系列将支持这一功能。
-
 \section{更新记录}
 \VerbatimInput[tabsize = 4, baselinestretch = 1]{ChangeLog.txt}
 
 \printbibliography%
-	[category = cited, heading = bibnumbered, title = {本文参考文献}]
+	[category = cited, heading = bibnumbered, sorting = none, title = {本文参考文献}]
 \printbibliography[
-	notcategory = cited, heading = bibnumbered,
+	notcategory = cited, heading = bibnumbered, sorting = ecnty,
 	title = {%
 		其它参考文献示例
 		（引自\texorpdfstring{文献 \parencite{gbt7714-2005}}{ GB/T 7714-2005}）
