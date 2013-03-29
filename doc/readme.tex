@@ -11,7 +11,6 @@
 \DeclareBibliographyCategory{cited}
 \AtEveryCitekey{\addtocategory{cited}{\thefield{entrykey}}}
 \addbibresource{readme.bib}
-\nocite{*}
 
 \newcommand{\myemph}[1]{\emph{\textcolor{red}{#1}}}
 
@@ -100,8 +99,8 @@ mpm --install=biblatex-caspervector
 	backend = biber, style = caspervector, gbk, sorting = centy, ...
 ]{biblatex}
 \end{Verbatim}
-其中 \verb|sorting| 选项用于指定按哪些字段排序，
-除 biblatex 提供的标准选项\supercite{biblatex}外，
+其中 \verb|sorting| 选项用于（全局）指定按哪些字段排序，
+除 biblatex 提供的标准选项\supercite{biblatex}外，%
 \verb|caspervector| 样式还提供 \verb|centy| 和 \verb|ecnty| 两种排序方案
 （\verb|caspervector| 默认设置为 \verb|none| 排序方案，即按引用顺序排序），
 表示依次按文献语言
@@ -161,7 +160,7 @@ mpm --install=biblatex-caspervector
 		当其值为 \verb|bibnumbered| 时，
 		参考文献列表参与章节编号（当然也会被自动加入目录中）。
 	\item \verb|sorting = 排序方案|：
-		对这一部分的文献按照指定的方案排序。\myemph{%
+		对这一部分的文献按照指定的方案排序。此设置会覆盖全局设置。\myemph{%
 			注：
 			只有同时使用 2.x 或之后版本的 biblatex 和相应兼容版本的 biber，
 			才能对每个 \texttt{\string\printbibliography} 命令采用不同的排序方案。%
@@ -183,9 +182,10 @@ mpm --install=biblatex-caspervector
 # “pdflatex”可改为其它 TeX 程序，使用纯 latex 编译时可能还需要运行 dvipdfmx。
 # 如果系统上无法使用 biber，可将执行 biber 的一行改为
 #   bibtex texfile
-# 但将无法按拼音排序。
+# 但将无法按拼音排序或进行分类排序。
 pdflatex texfile
 biber -l zh__pinyin texfile
+pdflatex texfile
 pdflatex texfile
 \end{Verbatim}
 即可实现正确的排版。
@@ -194,7 +194,7 @@ pdflatex texfile
 之后运行两次 \verb|pdflatex|（或 \verb|xelatex|、\verb|latex|）
 才能获得正确的引用标记。
 
-另外，上述执行 \verb|biber| 的一行命令中，
+另外，上述执行 \verb|biber| 的一行命令中，%
 \verb|-l| 的参数 \verb|zh__pinyin| 可改为其它
 被 Perl 的 \verb|Unicode::Collate| 模块支持的 locale\footnote{\ %
 	\url{http://search.cpan.org/~sadahiro/Unicode-Collate/Collate/Locale.pm}.%
@@ -331,6 +331,40 @@ pdflatex texfile
 	进行排序。 %
 }
 
+\section{对参考文献进行分类排序}
+
+使用 biblatex 2.6 和 biber 1.6（或两者的更高版本）的用户可以通过
+对不同的 \verb|\printbibliography| 命令传递不同的 \verb|sorting| 选项来实现
+对不同部分文献按不同方案排序。
+例如，如需对被引用的文献按照引用顺序排序，
+而对未引用的文献按照英文文献在前、中文文献在后排序，
+则可以在导言区中加入下列几行代码：
+\begin{Verbatim}[frame = single]
+% 新建条目分类（category）用于区分被引用和未引用的文献条目。
+\DeclareBibliographyCategory{cited}
+% 每执行一次除 \nocite 之外的 \cite 类命令，将被引用的文献加到“cited”分类中。
+\AtEveryCitekey{\addtocategory{cited}{\thefield{entrykey}}}
+\end{Verbatim}
+在正文中准备排版文献列表的位置使用如下代码：
+\begin{Verbatim}[frame = single]
+% 按引用顺序排版“cited”分类，即被引用的文献条目。
+\printbibliography[category = cited, ..., sorting = none, title = {References}]
+% 按英文文献在前、中文文献在后排版“cited”分类之外，即未被引用的文献条目。
+\printbibliography[notcategory = cited, sorting = ecnty, title = {Works Not Cited}]
+\end{Verbatim}
+并在最后一个除 \verb|\nocite| 之外的 \verb|\cite| 类命令之后、%
+\verb|\end{document}| 之前的任意合适位置\footnote{\ %
+	因为 biblatex 中的引用顺序记录是按每个条目被第一次引用的顺序计算的，
+	所以 \texttt{\string\nocite\{*\}} 时导入文献的顺序会覆盖掉后面
+	\texttt{\string\cite} 类命令的引用顺序。
+}（例如，在本说明文档中，就是在两个 \verb|\printbibliography| 命令之间）
+加入以下代码：
+\begin{Verbatim}[frame = single]
+% 将 .bib 文件中所有的参考文献都加到引用列表中，但不将它们加到“cited”分类中，
+% 也不会排版引用标号，只是在最后的 \printbibliography 命令中排版相应的文献条目。
+\nocite{*}
+\end{Verbatim}
+
 \section{FAQ 和其它使用提示}
 
 用户可以通过省略可选字段的方式来避免排版相应的内容。
@@ -348,6 +382,13 @@ year = {1845\textmd{\emph{（清同治四年）}}}
 
 \section{存在的问题}
 
+biber 1.6 之前的版本存在一个 bug\footnote{\ %
+	\url{https://github.com/plk/biblatex/issues/101}.%
+}：在源代码中任意位置出现的 \verb|\nocite{*}| 都会覆盖整个引用顺序记录，
+导致即使在 \verb|sorting = none| 的设定下，
+排版出来的文献列表依然不是按照引用顺序排序的情况。
+因此，如果需要使用相关功能，\myemph{强烈建议将 biblatex 和 biber 升级到最新版本}。
+
 如上文所述，因为 babel 宏包目前不支持中文，
 故对中英文的分别处理只能通过比较麻烦的方式实现，
 指定语言也只能通过一个自定义的字段（\verb|userf|）进行。
@@ -357,6 +398,7 @@ year = {1845\textmd{\emph{（清同治四年）}}}
 
 \printbibliography%
 	[category = cited, heading = bibnumbered, sorting = none, title = {本文参考文献}]
+\nocite{*}
 \printbibliography[
 	notcategory = cited, heading = bibnumbered, sorting = ecnty,
 	title = {%
