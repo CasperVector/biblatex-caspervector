@@ -1,3 +1,13 @@
+2013-03-30, v0.1.7
+	* Changes to package code:
+	- Default to `defernumbers = true' and `sorting = none'.
+
+	* Changes to documentation:
+	- Add hint for split sorting.
+
+	* Misc:
+	- Minor fixes and improvements.
+
 2013-01-10, v0.1.6
 
 	* Changes to package code:
