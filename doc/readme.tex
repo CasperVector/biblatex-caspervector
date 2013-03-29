@@ -155,7 +155,7 @@ mpm --install=biblatex-caspervector
 \begin{itemize}
 	\item \verb|title = 标题|：
 		可以用于指定文献列表的标题（默认为“参考文献”）。
-	\item \verb|heading = 样式|：
+	\item \verb|heading = 标题样式|：
 		最常用的是当 \verb|heading| 的值为 \verb|bibintoc| 时，
 		可以将参考文献加入目录中；
 		当其值为 \verb|bibnumbered| 时，
@@ -357,9 +357,9 @@ biblatex/biber 所支持的排序方式仍有一定限制，例如这样的需�
 \VerbatimInput[tabsize = 4, baselinestretch = 1]{ChangeLog.txt}
 
 \printbibliography%
-	[heading = bibnumbered, title = {本文参考文献}, category = cited]
+	[category = cited, heading = bibnumbered, title = {本文参考文献}]
 \printbibliography[
-	heading = bibnumbered, notcategory = cited,
+	notcategory = cited, heading = bibnumbered,
 	title = {%
 		其它参考文献示例
 		（引自\texorpdfstring{文献 \parencite{gbt7714-2005}}{ GB/T 7714-2005}）
