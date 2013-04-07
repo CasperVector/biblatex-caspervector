@@ -1,4 +1,14 @@
+2013-04-07, v0.1.8
+
+	* Changes to package code:
+	- Fix previously ignored `setunit' issue.
+
+	* Misc:
+	- Update copyright notices.
+	- Minor fixes and improvements.
+
 2013-03-30, v0.1.7
+
 	* Changes to package code:
 	- Default to `defernumbers = true' and `sorting = none'.
 

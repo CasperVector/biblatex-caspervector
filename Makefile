@@ -4,7 +4,7 @@
 # Public domain.
 
 TITLE = biblatex-caspervector
-VERSION = 0.1.7
+VERSION = 0.1.8
 DIST_FLAGS = TITLE=$(TITLE) VERSION=$(VERSION)
 
 dist:
