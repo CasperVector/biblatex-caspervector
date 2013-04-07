@@ -389,6 +389,36 @@ biber 1.6 之前的版本存在一个 bug\footnote{\ %
 故对中英文的分别处理只能通过比较麻烦的方式实现，
 指定语言也只能通过一个自定义的字段（\verb|userf|）进行。
 
+因为 biblatex 现有功能的限制，一些需求无法直接实现。
+例如类似于文献 \parencite{3-2} 中同时有出版起止年和起止期号的情况就无法自动排版，
+只能通过用户手动实现。下面两种方式均可实现上述需求：
+（\verb|sortyear| 字段的用法请参考 biblatex 手册\supercite{biblatex}）：
+\begin{Verbatim}[frame = single]
+@periodical{3-2,
+	author = {中国图书馆学会},
+	title = {图书馆学通讯},
+	type = {J},
+	sortyear = {1957},
+	year = {\textmd{\textbf{1957}(1) -- \textbf{1990}(4)}},
+	location = {北京},
+	publisher = {北京图书馆},
+	userf = {zh},
+}
+\end{Verbatim}
+或
+\begin{Verbatim}[frame = single]
+@customf{3-2,
+	author = {中国图书馆学会},
+	title = {图书馆学通讯},
+	sortyear = {1957},
+	addendum = {中国图书馆学会。
+		\textit{图书馆学通讯} [J]。
+		\textbf{1957}(1) -- \textbf{1990}(4)。
+		北京：北京图书馆。}
+}
+\end{Verbatim}
+这两种方法中更加推荐使用前者，因为前者只需手动实现出版年和期号的排版。
+
 \section{更新记录}
 \VerbatimInput[tabsize = 4, baselinestretch = 1]{ChangeLog.txt}
 
