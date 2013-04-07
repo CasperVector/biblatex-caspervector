@@ -176,7 +176,7 @@ mpm --install=biblatex-caspervector
 
 \subsection{编译方法}
 
-一般情况下，
+一般情况下，依次执行
 \begin{Verbatim}[frame = single]
 # “texfile”是被 TeX 编译的文件名中除去“.tex”的部分。
 # “pdflatex”可改为其它 TeX 程序，使用纯 latex 编译时可能还需要运行 dvipdfmx。
@@ -189,12 +189,8 @@ pdflatex texfile
 pdflatex texfile
 \end{Verbatim}
 即可实现正确的排版。
-某些情况下（详见 biblatex 手册\supercite{biblatex}），
-用户可能需要在运行 \verb|biber|（或 \verb|bibtex|）
-之后运行两次 \verb|pdflatex|（或 \verb|xelatex|、\verb|latex|）
-才能获得正确的引用标记。
 
-另外，上述执行 \verb|biber| 的一行命令中，%
+上述执行 \verb|biber| 的一行命令中，%
 \verb|-l| 的参数 \verb|zh__pinyin| 可改为其它
 被 Perl 的 \verb|Unicode::Collate| 模块支持的 locale\footnote{\ %
 	\url{http://search.cpan.org/~sadahiro/Unicode-Collate/Collate/Locale.pm}.%
