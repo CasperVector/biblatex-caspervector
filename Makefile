@@ -5,29 +5,15 @@
 
 TITLE = biblatex-caspervector
 VERSION = 0.1.9
-DIST_FLAGS = TITLE=$(TITLE) VERSION=$(VERSION)
 
-dist:
-	utils/dist $(DIST_FLAGS)
-
-doc-pdf:
-	utils/dist $(DIST_FLAGS) doc-pdf
-
-dist-ctan:
-	utils/dist $(DIST_FLAGS) dist-ctan
-
-dist-tds:
-	utils/dist $(DIST_FLAGS) dist-tds
-
-clean:
-	utils/dist $(DIST_FLAGS) clean
-
-distclean:
-	utils/dist $(DIST_FLAGS) distclean
+default: dist
 
 qa:
 	utils/qa
 
 bump:
 	utils/bump VERSION=$(VERSION)
+
+dist clean distclean:
+	utils/dist TITLE=$(TITLE) VERSION=$(VERSION) $@
 
