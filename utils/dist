@@ -4,40 +4,48 @@
 # Copyright (c) 2011-2012 Casper Ti. Vector
 # Public domain.
 
+CP = cp -rL
+MV = mv -f
+MD = mkdir -p
+RD = rm -rf
+ZIP = zip -rT
+MAKE = make
+SELF = utils/dist
+
 dist:
-	make distclean
-	make doc-pdf
-	make dist-ctan
-	make clean
+	$(SELF) distclean
+	$(SELF) doc-pdf
+	$(SELF) dist-ctan
+	$(SELF) clean
 
 doc-pdf: doc/
-	cd doc/ && make && make clean
+	cd doc/ && $(MAKE) && $(MAKE) clean
 
 dir-tds: $(TITLE)-tds
 $(TITLE)-tds: tex/ doc/ README
-	mkdir -p $@/tex/latex/ $@/doc/latex/
+	$(MD) $@/tex/latex/ $@/doc/latex/
 	cp -r tex/ $@/tex/latex/$(TITLE)
 	cp -r doc/ $@/doc/latex/$(TITLE)
 
 dist-tds: $(TITLE)-$(VERSION).tds.zip
 $(TITLE)-$(VERSION).tds.zip: $(TITLE)-tds
-	cd $< && zip -rT ../$@ tex/ doc/
+	cd $< && $(ZIP) ../$@ tex/ doc/
 
 dir-ctan: $(TITLE)-ctan
 $(TITLE)-ctan: tex/ doc/ README $(TITLE)-$(VERSION).tds.zip
-	mkdir -p $@/$(TITLE)/
+	$(MD) $@/$(TITLE)/
 	cp -r tex/ doc/ README $@/$(TITLE)/
 	mv -f $(TITLE)-$(VERSION).tds.zip $@/
 
 dist-ctan: $(TITLE)-$(VERSION).zip
 $(TITLE)-$(VERSION).zip: $(TITLE)-ctan
-	cd $< && zip -rT ../$@ $(TITLE)/ $(TITLE)-$(VERSION).tds.zip
+	cd $< && $(ZIP) ../$@ $(TITLE)/ $(TITLE)-$(VERSION).tds.zip
 
 clean:
-	cd doc/ && make distclean
-	rm -rf $(TITLE)-ctan/ $(TITLE)-tds/
+	cd doc/ && $(MAKE) distclean
+	$(RD) $(TITLE)-ctan/ $(TITLE)-tds/
 
 distclean:
-	make clean
-	rm -rf $(TITLE)-$(VERSION).tds.zip  $(TITLE)-$(VERSION).zip
+	$(SELF) clean
+	$(RD) $(TITLE)-$(VERSION).tds.zip  $(TITLE)-$(VERSION).zip
 
