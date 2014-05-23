@@ -79,10 +79,10 @@ biblatex\supercite{biblatex}/biber\supercite{biber}
 用户应当通过以下命令调用 \verb|caspervector| 样式：
 \begin{Verbatim}[frame = single]
 % 如果系统上无法使用 biber，可将“biber”改为“bibtex”。
-% “gbk”可能需要改为“utf8”，根据用户使用的字符编码而定。
+% “utf8”可能需要改为“gbk”，根据用户使用的字符编码而定。
 % “...” 代表其它选项。
 \usepackage[
-	backend = biber, style = caspervector, gbk, sorting = centy, ...
+	backend = biber, style = caspervector, utf8, sorting = centy, ...
 ]{biblatex}
 \end{Verbatim}
 其中 \verb|sorting| 选项用于（全局）指定按哪些字段排序，
