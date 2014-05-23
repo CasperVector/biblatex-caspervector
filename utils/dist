@@ -11,6 +11,8 @@ RD = rm -rf
 ZIP = zip -rT
 MAKE = make
 SELF = utils/dist
+PERM = find . -type d -exec chmod 755 '{}' + && \
+	find . -type f -exec chmod 644 '{}' +
 
 dist:
 	$(SELF) distclean
@@ -29,7 +31,7 @@ $(TITLE)-tds: tex/ doc/ README
 
 dist-tds: $(TITLE)-$(VERSION).tds.zip
 $(TITLE)-$(VERSION).tds.zip: $(TITLE)-tds
-	cd $< && $(ZIP) ../$@ tex/ doc/
+	cd $< && $(PERM) && $(ZIP) ../$@ tex/ doc/
 
 dir-ctan: $(TITLE)-ctan
 $(TITLE)-ctan: tex/ doc/ README $(TITLE)-$(VERSION).tds.zip
@@ -39,7 +41,8 @@ $(TITLE)-ctan: tex/ doc/ README $(TITLE)-$(VERSION).tds.zip
 
 dist-ctan: $(TITLE)-$(VERSION).zip
 $(TITLE)-$(VERSION).zip: $(TITLE)-ctan
-	cd $< && $(ZIP) ../$@ $(TITLE)/ $(TITLE)-$(VERSION).tds.zip
+	cd $< && $(PERM) && \
+		$(ZIP) ../$@ $(TITLE)/ $(TITLE)-$(VERSION).tds.zip
 
 clean:
 	cd doc/ && $(MAKE) distclean
