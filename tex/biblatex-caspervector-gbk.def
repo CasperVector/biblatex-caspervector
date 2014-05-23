@@ -24,12 +24,12 @@
 \ProvidesFile{biblatex-caspervector-gbk.def}%
 	[2013/12/27 v0.1.9 Chinese punctuations and captions in GBK]
 
-\providecommand\bbx@cnldquot{“}
-\providecommand\bbx@cnrdquot{”}
-\providecommand\bbx@cncomma{，}
-\providecommand\bbx@cnscolon{；}
-\providecommand\bbx@cncolon{：}
-\providecommand\bbx@cnperiod{。}
+\newcommand*\bbx@cnldquot{“}
+\newcommand*\bbx@cnrdquot{”}
+\newcommand*\bbx@cncomma{，}
+\newcommand*\bbx@cnscolon{；}
+\newcommand*\bbx@cncolon{：}
+\newcommand*\bbx@cnperiod{。}
 
 \DefineBibliographyStrings{english}{
 	andmore = {\bbx@cegen{等}{\mkbibemph{et\addabbrvspace al\adddot}}},
@@ -38,29 +38,29 @@
 	references = {参考文献}
 }
 
-\newbibmacro{cein:}{\printtext{\bbx@cegen{出自}{In}\bbx@cecolon}}
-\newbibmacro{cebyauthor}{%
+\newbibmacro*{cein:}{\printtext{\bbx@cegen{出自}{In}\bbx@cecolon}}
+\newbibmacro*{cebyauthor}{%
 	\ifnameundef{author}{}{%
 		\bbx@cegen%
 		{\printnames{author}\printtext{著}}%
 		{\usebibmacro{byauthor}}%
 	}%
 }
-\newbibmacro{cebyeditor}{%
+\newbibmacro*{cebyeditor}{%
 	\ifnameundef{editor}{}{%
 		\bbx@cegen%
 		{\printnames{editor}\printtext{编}}%
 		{\usebibmacro{byeditor}}%
 	}%
 }
-\newbibmacro{cebytranslator}{%
+\newbibmacro*{cebytranslator}{%
 	\ifnameundef{translator}{}{%
 		\bbx@cegen%
 		{\printnames{translator}\printtext{译}}%
 		{\usebibmacro{bytranslator}}%
 	}%
 }
-\newbibmacro{urldate}{%
+\newbibmacro*{urldate}{%
 	\iffieldundef{urlyear}{}{%
 		\printtext{\bbx@cegen{检索于 }{retrieved on\addspace}}%
 		\printurldate%

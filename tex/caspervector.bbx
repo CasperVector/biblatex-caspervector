@@ -42,20 +42,20 @@
 	}%
 }
 
-\providecommand{\bbx@cegen}[2]{\iffieldequalstr{userf}{zh}{#1}{#2}}
-\providecommand{\bbx@cecomma}{\bbx@cegen{\bbx@cncomma}{\addcomma\addspace}}
-\providecommand{\bbx@cecolon}{\bbx@cegen{\bbx@cncolon}{\addcolon\addspace}}
-\providecommand{\bbx@cescolon}{\bbx@cegen{\bbx@cnscolon}{\addcolon\addspace}}
-\providecommand{\bbx@ceperiod}{\bbx@cegen{\bbx@cnperiod}{\addperiod\addspace}}
-\providecommand{\bbx@cespace}{\bbx@cegen{}{\addspace}}
-\providecommand{\bbx@mybibquote}[1]%
+\newcommand*{\bbx@cegen}[2]{\iffieldequalstr{userf}{zh}{#1}{#2}}
+\newcommand*{\bbx@cecomma}{\bbx@cegen{\bbx@cncomma}{\addcomma\addspace}}
+\newcommand*{\bbx@cecolon}{\bbx@cegen{\bbx@cncolon}{\addcolon\addspace}}
+\newcommand*{\bbx@cescolon}{\bbx@cegen{\bbx@cnscolon}{\addcolon\addspace}}
+\newcommand*{\bbx@ceperiod}{\bbx@cegen{\bbx@cnperiod}{\addperiod\addspace}}
+\newcommand*{\bbx@cespace}{\bbx@cegen{}{\addspace}}
+\newcommand*{\bbx@mybibquote}[1]%
 	{\bbx@cegen{\bbx@cnldquot{#1}\bbx@cnrdquot}{\mkbibquote{#1}}}
-\renewcommand{\finalnamedelim}%
+\renewcommand*{\finalnamedelim}%
 	{\bbx@cegen{\bbx@cncomma}{\addspace\bibstring{and}\space}}
-\renewcommand{\multinamedelim}{\bbx@cecomma}
-\renewcommand{\andothersdelim}{\bbx@cespace}
-\renewcommand{\postnotedelim}{\bbx@cecomma}
-\renewcommand{\finentrypunct}{\bbx@cegen{\bbx@cnperiod}{.}}
+\renewcommand*{\multinamedelim}{\bbx@cecomma}
+\renewcommand*{\andothersdelim}{\bbx@cespace}
+\renewcommand*{\postnotedelim}{\bbx@cecomma}
+\renewcommand*{\finentrypunct}{\bbx@cegen{\bbx@cnperiod}{.}}
 \renewcommand{\bibendnotewrapper}[1]{\bibsentence #1\bbx@cnperiod}
 \renewcommand{\bibfootnotewrapper}[1]{\bibsentence #1\bbx@cnperiod}
 
@@ -73,9 +73,9 @@
 \DeclareFieldFormat*{type}{\mkbibbrackets{\textsc{#1}}}
 \DeclareFieldFormat*{number}{\mkbibparens{#1}}
 \DeclareFieldFormat[patent]{number}{#1}
-\renewbibmacro{title}{\iffieldundef{title}{}{\printfield{title}}}
-\newbibmacro{type}{\iffieldundef{type}{}{\printfield{type}}}
-\newbibmacro{number}{\iffieldundef{number}{}{\printfield{number}}}
+\renewbibmacro*{title}{\iffieldundef{title}{}{\printfield{title}}}
+\newbibmacro*{type}{\iffieldundef{type}{}{\printfield{type}}}
+\newbibmacro*{number}{\iffieldundef{number}{}{\printfield{number}}}
 
 \DeclareNameFormat{default}{%
 	\usebibmacro{name:first-last}{#1}{#4}{#5}{#7}%
@@ -83,7 +83,7 @@
 }
 \DeclareNameAlias{sortname}{default}
 
-\newbibmacro{author+others}{%
+\newbibmacro*{author+others}{%
 	\ifthenelse%
 	{\ifnameundef{author} \and \ifnameundef{editor} \and \ifnameundef{translator}}%
 	{}%
@@ -97,14 +97,14 @@
 		}%
 	}%
 }
-\newbibmacro{journaltitle/title}{%
+\newbibmacro*{journaltitle/title}{%
 	\iffieldundef{journaltitle}{\usebibmacro{title}}{\printfield{journaltitle}}%
 }
-\newbibmacro{year/date}{%
+\newbibmacro*{year/date}{%
 	\ifthenelse{\iffieldundef{month} \and \iffieldundef{day}}%
 	{\printfield{year}}{\printdate}%
 }
-\newbibmacro{(year+volume+number)/date}{%
+\newbibmacro*{(year+volume+number)/date}{%
 	\ifthenelse{\iffieldundef{month} \and \iffieldundef{day}}%
 	{%
 		\printfield{year}\setunit*{\bbx@cecomma}%
