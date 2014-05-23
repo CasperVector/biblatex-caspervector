@@ -1,4 +1,22 @@
+2014-05-24, v0.2.0
+
+	* Changes to API:
+	- Chinese references now (only) require language == {chinese}.
+	- `userf' becomes an internal entry field (backward compatible for now).
+
+	* Changes to package code:
+	- Avoid potential name clashes, using `something@' prefixes for commands.
+
+	* Changes to documentation:
+	- No longer recommend the CTeX Suite.
+	- Remove install hints (already included in TeX Live).
+	- Use `%' for comments in `.bib' files, now supported by biber.
+
+	* Misc:
+	- Minor fixes and improvements.
+
 2013-12-27, v0.1.9
+
 	* Misc:
 	- Remove support for CRLF, as required by CTAN.
 

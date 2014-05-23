@@ -22,7 +22,7 @@
 %   biblatex-caspervector-utf8.def
 
 \ProvidesFile{biblatex-caspervector-utf8.def}%
-	[2013/12/27 v0.1.9 Chinese punctuations and captions in UTF-8]
+	[2014/05/24 v0.2.0 Chinese punctuations and captions in UTF-8]
 
 \newcommand*\bbx@cnldquot{“}
 \newcommand*\bbx@cnrdquot{”}
