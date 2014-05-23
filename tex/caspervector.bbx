@@ -70,7 +70,7 @@
 
 \DeclareFieldFormat[inbook, inproceedings, incollection, article]%
 	{title}{\bbx@mybibquote{\mkbibemph{#1}}}
-\DeclareFieldFormat*{type}{\mkbibbrackets{\textsc{#1}}}
+\DeclareFieldFormat*{type}{\mkbibbrackets{#1}}
 \DeclareFieldFormat*{number}{\mkbibparens{#1}}
 \DeclareFieldFormat[patent]{number}{#1}
 \renewbibmacro*{title}{\iffieldundef{title}{}{\printfield{title}}}
