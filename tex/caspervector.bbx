@@ -42,20 +42,22 @@
 	}%
 }
 
-\providecommand{\cegen}[2]{\iffieldequalstr{userf}{zh}{#1}{#2}}
-\providecommand{\mybibquote}[1]{\cegen{\cnldquot{#1}\cnrdquot}{\mkbibquote{#1}}}
-\providecommand{\cecomma}{\cegen{\cncomma}{\addcomma\addspace}}
-\providecommand{\cecolon}{\cegen{\cncolon}{\addcolon\addspace}}
-\providecommand{\cescolon}{\cegen{\cnscolon}{\addcolon\addspace}}
-\providecommand{\ceperiod}{\cegen{\cnperiod}{\addperiod\addspace}}
-\providecommand{\cespace}{\cegen{}{\addspace}}
-\renewcommand{\finentrypunct}{\cegen{\cnperiod}{.}}
-\renewcommand{\multinamedelim}{\cecomma}
-\renewcommand{\finalnamedelim}{\cegen{\cncomma}{\addspace\bibstring{and}\space}}
-\renewcommand{\andothersdelim}{\cespace}
-\renewcommand{\postnotedelim}{\cecomma}
-\renewcommand{\bibendnotewrapper}[1]{\bibsentence #1\cnperiod}
-\renewcommand{\bibfootnotewrapper}[1]{\bibsentence #1\cnperiod}
+\providecommand{\bbx@cegen}[2]{\iffieldequalstr{userf}{zh}{#1}{#2}}
+\providecommand{\bbx@cecomma}{\bbx@cegen{\bbx@cncomma}{\addcomma\addspace}}
+\providecommand{\bbx@cecolon}{\bbx@cegen{\bbx@cncolon}{\addcolon\addspace}}
+\providecommand{\bbx@cescolon}{\bbx@cegen{\bbx@cnscolon}{\addcolon\addspace}}
+\providecommand{\bbx@ceperiod}{\bbx@cegen{\bbx@cnperiod}{\addperiod\addspace}}
+\providecommand{\bbx@cespace}{\bbx@cegen{}{\addspace}}
+\providecommand{\bbx@mybibquote}[1]%
+	{\bbx@cegen{\bbx@cnldquot{#1}\bbx@cnrdquot}{\mkbibquote{#1}}}
+\renewcommand{\finalnamedelim}%
+	{\bbx@cegen{\bbx@cncomma}{\addspace\bibstring{and}\space}}
+\renewcommand{\multinamedelim}{\bbx@cecomma}
+\renewcommand{\andothersdelim}{\bbx@cespace}
+\renewcommand{\postnotedelim}{\bbx@cecomma}
+\renewcommand{\finentrypunct}{\bbx@cegen{\bbx@cnperiod}{.}}
+\renewcommand{\bibendnotewrapper}[1]{\bibsentence #1\bbx@cnperiod}
+\renewcommand{\bibfootnotewrapper}[1]{\bibsentence #1\bbx@cnperiod}
 
 \DeclareFieldFormat*{booktitle}{\mkbibemph{#1}}
 \DeclareFieldFormat*{journaltitle}{\mkbibemph{#1}}
@@ -67,7 +69,7 @@
 \DeclareFieldFormat*{urldate}{#1}
 
 \DeclareFieldFormat[inbook, inproceedings, incollection, article]%
-	{title}{\mybibquote{\mkbibemph{#1}}}
+	{title}{\bbx@mybibquote{\mkbibemph{#1}}}
 \DeclareFieldFormat*{type}{\mkbibbrackets{\textsc{#1}}}
 \DeclareFieldFormat*{number}{\mkbibparens{#1}}
 \DeclareFieldFormat[patent]{number}{#1}
@@ -89,8 +91,8 @@
 		\ifthenelse{\ifnameundef{editor} \and \ifnameundef{translator}}%
 		{\printnames{author}}%
 		{%
-			\usebibmacro{cebyauthor}\setunit*{\cescolon}%
-			\usebibmacro{cebyeditor}\setunit*{\cescolon}%
+			\usebibmacro{cebyauthor}\setunit*{\bbx@cescolon}%
+			\usebibmacro{cebyeditor}\setunit*{\bbx@cescolon}%
 			\usebibmacro{cebytranslator}%
 		}%
 	}%
@@ -105,7 +107,7 @@
 \newbibmacro{(year+volume+number)/date}{%
 	\ifthenelse{\iffieldundef{month} \and \iffieldundef{day}}%
 	{%
-		\printfield{year}\setunit*{\cecomma}%
+		\printfield{year}\setunit*{\bbx@cecomma}%
 		\printfield{volume}%
 		\usebibmacro{number}%
 	}{\printdate}%
@@ -114,17 +116,17 @@
 \DeclareBibliographyDriver{book}{%
 	\usebibmacro{bibindex}%
 	\newblock
-	\usebibmacro{author+others}\setunit{\ceperiod}%
+	\usebibmacro{author+others}\setunit{\bbx@ceperiod}%
 	\newblock
 	\usebibmacro{title}\setunit*{\addspace}%
-	\usebibmacro{type}\setunit{\ceperiod}%
+	\usebibmacro{type}\setunit{\bbx@ceperiod}%
 	\newblock
-	\printlist{location}\setunit*{\cecolon}%
-	\printlist{publisher}\setunit{\cecomma}%
-	\usebibmacro{year/date}\setunit*{\cecolon}%
-	\printfield{pages}\setunit{\ceperiod}%
+	\printlist{location}\setunit*{\bbx@cecolon}%
+	\printlist{publisher}\setunit{\bbx@cecomma}%
+	\usebibmacro{year/date}\setunit*{\bbx@cecolon}%
+	\printfield{pages}\setunit{\bbx@ceperiod}%
 	\newblock
-	\printfield{url}\setunit*{\cecomma}%
+	\printfield{url}\setunit*{\bbx@cecomma}%
 	\usebibmacro{urldate}\usebibmacro{finentry}%
 	\newblock
 	\printfield{addendum}%
@@ -133,23 +135,23 @@
 \DeclareBibliographyDriver{incollection}{%
 	\usebibmacro{bibindex}%
 	\newblock
-	\usebibmacro{author+others}\setunit{\ceperiod}%
+	\usebibmacro{author+others}\setunit{\bbx@ceperiod}%
 	\newblock
-	\usebibmacro{title}\setunit*{\cespace}%
-	\usebibmacro{type}\setunit{\ceperiod}%
+	\usebibmacro{title}\setunit*{\bbx@cespace}%
+	\usebibmacro{type}\setunit{\bbx@ceperiod}%
 	\newblock
 	\usebibmacro{cein:}%
 	\newblock
-	\printnames{bookauthor}\setunit{\ceperiod}%
+	\printnames{bookauthor}\setunit{\bbx@ceperiod}%
 	\newblock
-	\printfield{booktitle}\setunit{\ceperiod}%
+	\printfield{booktitle}\setunit{\bbx@ceperiod}%
 	\newblock
-	\printlist{location}\setunit*{\cecolon}%
-	\printlist{publisher}\setunit{\cecomma}%
-	\usebibmacro{year/date}\setunit*{\cecolon}%
-	\printfield{pages}\setunit{\ceperiod}%
+	\printlist{location}\setunit*{\bbx@cecolon}%
+	\printlist{publisher}\setunit{\bbx@cecomma}%
+	\usebibmacro{year/date}\setunit*{\bbx@cecolon}%
+	\printfield{pages}\setunit{\bbx@ceperiod}%
 	\newblock
-	\printfield{url}\setunit*{\cecomma}%
+	\printfield{url}\setunit*{\bbx@cecomma}%
 	\usebibmacro{urldate}\usebibmacro{finentry}%
 	\newblock
 	\printfield{addendum}%
@@ -158,17 +160,17 @@
 \DeclareBibliographyDriver{periodical}{%
 	\usebibmacro{bibindex}%
 	\newblock
-	\usebibmacro{author+others}\setunit{\ceperiod}%
+	\usebibmacro{author+others}\setunit{\bbx@ceperiod}%
 	\newblock
 	\usebibmacro{journaltitle/title}\setunit*{\addspace}%
-	\usebibmacro{type}\setunit{\ceperiod}%
+	\usebibmacro{type}\setunit{\bbx@ceperiod}%
 	\newblock
-	\usebibmacro{(year+volume+number)/date}\setunit{\ceperiod}%
+	\usebibmacro{(year+volume+number)/date}\setunit{\bbx@ceperiod}%
 	\newblock
-	\printlist{location}\setunit*{\cecolon}%
-	\printlist{publisher}\setunit{\ceperiod}%
+	\printlist{location}\setunit*{\bbx@cecolon}%
+	\printlist{publisher}\setunit{\bbx@ceperiod}%
 	\newblock
-	\printfield{url}\setunit*{\cecomma}%
+	\printfield{url}\setunit*{\bbx@cecomma}%
 	\usebibmacro{urldate}\usebibmacro{finentry}%
 	\newblock
 	\printfield{addendum}%
@@ -177,16 +179,16 @@
 \DeclareBibliographyDriver{article}{%
 	\usebibmacro{bibindex}%
 	\newblock
-	\printnames{author}\setunit{\ceperiod}%
+	\printnames{author}\setunit{\bbx@ceperiod}%
 	\newblock
-	\usebibmacro{title}\setunit*{\cespace}%
-	\usebibmacro{type}\setunit{\ceperiod}%
+	\usebibmacro{title}\setunit*{\bbx@cespace}%
+	\usebibmacro{type}\setunit{\bbx@ceperiod}%
 	\newblock
-	\printfield{journaltitle}\setunit*{\cecomma}%
-	\usebibmacro{(year+volume+number)/date}\setunit{\cecolon}%
-	\printfield{pages}\setunit{\ceperiod}%
+	\printfield{journaltitle}\setunit*{\bbx@cecomma}%
+	\usebibmacro{(year+volume+number)/date}\setunit{\bbx@cecolon}%
+	\printfield{pages}\setunit{\bbx@ceperiod}%
 	\newblock
-	\printfield{url}\setunit*{\cecomma}%
+	\printfield{url}\setunit*{\bbx@cecomma}%
 	\usebibmacro{urldate}\usebibmacro{finentry}%
 	\newblock
 	\printfield{addendum}%
@@ -195,17 +197,17 @@
 \DeclareBibliographyDriver{patent}{%
 	\usebibmacro{bibindex}%
 	\newblock
-	\usebibmacro{author}\setunit{\ceperiod}%
+	\usebibmacro{author}\setunit{\bbx@ceperiod}%
 	\newblock
 	\usebibmacro{title}\setunit*{\addspace}%
-	\usebibmacro{type}\setunit{\ceperiod}%
+	\usebibmacro{type}\setunit{\bbx@ceperiod}%
 	\newblock
-	\printlist{location}\setunit*{\cecolon}%
-	\usebibmacro{number}\setunit{\ceperiod}%
+	\printlist{location}\setunit*{\bbx@cecolon}%
+	\usebibmacro{number}\setunit{\bbx@ceperiod}%
 	\newblock
-	\usebibmacro{year/date}\setunit{\ceperiod}%
+	\usebibmacro{year/date}\setunit{\bbx@ceperiod}%
 	\newblock
-	\printfield{url}\setunit*{\cecomma}%
+	\printfield{url}\setunit*{\bbx@cecomma}%
 	\usebibmacro{urldate}\usebibmacro{finentry}%
 	\newblock
 	\printfield{addendum}%

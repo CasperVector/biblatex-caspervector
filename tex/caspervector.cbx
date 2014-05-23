@@ -30,7 +30,7 @@
 	autopunct = false
 }
 
-\providecommand{\mksuperbrackets}[1]{\mkbibsuperscript{\mkbibbrackets{#1}}}
+\providecommand{\cbx@mksuperbrackets}[1]{\mkbibsuperscript{\mkbibbrackets{#1}}}
 
 \DeclareCiteCommand{\cite}
 {%
@@ -47,7 +47,7 @@
 	\usebibmacro{postnote}%
 }
 
-\DeclareCiteCommand{\supercite}[\mksuperbrackets]
+\DeclareCiteCommand{\supercite}[\cbx@mksuperbrackets]
 {%
 	\usebibmacro{cite:init}%
 	\let\multicitedelim=\supercitedelim
