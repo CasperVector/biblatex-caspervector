@@ -91,7 +91,7 @@ biblatex\supercite{biblatex}/biber\supercite{biber}
 （\verb|caspervector| 默认设置为 \verb|none| 排序方案，即按引用顺序排序），
 表示依次按文献语言
 （\textbf{ce}nty 表示中文文献在前，\textbf{ec}nty 表示英文文献在前；
-文献语言根据 \verb|userf| 字段进行区分，详见第 \ref{sec:fields} 部分）、
+文献语言根据 \verb|language| 字段进行区分，详见第 \ref{sec:fields} 部分）、
 编著者姓名（\textbf{n}ame）、标题（\textbf{t}itle）
 和出版年（\textbf{y}ear）排序。
 
@@ -217,15 +217,10 @@ pdflatex texfile
 \subsection{特殊字段}
 
 \begin{itemize}
-	\item \verb|userf|：
-		值为 \verb|zh| 或 \verb|cn| 时，相应条目在文献列表中用中文排版；
-		否则（为其他值或未定义时）用英文排版。\\
-		\myemph{%
-			注：
-			不可用 \texttt{language} 字段区分中英文文献，
-			因为 biblatex 使用 babel\supercite{babel} 宏包处理此字段，
-			但后者目前不支持中文，所以可能出错。%
-		}
+	\item \verb|language|：
+		值为 \verb|chinese| 时，相应条目在文献列表中用中文排版；
+		否则（为其他值或未定义时）用英文排版。
+	\item \verb|userf|：\verb|caspervector| 样式内部使用。
 	\item 其它通用特殊字段，见 biblatex 手册\supercite{biblatex}。
 \end{itemize}
 
@@ -309,7 +304,8 @@ pdflatex texfile
 	但用户仍可以设定它们的值。
 	这样虽不能自动根据这些字段排版，
 	但在仍可以根据它们
-	（主要是 \texttt{author}、\texttt{title} 和 \texttt{year} 三个字段）
+	（主要是 \texttt{language}、\texttt{author}、\texttt{title}
+	和 \texttt{year} 四个字段）
 	进行排序。 %
 }
 
@@ -362,11 +358,10 @@ year = {1845\textmd{\emph{（清同治四年）}}}
 \verb|caspervector| 样式不支持 \verb|edition| 字段，
 用户可以在 \verb|title| 等字段中手动标注。
 
-\section{存在的问题}
+直接使用 \verb|userf| 字段是否等于 \verb|zh| 或 \verb|cn|
+来区分中英文文献的功能在近期仍将被支持，但在将来可能被去掉或修改。
 
-如上文所述，因为 babel 宏包目前不支持中文，
-故对中英文的分别处理只能通过比较麻烦的方式实现，
-指定语言也只能通过一个自定义的字段（\verb|userf|）进行。
+\section{存在的问题}
 
 因为 biblatex 现有功能的限制，一些需求无法直接实现。
 例如类似于文献 \parencite{3-2} 中同时有出版起止年和起止期号的情况就无法自动排版，
@@ -381,7 +376,7 @@ year = {1845\textmd{\emph{（清同治四年）}}}
 	year = {\textmd{\textbf{1957}(1) -- \textbf{1990}(4)}},
 	location = {北京},
 	publisher = {北京图书馆},
-	userf = {zh},
+	language = {chinese},
 }
 \end{Verbatim}
 或
@@ -393,7 +388,8 @@ year = {1845\textmd{\emph{（清同治四年）}}}
 	addendum = {中国图书馆学会。
 		\textit{图书馆学通讯} [J]。
 		\textbf{1957}(1) -- \textbf{1990}(4)。
-		北京：北京图书馆。}
+		北京：北京图书馆。},
+	language = {chinese},
 }
 \end{Verbatim}
 这两种方法中更加推荐使用前者，因为前者只需手动实现出版年和期号的排版。
