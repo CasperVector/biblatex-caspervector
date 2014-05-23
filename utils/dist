@@ -7,7 +7,7 @@
 CP = cp -rL
 MV = mv -f
 MD = mkdir -p
-RD = rm -rf
+RM = rm -rf
 ZIP = zip -rT
 MAKE = make
 SELF = utils/dist
@@ -23,32 +23,30 @@ dist:
 doc-pdf: doc/
 	cd doc/ && $(MAKE) && $(MAKE) clean
 
-dir-tds: $(TITLE)-tds
-$(TITLE)-tds: tex/ doc/ README
+dir-tds: tex/ doc/
 	$(MD) $@/tex/latex/ $@/doc/latex/
-	cp -r tex/ $@/tex/latex/$(TITLE)
-	cp -r doc/ $@/doc/latex/$(TITLE)
+	$(CP) tex/ $@/tex/latex/$(TITLE)
+	$(CP) doc/ $@/doc/latex/$(TITLE)
 
 dist-tds: $(TITLE)-$(VERSION).tds.zip
-$(TITLE)-$(VERSION).tds.zip: $(TITLE)-tds
+$(TITLE)-$(VERSION).tds.zip: dir-tds
 	cd $< && $(PERM) && $(ZIP) ../$@ tex/ doc/
 
-dir-ctan: $(TITLE)-ctan
-$(TITLE)-ctan: tex/ doc/ README $(TITLE)-$(VERSION).tds.zip
+dir-ctan: README tex/ doc/ $(TITLE)-$(VERSION).tds.zip
 	$(MD) $@/$(TITLE)/
-	cp -r tex/ doc/ README $@/$(TITLE)/
-	mv -f $(TITLE)-$(VERSION).tds.zip $@/
+	$(CP) README tex/ doc/ $@/$(TITLE)/
+	$(MV) $(TITLE)-$(VERSION).tds.zip $@/
 
 dist-ctan: $(TITLE)-$(VERSION).zip
-$(TITLE)-$(VERSION).zip: $(TITLE)-ctan
+$(TITLE)-$(VERSION).zip: dir-ctan
 	cd $< && $(PERM) && \
 		$(ZIP) ../$@ $(TITLE)/ $(TITLE)-$(VERSION).tds.zip
 
 clean:
 	cd doc/ && $(MAKE) distclean
-	$(RD) $(TITLE)-ctan/ $(TITLE)-tds/
+	$(RM) dir-ctan/ dir-tds/
 
 distclean:
 	$(SELF) clean
-	$(RD) $(TITLE)-$(VERSION).tds.zip  $(TITLE)-$(VERSION).zip
+	$(RM) $(TITLE)-$(VERSION).tds.zip $(TITLE)-$(VERSION).zip
 
