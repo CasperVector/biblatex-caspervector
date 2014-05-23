@@ -42,11 +42,7 @@
 	}%
 }
 
-\providecommand{\cegen}[2]{%
-	\ifthenelse%
-	{\iffieldequalstr{userf}{zh} \or \iffieldequalstr{userf}{cn}}%
-	{#1}{#2}%
-}
+\providecommand{\cegen}[2]{\iffieldequalstr{userf}{zh}{#1}{#2}}
 \providecommand{\mybibquote}[1]{\cegen{\cnldquot{#1}\cnrdquot}{\mkbibquote{#1}}}
 \providecommand{\cecomma}{\cegen{\cncomma}{\addcomma\addspace}}
 \providecommand{\cecolon}{\cegen{\cncolon}{\addcolon\addspace}}
@@ -239,7 +235,6 @@
 	\sort[final]{\field{sortkey}}
 	\sort{
 		\field{userf}
-		\literal{en}
 	}
 	\sort{
 		\field{sortname}
@@ -264,7 +259,6 @@
 	\sort[final]{\field{sortkey}}
 	\sort[direction = descending]{
 		\field{userf}
-		\literal{en}
 	}
 	\sort{
 		\field{sortname}
@@ -281,6 +275,23 @@
 	\sort{
 		\field{sortyear}
 		\field{year}
+	}
+}
+
+\DeclareStyleSourcemap{
+	\maps{
+		\map[overwrite]{
+			\step[
+				fieldsource = language, match = \regexp{chinese},
+				fieldset = userf, fieldvalue = {zh}
+			]
+		}
+		\map[overwrite]{
+			\step[fieldsource = userf, match = \regexp{^cn$}, replace = \regexp{zh}]
+		}
+		\map{
+			\step[fieldset = userf, fieldvalue = {en}]
+		}
 	}
 }
 
