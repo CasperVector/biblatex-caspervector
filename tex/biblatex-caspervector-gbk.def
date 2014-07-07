@@ -60,7 +60,7 @@
 		{\usebibmacro{bytranslator}}%
 	}%
 }
-\newbibmacro*{urldate}{%
+\renewbibmacro*{urldate}{%
 	\iffieldundef{urlyear}{}{%
 		\printtext{\bbx@cegen{¼ìË÷ÓÚ }{retrieved on\addspace}}%
 		\printurldate%
