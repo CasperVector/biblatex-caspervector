@@ -1,7 +1,7 @@
 #!/usr/bin/make -f
 # vim:ts=4:sw=4
 #
-# Copyright (c) 2011-2012 Casper Ti. Vector
+# Copyright (c) 2011-2012,2014 Casper Ti. Vector
 # Public domain.
 
 CP = cp -rL
@@ -28,19 +28,19 @@ dir-tds: tex/ doc/
 	$(CP) tex/ $@/tex/latex/$(TITLE)
 	$(CP) doc/ $@/doc/latex/$(TITLE)
 
-dist-tds: $(TITLE)-$(VERSION).tds.zip
-$(TITLE)-$(VERSION).tds.zip: dir-tds
+dist-tds: $(TITLE).tds.zip
+$(TITLE).tds.zip: dir-tds
 	cd $< && $(PERM) && $(ZIP) ../$@ tex/ doc/
 
-dir-ctan: README tex/ doc/ $(TITLE)-$(VERSION).tds.zip
+dir-ctan: README tex/ doc/ $(TITLE).tds.zip
 	$(MD) $@/$(TITLE)/
 	$(CP) README tex/ doc/ $@/$(TITLE)/
-	$(MV) $(TITLE)-$(VERSION).tds.zip $@/
+	$(MV) $(TITLE).tds.zip $@/
 
 dist-ctan: $(TITLE)-$(VERSION).zip
 $(TITLE)-$(VERSION).zip: dir-ctan
 	cd $< && $(PERM) && \
-		$(ZIP) ../$@ $(TITLE)/ $(TITLE)-$(VERSION).tds.zip
+		$(ZIP) ../$@ $(TITLE)/ $(TITLE).tds.zip
 
 clean:
 	cd doc/ && $(MAKE) distclean
@@ -48,5 +48,5 @@ clean:
 
 distclean:
 	$(SELF) clean
-	$(RM) $(TITLE)-$(VERSION).tds.zip $(TITLE)-$(VERSION).zip
+	$(RM) $(TITLE).tds.zip $(TITLE)-$(VERSION).zip
 
