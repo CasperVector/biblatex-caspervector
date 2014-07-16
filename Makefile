@@ -1,6 +1,6 @@
 # vim:ts=4:sw=4
 #
-# Copyright (c) 2011-2013 Casper Ti. Vector
+# Copyright (c) 2011-2014 Casper Ti. Vector
 # Public domain.
 
 TITLE = biblatex-caspervector
