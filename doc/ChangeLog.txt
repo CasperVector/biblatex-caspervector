@@ -1,3 +1,18 @@
+2015-04-28, v0.2.1
+
+	* Changes to package code:
+	- biblatex-caspervector-*.def: use `\renewbibmacro' for `urldate'.
+
+	* Changes to documentation:
+	- readme.tex: use `\hologo{}' when applicable.
+	- readme.bib: fix inaccurate formatted author names.
+
+	* Misc:
+	- Update URL of project homepage.
+	- dist: remove version string from file name of TDS archive.
+	- dist: fix zipball permission.
+	- Aesthetic improvements.
+
 2014-05-24, v0.2.0
 
 	* Changes to API:
