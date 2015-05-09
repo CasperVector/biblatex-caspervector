@@ -98,7 +98,6 @@ biblatex\supercite{biblatex}/biber\supercite{biber}
 
 用户应当通过以下命令调用 \verb|caspervector| 样式：
 \begin{Verbatim}[frame = single]
-% 如果系统上无法使用 biber，可将“biber”改为“bibtex”。
 % “utf8”可能需要改为“gbk”，根据用户使用的字符编码而定。
 % “...” 代表其它选项。
 \usepackage[
@@ -186,9 +185,6 @@ biblatex\supercite{biblatex}/biber\supercite{biber}
 \begin{Verbatim}[frame = single]
 # “texfile”是被 TeX 编译的文件名中除去“.tex”的部分。
 # “pdflatex”可改为其它 TeX 程序，使用纯 latex 编译时可能还需要运行 dvipdfmx。
-# 如果系统上无法使用 biber，可将执行 biber 的一行改为
-#   bibtex texfile
-# 但将无法按拼音排序或进行分类排序。
 pdflatex texfile
 biber -l zh__pinyin texfile
 pdflatex texfile
