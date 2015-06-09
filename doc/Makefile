@@ -6,7 +6,7 @@
 doc:
 	latex readme
 	biber -l zh__pinyin readme
-	latex readme
+	xelatex readme
 	xelatex readme
 
 toutf8:
