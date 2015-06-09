@@ -18,10 +18,11 @@
 % This work consists of the following files:
 %   readme.tex
 
-\documentclass[UTF8, fancyhdr, hyperref]{ctexart}
+\documentclass[UTF8]{ctexart}
 \usepackage[margin = 2cm, centering, includefoot]{geometry}
 \usepackage[backend = biber, style = caspervector, utf8]{biblatex}
-\usepackage{CJKspace, enumitem, fancyvrb, hologo}
+\usepackage{fancyhdr, hyperref, enumitem, fancyvrb, hologo}
+\unless\ifxetex\usepackage{CJKspace}\fi
 
 \pagestyle{fancy}\fancyhf{}\cfoot{\thepage}
 \renewcommand{\headrulewidth}{0pt}
@@ -33,6 +34,7 @@
 \addbibresource{readme.bib}
 
 \setlength{\hfuzz}{3pt}
+\ctexset{linestretch = {\maxdimen}}
 \renewcommand{\bibfont}{\small}
 \newcommand{\myemph}[1]{\emph{\textcolor{red}{#1}}}
 

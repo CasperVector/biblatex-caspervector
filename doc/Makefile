@@ -7,8 +7,7 @@ doc:
 	latex readme
 	biber -l zh__pinyin readme
 	latex readme
-	latex readme
-	dvipdfmx readme
+	xelatex readme
 
 toutf8:
 	sed -i '1,10 s/GBK/UTF8/; 1,10 s/gbk/utf8/' readme.tex
