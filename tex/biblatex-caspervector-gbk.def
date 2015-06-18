@@ -22,7 +22,7 @@
 %   biblatex-caspervector-utf8.def
 
 \ProvidesFile{biblatex-caspervector-gbk.def}%
-	[2015/04/28 v0.2.1 Chinese punctuations and captions in GBK]
+	[2015/06/18 v0.2.2 Chinese punctuations and captions in GBK]
 
 \newcommand*\bbx@cnldquot{¡°}
 \newcommand*\bbx@cnrdquot{¡±}

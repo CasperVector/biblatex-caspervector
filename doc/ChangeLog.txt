@@ -1,3 +1,17 @@
+2015-05-30, v0.2.2
+
+	* Changes to package code:
+	- Remove bibtex support because of `\DeclareStyleSourcemap' usage.
+
+	* Changes to documentation:
+	- readme.tex: mention the issue with sorting in biblatex 3.0.
+	- readme.tex: remove description of usage with bibtex.
+	- readme.{tex,bib}: refine the short example for custom formatting.
+	- Adapt to ctex 2.x, and use the latex/biber/xelatex/xelatex prodedure.
+
+	* Misc:
+	- Cosmetics.
+
 2015-04-28, v0.2.1
 
 	* Changes to package code:
