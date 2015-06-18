@@ -329,7 +329,14 @@ pdflatex texfile
 	进行排序。 %
 }
 
-\section{对参考文献进行分类排序}
+\section{对参考文献进行分类排序}\label{sec:catsort}
+
+\myemph{%
+	注：因为 biblatex 3.0 中功能的调整，此方法已经失效，
+	而且目前没有已知较好的替代办法\footnote{\ %
+		可以关注 \url{https://tex.stackexchange.com/questions/250548/}。%
+	}。%
+}
 
 使用 biber 的用户可以通过
 对不同的 \verb|\printbibliography| 命令传递不同的 \verb|sorting| 选项来实现
@@ -383,6 +390,10 @@ year = {1845\textmd{（\emph{清同治四年}）}},
 来区分中英文文献的功能在近期仍将被支持，但在将来可能被去掉或修改。
 
 \section{存在的问题}
+
+如第 \ref{sec:catsort} 部分所述，
+biblatex 3.0 的功能调整导致分类排序失效，且目前无解。
+\verb|caspervector| 样式的作者对此表示遗憾，希望用户能谅解。
 
 因为 biblatex 现有功能的限制，一些需求无法直接实现。
 例如类似于文献 \parencite{3-2} 中同时有出版起止年和起止期号的情况就无法自动排版，
