@@ -2,8 +2,8 @@ biblatex-caspervector: Casper Ti. Vector's biblatex style
 ---------------------------------------------------------
 
 Maintainer: Casper Ti. Vector <CasperVector@gmail.com>
-License: LaTeX Project Public License 1.3 or later
 Homepage: <https://gitlab.com/CasperVector/biblatex-caspervector>
+License: LaTeX Project Public License 1.3 or later
 
 This package provides a simple, nice and easily extensible
 biblography/citation style for Chinese LaTeX users.
