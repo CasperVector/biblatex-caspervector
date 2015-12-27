@@ -43,7 +43,7 @@
 	\ifnameundef{author}{}{%
 		\bbx@cegen%
 		{\printnames{author}\printtext{著}}%
-		{\usebibmacro{byauthor}}%
+		{\printnames{author}}% `byauthor' does not print with `useauthor' enabled.
 	}%
 }
 \newbibmacro*{cebyeditor}{%
