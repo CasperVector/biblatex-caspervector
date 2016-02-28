@@ -1,5 +1,3 @@
-# vim:ts=4:sw=4
-#
 # Copyright (c) 2011-2013 Casper Ti. Vector
 # Public domain.
 
@@ -23,3 +21,4 @@ clean:
 distclean: clean
 	rm -f readme.pdf
 
+# vim:ts=4:sw=4
