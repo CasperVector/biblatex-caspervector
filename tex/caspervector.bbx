@@ -1,6 +1,6 @@
 % Casper Ti. Vector's biblatex style
 %
-% Copyright (c) 2012-2015 Casper Ti. Vector
+% Copyright (c) 2012-2016 Casper Ti. Vector
 %
 % This work may be distributed and/or modified under the conditions of the
 % LaTeX Project Public License, either version 1.3 of this license or (at
@@ -75,12 +75,6 @@
 \renewbibmacro*{title}{\iffieldundef{title}{}{\printfield{title}}}
 \newbibmacro*{type}{\iffieldundef{type}{}{\printfield{type}}}
 \newbibmacro*{number}{\iffieldundef{number}{}{\printfield{number}}}
-
-\DeclareNameFormat{default}{%
-	\usebibmacro{name:first-last}{#1}{#4}{#5}{#7}%
-	\usebibmacro{name:andothers}%
-}
-\DeclareNameAlias{sortname}{default}
 
 \newbibmacro*{author+others}{%
 	\ifthenelse%
