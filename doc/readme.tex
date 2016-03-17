@@ -86,13 +86,13 @@ biblatex\supercite{biblatex}/biber\supercite{biber}
 \subsection{系统要求}
 
 \begin{itemize}
-	\item biblatex 宏包（2.0 或以上版本，\myemph{必需}）：%
+	\item biblatex 宏包（2.0 或以上版本）：%
 		\verb|caspervector| 样式基于 biblatex 宏包。
-	\item 中文环境（\myemph{必需}）：%
+	\item biber 程序（和 biblatex 相应的版本）：
+		用 biber 可以方便地实现文献按字母和拼音顺序排序。
+	\item 中文环境：%
 		\verb|caspervector| 样式虽支持中文，但其本身不提供中文环境。
 		用户仍然需要中文环境才能排版出文档。
-	\item biber 程序（和 biblatex 相应的版本，\myemph{可选}）：
-		用 biber 可以方便地实现文献按字母和拼音顺序排序。
 \end{itemize}
 
 以上要求在\myemph{最新}的\myemph{完全版}
@@ -363,7 +363,7 @@ pdflatex texfile
 	因为 biblatex 中的引用顺序记录是按每个条目被第一次引用的顺序计算的，
 	所以 \texttt{\string\nocite\{*\}} 时导入文献的顺序会覆盖掉后面
 	\texttt{\string\cite} 类命令的引用顺序。
-}（例如，在本说明文档中，就是在两个 \verb|\printbibliography| 命令之间）
+}（例如，在本说明文档中，就是在 \verb|\end{document}| 之前一行）
 加入以下代码：
 \begin{Verbatim}[frame = single]
 % 将 .bib 文件中所有的参考文献都加到引用列表中，但不将它们加到“cited”分类中，
