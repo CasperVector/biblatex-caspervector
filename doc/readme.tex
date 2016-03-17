@@ -332,14 +332,7 @@ pdflatex texfile
 
 \section{对参考文献进行分类排序}\label{sec:catsort}
 
-\myemph{%
-	注：因为 biblatex 3.0 中功能的调整，此方法已经失效，
-	而且目前没有已知较好的替代办法\footnote{\ %
-		可以关注 \url{https://tex.stackexchange.com/questions/250548/}。%
-	}。%
-}
-
-使用 biber 的用户可以通过
+使用 biblatex 3.4 或更新版本的用户可以通过
 对不同的 \verb|\printbibliography| 命令传递不同的 \verb|sorting| 选项来实现
 对不同部分文献按不同方案排序。
 例如，如需对被引用的文献按照引用顺序排序，
@@ -354,9 +347,13 @@ pdflatex texfile
 在正文中准备排版文献列表的位置使用如下代码：
 \begin{Verbatim}[frame = single]
 % 按引用顺序排版“cited”分类，即被引用的文献条目。
-\printbibliography[category = cited, ..., sorting = none, title = {References}]
+\begin{refcontext}[sorting = none]
+\printbibliography[category = cited, title = {References}]
+\end{refcontext}
 % 按英文文献在前、中文文献在后排版“cited”分类之外，即未被引用的文献条目。
-\printbibliography[notcategory = cited, sorting = ecnty, title = {Works Not Cited}]
+\begin{refcontext}[sorting = ecnty]
+\printbibliography[notcategory = cited, title = {Works Not Cited}]
+\end{refcontext}
 \end{Verbatim}
 并在最后一个除 \verb|\nocite| 之外的 \verb|\cite| 类命令之后、%
 \verb|\end{document}| 之前的任意合适位置\footnote{\ %
@@ -370,6 +367,19 @@ pdflatex texfile
 % 也不会排版引用标号，只是在最后的 \printbibliography 命令中排版相应的文献条目。
 \nocite{*}
 \end{Verbatim}
+
+使用 biblatex 2.x 或更旧版本的用户需要
+将在正文中准备排版文献列表的位置使用的代码改为
+\begin{Verbatim}[frame = single]
+% 按引用顺序排版“cited”分类，即被引用的文献条目。
+\printbibliography[category = cited, ..., sorting = none, title = {References}]
+% 按英文文献在前、中文文献在后排版“cited”分类之外，即未被引用的文献条目。
+\printbibliography%
+	[notcategory = cited, ..., sorting = ecnty, title = {Works Not Cited}]
+\end{Verbatim}
+biblatex 3.0--3.3 中有一个 bug\footnote{%
+	可以参考 \url{https://tex.stackexchange.com/questions/250548/}。%
+} 导致分类排序失效，此问题基本无解。
 
 \section{FAQ 和其它使用提示}
 
@@ -392,8 +402,7 @@ year = {1845\textmd{（\emph{清同治四年}）}},
 
 \section{存在的问题}
 
-如第 \ref{sec:catsort} 部分所述，
-biblatex 3.0 的功能调整导致分类排序失效，且目前无解。
+如第 \ref{sec:catsort} 部分所述，biblatex 3.0--3.3 的功能调整导致分类排序失效。
 \verb|caspervector| 样式的作者对此表示遗憾，希望用户能谅解。
 
 因为 biblatex 现有功能的限制，一些需求无法直接实现。
@@ -428,15 +437,15 @@ biblatex 3.0 的功能调整导致分类排序失效，且目前无解。
 \end{Verbatim}
 这两种方法中更加推荐使用前者，因为前者只需手动实现出版年和期号的排版。
 
-\printbibliography%
-	[category = cited, heading = bibnumbered, sorting = none, title = {本文参考文献}]
-\printbibliography[
-	notcategory = cited, heading = bibnumbered, sorting = ecnty,
-	title = {%
-		其它参考文献示例
-		（引自\texorpdfstring{文献 \parencite{gbt7714-2005}}{ GB/T 7714-2005}）
-	}
-]
+\begin{refcontext}[sorting = none]
+\printbibliography[category = cited, heading = bibnumbered, title = {本文参考文献}]
+\end{refcontext}
+\begin{refcontext}[sorting = ecnty]
+\printbibliography[notcategory = cited, heading = bibnumbered, title = {%
+	其它参考文献示例
+	（引自\texorpdfstring{文献 \parencite{gbt7714-2005}}{ GB/T 7714-2005}）%
+}]
+\end{refcontext}
 
 \section{更新记录}
 \VerbatimInput[tabsize = 4, fontsize = {\small}, baselinestretch = 1]{ChangeLog.txt}
