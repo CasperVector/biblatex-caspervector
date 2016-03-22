@@ -2,7 +2,7 @@
 # Public domain.
 
 TITLE = biblatex-caspervector
-VERSION = 0.2.3
+VERSION = 0.2.4
 
 default: dist
 
