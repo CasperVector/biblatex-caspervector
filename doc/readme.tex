@@ -348,11 +348,11 @@ pdflatex texfile
 \begin{Verbatim}[frame = single]
 % 按引用顺序排版“cited”分类，即被引用的文献条目。
 \begin{refcontext}[sorting = none]
-\printbibliography[category = cited, title = {References}]
+\printbibliography[category = cited, ..., title = {References}]
 \end{refcontext}
 % 按英文文献在前、中文文献在后排版“cited”分类之外，即未被引用的文献条目。
 \begin{refcontext}[sorting = ecnty]
-\printbibliography[notcategory = cited, title = {Works Not Cited}]
+\printbibliography[notcategory = cited, ..., title = {Works Not Cited}]
 \end{refcontext}
 \end{Verbatim}
 并在最后一个除 \verb|\nocite| 之外的 \verb|\cite| 类命令之后、%
@@ -369,7 +369,7 @@ pdflatex texfile
 \end{Verbatim}
 
 使用 biblatex 2.x 或更旧版本的用户需要
-将在正文中准备排版文献列表的位置使用的代码改为
+将在正文中准备排版文献列表的位置使用的代码改为：
 \begin{Verbatim}[frame = single]
 % 按引用顺序排版“cited”分类，即被引用的文献条目。
 \printbibliography[category = cited, ..., sorting = none, title = {References}]
