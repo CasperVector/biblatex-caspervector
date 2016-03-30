@@ -29,7 +29,7 @@
 \DeclareBibliographyOption{utf8}[true]{\togglefalse{bbx:gbk}}
 \DeclareBibliographyOption{gbk}[true]{\toggletrue{bbx:gbk}}
 \ExecuteBibliographyOptions{
-	alldates = iso8601, gbk, defernumbers = true, sorting = none
+	alldates = iso8601, gbk, defernumbers = true, sorting = none, minnames = 3
 }
 \AtEndOfPackage{%
 	\iftoggle{bbx:gbk}{
@@ -57,6 +57,9 @@
 \renewcommand*{\finentrypunct}{\bbx@cegen{\bbx@cnperiod}{.}}
 \renewcommand{\bibendnotewrapper}[1]{\bibsentence #1\bbx@cnperiod}
 \renewcommand{\bibfootnotewrapper}[1]{\bibsentence #1\bbx@cnperiod}
+\DefineBibliographyExtras{english}{%
+	\renewcommand*{\finalandcomma}{\bbx@cegen{ }{}}%
+}
 
 \DeclareFieldFormat*{booktitle}{\mkbibemph{#1}}
 \DeclareFieldFormat*{journaltitle}{\mkbibemph{#1}}
@@ -66,7 +69,6 @@
 \DeclareFieldFormat*{pages}{#1}
 \DeclareFieldFormat*{url}{\url{#1}}
 \DeclareFieldFormat*{urldate}{#1}
-
 \DeclareFieldFormat[inbook, inproceedings, incollection, article]%
 	{title}{\bbx@mybibquote{\mkbibemph{#1}}}
 \DeclareFieldFormat*{type}{\mkbibbrackets{#1}}
