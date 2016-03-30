@@ -49,9 +49,13 @@
 \newcommand*{\bbx@cespace}{\bbx@cegen{}{\addspace}}
 \newcommand*{\bbx@mybibquote}[1]%
 	{\bbx@cegen{\bbx@cnldquot{#1}\bbx@cnrdquot}{\mkbibquote{#1}}}
+\renewcommand*{\finallistdelim}%
+	{\bbx@cegen{\bbx@cncomma}{\addspace\bibstring{and}\space}}
 \renewcommand*{\finalnamedelim}%
 	{\bbx@cegen{\bbx@cncomma}{\addspace\bibstring{and}\space}}
+\renewcommand*{\multilistdelim}{\bbx@cecomma}
 \renewcommand*{\multinamedelim}{\bbx@cecomma}
+\renewcommand*{\andmoredelim}{\bbx@cespace}
 \renewcommand*{\andothersdelim}{\bbx@cespace}
 \renewcommand*{\postnotedelim}{\bbx@cecomma}
 \renewcommand*{\finentrypunct}{\bbx@cegen{\bbx@cnperiod}{.}}
