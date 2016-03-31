@@ -28,42 +28,12 @@
 \newcommand*\bbx@cnscolon{；}
 \newcommand*\bbx@cncolon{：}
 \newcommand*\bbx@cnperiod{。}
-
-\DefineBibliographyStrings{english}{
-	andmore = {\bbx@cegen{等}{\mkbibemph{et\addabbrvspace al\adddot}}},
-	andothers = {\bbx@cegen{等}{\mkbibemph{et\addabbrvspace al\adddot}}},
-	bibliography = {参考文献},
-	references = {参考文献}
-}
-
-\newbibmacro*{cein:}{\printtext{\bbx@cegen{出自}{In}\bbx@cecolon}}
-\newbibmacro*{cebyauthor}{%
-	\ifnameundef{author}{}{%
-		\bbx@cegen%
-		{\printnames{author}\printtext{著}}%
-		% `\usebibmacro{byauthor}' does not print with `useauthor' enabled.
-		{\printnames[byauthor]{author}}%
-	}%
-}
-\newbibmacro*{cebyeditor}{%
-	\ifnameundef{editor}{}{%
-		\bbx@cegen%
-		{\printnames{editor}\printtext{编}}%
-		{\usebibmacro{byeditor}}%
-	}%
-}
-\newbibmacro*{cebytranslator}{%
-	\ifnameundef{translator}{}{%
-		\bbx@cegen%
-		{\printnames{translator}\printtext{译}}%
-		{\usebibmacro{bytranslator}}%
-	}%
-}
-\renewbibmacro*{urldate}{%
-	\iffieldundef{urlyear}{}{%
-		\printtext{\bbx@cegen{检索于 }{retrieved on\addspace}}%
-		\printurldate%
-	}%
-}
+\newcommand*\bbx@cnetal{等}
+\newcommand*\bbx@cnauth{著}
+\newcommand*\bbx@cnedit{编}
+\newcommand*\bbx@cntrans{译}
+\newcommand*\bbx@cnin{出自}
+\newcommand*\bbx@cnretr{检索于}
+\newcommand*\bbx@cnbib{参考文献}
 
 % vim:ft=tex:ts=2:sw=2

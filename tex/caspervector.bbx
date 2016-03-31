@@ -64,6 +64,11 @@
 \DefineBibliographyExtras{english}{%
 	\renewcommand*{\finalandcomma}{\bbx@cegen{ }{}}%
 }
+\DefineBibliographyStrings{english}{
+	andmore = {\bbx@cegen{\bbx@cnetal}{\mkbibemph{et\addabbrvspace al\adddot}}},
+	andothers = {\bbx@cegen{\bbx@cnetal}{\mkbibemph{et\addabbrvspace al\adddot}}},
+	bibliography = {\bbx@cnbib}, references = {\bbx@cnbib}
+}
 
 \DeclareFieldFormat*{booktitle}{\mkbibemph{#1}}
 \DeclareFieldFormat*{journaltitle}{\mkbibemph{#1}}
@@ -81,7 +86,30 @@
 \renewbibmacro*{title}{\iffieldundef{title}{}{\printfield{title}}}
 \newbibmacro*{type}{\iffieldundef{type}{}{\printfield{type}}}
 \newbibmacro*{number}{\iffieldundef{number}{}{\printfield{number}}}
+\newbibmacro*{cein:}{\printtext{\bbx@cegen{\bbx@cnin}{In}\bbx@cecolon}}
 
+\newbibmacro*{cebyauthor}{%
+	\ifnameundef{author}{}{%
+		\bbx@cegen%
+		{\printnames{author}\printtext{\bbx@cnauth}}%
+		% `\usebibmacro{byauthor}' does not print with `useauthor' enabled.
+		{\printnames[byauthor]{author}}%
+	}%
+}
+\newbibmacro*{cebyeditor}{%
+	\ifnameundef{editor}{}{%
+		\bbx@cegen%
+		{\printnames{editor}\printtext{\bbx@cnedit}}%
+		{\usebibmacro{byeditor}}%
+	}%
+}
+\newbibmacro*{cebytranslator}{%
+	\ifnameundef{translator}{}{%
+		\bbx@cegen%
+		{\printnames{translator}\printtext{\bbx@cntrans}}%
+		{\usebibmacro{bytranslator}}%
+	}%
+}
 \newbibmacro*{author+others}{%
 	\ifthenelse%
 	{\ifnameundef{author} \and \ifnameundef{editor} \and \ifnameundef{translator}}%
@@ -110,6 +138,12 @@
 		\printfield{volume}%
 		\usebibmacro{number}%
 	}{\printdate}%
+}
+\renewbibmacro*{urldate}{%
+	\iffieldundef{urlyear}{}{%
+		\printtext{\bbx@cegen{\bbx@cnretr}{retrieved on}\addspace}%
+		\printurldate%
+	}%
 }
 
 \DeclareBibliographyDriver{book}{%
