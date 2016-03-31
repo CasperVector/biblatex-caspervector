@@ -1,3 +1,15 @@
+2016-03-22. v0.2.5
+
+	* Changes to package code:
+	- caspervector.bbx: add overlooked `minnames = 3' and `minitems = 3'.
+	- caspervector.bbx: refine name spacing to reduce ambiguity.
+	- caspervector.bbx: adjust list format (like names).
+	- Refactor common code from *.def into caspervector.bbx.
+
+	* Misc:
+	- Makefile: remove re-encoding code.
+	- Minor fixes and cosmetics.
+
 2016-03-22. v0.2.4
 
 	* Misc:
