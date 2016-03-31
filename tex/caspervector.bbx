@@ -29,7 +29,8 @@
 \DeclareBibliographyOption{utf8}[true]{\togglefalse{bbx:gbk}}
 \DeclareBibliographyOption{gbk}[true]{\toggletrue{bbx:gbk}}
 \ExecuteBibliographyOptions{
-	alldates = iso8601, gbk, defernumbers = true, sorting = none, minnames = 3
+	alldates = iso8601, gbk, defernumbers = true,
+	sorting = none, minnames = 3, minitems = 3
 }
 \AtEndOfPackage{%
 	\iftoggle{bbx:gbk}{
