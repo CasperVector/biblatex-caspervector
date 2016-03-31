@@ -62,7 +62,7 @@
 \renewcommand{\bibendnotewrapper}[1]{\bibsentence #1\bbx@cnperiod}
 \renewcommand{\bibfootnotewrapper}[1]{\bibsentence #1\bbx@cnperiod}
 \DefineBibliographyExtras{english}{%
-	\renewcommand*{\finalandcomma}{\bbx@cegen{ }{}}%
+	\renewcommand*{\finalandcomma}{\bbx@cegen{\addspace}{}}%
 }
 \DefineBibliographyStrings{english}{
 	andmore = {\bbx@cegen{\bbx@cnetal}{\mkbibemph{et\addabbrvspace al\adddot}}},
