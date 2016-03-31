@@ -87,11 +87,14 @@
 \newbibmacro*{type}{\iffieldundef{type}{}{\printfield{type}}}
 \newbibmacro*{number}{\iffieldundef{number}{}{\printfield{number}}}
 \newbibmacro*{cein:}{\printtext{\bbx@cegen{\bbx@cnin}{In}\bbx@cecolon}}
+\newcommand*{\bbx@byspace}[1]{%
+	\ifnumgreater{\value{#1}}{\value{maxnames}}{}{\addspace}%
+}
 
 \newbibmacro*{cebyauthor}{%
 	\ifnameundef{author}{}{%
 		\bbx@cegen%
-		{\printnames{author}\printtext{\bbx@cnauth}}%
+		{\printnames{author}\printtext{\bbx@byspace{author}\bbx@cnauth}}%
 		% `\usebibmacro{byauthor}' does not print with `useauthor' enabled.
 		{\printnames[byauthor]{author}}%
 	}%
@@ -99,14 +102,14 @@
 \newbibmacro*{cebyeditor}{%
 	\ifnameundef{editor}{}{%
 		\bbx@cegen%
-		{\printnames{editor}\printtext{\bbx@cnedit}}%
+		{\printnames{editor}\printtext{\bbx@byspace{editor}\bbx@cnedit}}%
 		{\usebibmacro{byeditor}}%
 	}%
 }
 \newbibmacro*{cebytranslator}{%
 	\ifnameundef{translator}{}{%
 		\bbx@cegen%
-		{\printnames{translator}\printtext{\bbx@cntrans}}%
+		{\printnames{translator}\printtext{\bbx@byspace{translator}\bbx@cntrans}}%
 		{\usebibmacro{bytranslator}}%
 	}%
 }
