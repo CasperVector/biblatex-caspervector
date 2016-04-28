@@ -65,22 +65,34 @@
 \DefineBibliographyExtras{english}{%
 	\renewcommand*{\finalandcomma}{\bbx@cegen{\addspace}{}}%
 }
+
+% The alternative settings in comments can be used in case a really plain style
+% (without quotes, italic and bold) is demanded; be prepared that the style
+% might look really ugly.
 \DefineBibliographyStrings{english}{
 	andmore = {\bbx@cegen{\bbx@cnetal}{\mkbibemph{et\addabbrvspace al\adddot}}},
 	andothers = {\bbx@cegen{\bbx@cnetal}{\mkbibemph{et\addabbrvspace al\adddot}}},
+	%andmore = {\bbx@cegen{\bbx@cnetal}{et\addabbrvspace al\adddot}},
+	%andothers = {\bbx@cegen{\bbx@cnetal}{et\addabbrvspace al\adddot}},
 	bibliography = {\bbx@cnbib}, references = {\bbx@cnbib}
 }
-
 \DeclareFieldFormat*{booktitle}{\mkbibemph{#1}}
 \DeclareFieldFormat*{journaltitle}{\mkbibemph{#1}}
 \DeclareFieldFormat*{title}{\mkbibemph{#1}}
 \DeclareFieldFormat*{year}{\mkbibbold{#1}}
 \DeclareFieldFormat*{volume}{\mkbibemph{#1}}
+%\DeclareFieldFormat*{booktitle}{#1}
+%\DeclareFieldFormat*{journaltitle}{#1}
+%\DeclareFieldFormat*{title}{#1}
+%\DeclareFieldFormat*{year}{#1}
+%\DeclareFieldFormat*{volume}{#1}
 \DeclareFieldFormat*{pages}{#1}
 \DeclareFieldFormat*{url}{\url{#1}}
 \DeclareFieldFormat*{urldate}{#1}
 \DeclareFieldFormat[inbook, inproceedings, incollection, article]%
 	{title}{\bbx@mybibquote{\mkbibemph{#1}}}
+%\DeclareFieldFormat[inbook, inproceedings, incollection, article]%
+%	{title}{#1}
 \DeclareFieldFormat*{type}{\mkbibbrackets{#1}}
 \DeclareFieldFormat*{number}{\mkbibparens{#1}}
 \DeclareFieldFormat[patent]{number}{#1}
