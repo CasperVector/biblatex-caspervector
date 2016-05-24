@@ -1,4 +1,15 @@
-2016-03-22. v0.2.5
+2016-05-24. v0.2.6
+
+	* Changes to package code:
+	- caspervector.bbx: add code in case uglification is demanded.
+
+	* Changes to documentation:
+	- readme.tex: improve description of split sorting.
+
+	* Misc:
+	- Minor fixes and cosmetics.
+
+2016-03-31. v0.2.5
 
 	* Changes to package code:
 	- caspervector.bbx: add overlooked `minnames = 3' and `minitems = 3'.
