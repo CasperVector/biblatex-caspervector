@@ -42,38 +42,39 @@
 	}%
 }
 
-\newcommand*{\bbx@cegen}[2]{\iffieldequalstr{userf}{zh}{#1}{#2}}
-\newcommand*{\bbx@cecomma}{\bbx@cegen{\bbx@cncomma}{\addcomma\addspace}}
-\newcommand*{\bbx@cecolon}{\bbx@cegen{\bbx@cncolon}{\addcolon\addspace}}
-\newcommand*{\bbx@cescolon}{\bbx@cegen{\bbx@cnscolon}{\addsemicolon\addspace}}
-\newcommand*{\bbx@ceperiod}{\bbx@cegen{\bbx@cnperiod}{\addperiod\addspace}}
-\newcommand*{\bbx@cespace}{\bbx@cegen{}{\addspace}}
+\newcommand*{\bbx@cepunct}[2]{\iffieldequalstr{userf}{zh}{#1}{#2}}
+\newcommand*{\bbx@cetext}[2]{\iffieldequalstr{userf}{zh}{#1}{#2}}
+\newcommand*{\bbx@cecomma}{\bbx@cepunct{\bbx@cncomma}{\addcomma\addspace}}
+\newcommand*{\bbx@cecolon}{\bbx@cepunct{\bbx@cncolon}{\addcolon\addspace}}
+\newcommand*{\bbx@cescolon}{\bbx@cepunct{\bbx@cnscolon}{\addsemicolon\addspace}}
+\newcommand*{\bbx@ceperiod}{\bbx@cepunct{\bbx@cnperiod}{\addperiod\addspace}}
+\newcommand*{\bbx@cespace}{\bbx@cepunct{}{\addspace}}
 \newcommand*{\bbx@mybibquote}[1]%
-	{\bbx@cegen{\bbx@cnldquot{#1}\bbx@cnrdquot}{\mkbibquote{#1}}}
+	{\bbx@cepunct{\bbx@cnldquot{#1}\bbx@cnrdquot}{\mkbibquote{#1}}}
 \renewcommand*{\finallistdelim}%
-	{\bbx@cegen{\bbx@cncomma}{\addspace\bibstring{and}\space}}
+	{\bbx@cetext{\bbx@cncomma}{\addspace\bibstring{and}\space}}
 \renewcommand*{\finalnamedelim}%
-	{\bbx@cegen{\bbx@cncomma}{\addspace\bibstring{and}\space}}
+	{\bbx@cetext{\bbx@cncomma}{\addspace\bibstring{and}\space}}
 \renewcommand*{\multilistdelim}{\bbx@cecomma}
 \renewcommand*{\multinamedelim}{\bbx@cecomma}
 \renewcommand*{\andmoredelim}{\bbx@cespace}
 \renewcommand*{\andothersdelim}{\bbx@cespace}
 \renewcommand*{\postnotedelim}{\bbx@cecomma}
-\renewcommand*{\finentrypunct}{\bbx@cegen{\bbx@cnperiod}{.}}
+\renewcommand*{\finentrypunct}{\bbx@cepunct{\bbx@cnperiod}{.}}
 \renewcommand{\bibendnotewrapper}[1]{\bibsentence #1\bbx@cnperiod}
 \renewcommand{\bibfootnotewrapper}[1]{\bibsentence #1\bbx@cnperiod}
 \DefineBibliographyExtras{english}{%
-	\renewcommand*{\finalandcomma}{\bbx@cegen{\addspace}{}}%
+	\renewcommand*{\finalandcomma}{\bbx@cepunct{\addspace}{}}%
 }
 
 % The alternative settings in comments can be used in case a really plain style
 % (without quotes, italic and bold) is demanded; be prepared that the style
 % might look really ugly.
 \DefineBibliographyStrings{english}{
-	andmore = {\bbx@cegen{\bbx@cnetal}{\mkbibemph{et\addabbrvspace al\adddot}}},
-	andothers = {\bbx@cegen{\bbx@cnetal}{\mkbibemph{et\addabbrvspace al\adddot}}},
-	%andmore = {\bbx@cegen{\bbx@cnetal}{et\addabbrvspace al\adddot}},
-	%andothers = {\bbx@cegen{\bbx@cnetal}{et\addabbrvspace al\adddot}},
+	andmore = {\bbx@cetext{\bbx@cnetal}{\mkbibemph{et\addabbrvspace al\adddot}}},
+	andothers = {\bbx@cetext{\bbx@cnetal}{\mkbibemph{et\addabbrvspace al\adddot}}},
+%	andmore = {\bbx@cetext{\bbx@cnetal}{et\addabbrvspace al\adddot}},
+%	andothers = {\bbx@cetext{\bbx@cnetal}{et\addabbrvspace al\adddot}},
 	bibliography = {\bbx@cnbib}, references = {\bbx@cnbib}
 }
 \DeclareFieldFormat*{booktitle}{\mkbibemph{#1}}
@@ -99,14 +100,14 @@
 \renewbibmacro*{title}{\iffieldundef{title}{}{\printfield{title}}}
 \newbibmacro*{type}{\iffieldundef{type}{}{\printfield{type}}}
 \newbibmacro*{number}{\iffieldundef{number}{}{\printfield{number}}}
-\newbibmacro*{cein:}{\printtext{\bbx@cegen{\bbx@cnin}{In}\bbx@cecolon}}
+\newbibmacro*{cein:}{\printtext{\bbx@cetext{\bbx@cnin}{In}\bbx@cecolon}}
 \newcommand*{\bbx@byspace}[1]{%
 	\ifnumgreater{\value{#1}}{\value{maxnames}}{}{\addspace}%
 }
 
 \newbibmacro*{cebyauthor}{%
 	\ifnameundef{author}{}{%
-		\bbx@cegen%
+		\bbx@cetext%
 		{\printnames{author}\printtext{\bbx@byspace{author}\bbx@cnauth}}%
 		% `\usebibmacro{byauthor}' does not print with `useauthor' enabled.
 		{\printnames[byauthor]{author}}%
@@ -114,14 +115,14 @@
 }
 \newbibmacro*{cebyeditor}{%
 	\ifnameundef{editor}{}{%
-		\bbx@cegen%
+		\bbx@cetext%
 		{\printnames{editor}\printtext{\bbx@byspace{editor}\bbx@cnedit}}%
 		{\usebibmacro{byeditor}}%
 	}%
 }
 \newbibmacro*{cebytranslator}{%
 	\ifnameundef{translator}{}{%
-		\bbx@cegen%
+		\bbx@cetext%
 		{\printnames{translator}\printtext{\bbx@byspace{translator}\bbx@cntrans}}%
 		{\usebibmacro{bytranslator}}%
 	}%
@@ -157,7 +158,7 @@
 }
 \renewbibmacro*{urldate}{%
 	\iffieldundef{urlyear}{}{%
-		\printtext{\bbx@cegen{\bbx@cnretr}{retrieved on}\addspace}%
+		\printtext{\bbx@cetext{\bbx@cnretr}{retrieved on}\addspace}%
 		\printurldate%
 	}%
 }
