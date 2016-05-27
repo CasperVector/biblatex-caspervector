@@ -57,14 +57,12 @@
 	{\bbx@cetext{\bbx@cncomma}{\addspace\bibstring{and}\space}}
 \renewcommand*{\multilistdelim}{\bbx@cecomma}
 \renewcommand*{\multinamedelim}{\bbx@cecomma}
-\renewcommand*{\andmoredelim}{\bbx@cespace}
-\renewcommand*{\andothersdelim}{\bbx@cespace}
 \renewcommand*{\postnotedelim}{\bbx@cecomma}
 \renewcommand*{\finentrypunct}{\bbx@cepunct{\bbx@cnperiod}{.}}
 \renewcommand{\bibendnotewrapper}[1]{\bibsentence #1\bbx@cnperiod}
 \renewcommand{\bibfootnotewrapper}[1]{\bibsentence #1\bbx@cnperiod}
 \DefineBibliographyExtras{english}{%
-	\renewcommand*{\finalandcomma}{\bbx@cepunct{\addspace}{}}%
+	\renewcommand*{\finalandcomma}{}%
 }
 
 % The alternative settings in comments can be used in case a really plain style
