@@ -26,10 +26,12 @@
 \RequireBibliographyStyle{numeric}
 
 \newtoggle{bbx:gbk}
+\newtoggle{bbx:ugly}
 \DeclareBibliographyOption{utf8}[true]{\togglefalse{bbx:gbk}}
 \DeclareBibliographyOption{gbk}[true]{\toggletrue{bbx:gbk}}
+\DeclareBibliographyOption{ugly}[true]{\settoggle{bbx:ugly}{#1}}
 \ExecuteBibliographyOptions{
-	alldates = iso8601, gbk, defernumbers = true,
+	gbk, ugly = false, alldates = iso8601, defernumbers = true,
 	sorting = none, minnames = 3, minitems = 3
 }
 \AtEndOfPackage{%
@@ -39,10 +41,32 @@
 	}{
 		\input{biblatex-caspervector-utf8.def}
 		\ExecuteBibliographyOptions{texencoding = UTF-8}
+	}
+	\iftoggle{bbx:ugly}{
+		\newcommand*{\bbx@cepunct}[2]{#2}
+		\DeclareFieldFormat*{booktitle}{#1}
+		\DeclareFieldFormat*{journaltitle}{#1}
+		\DeclareFieldFormat*{title}{#1}
+		\DeclareFieldFormat*{year}{#1}
+		\DeclareFieldFormat*{volume}{#1}
+		\DeclareFieldFormat[inbook, inproceedings, incollection, article]%
+			{title}{#1}
+	}{
+		\newcommand*{\bbx@cepunct}[2]{\iffieldequalstr{userf}{zh}{#1}{#2}}
+		\DefineBibliographyStrings{english}{
+			andmore = {\bbx@cetext{\bbx@cnetal}{et\addabbrvspace al\adddot}},
+			andothers = {\bbx@cetext{\bbx@cnetal}{et\addabbrvspace al\adddot}},
+		}
+		\DeclareFieldFormat*{booktitle}{\mkbibemph{#1}}
+		\DeclareFieldFormat*{journaltitle}{\mkbibemph{#1}}
+		\DeclareFieldFormat*{title}{\mkbibemph{#1}}
+		\DeclareFieldFormat*{year}{\mkbibbold{#1}}
+		\DeclareFieldFormat*{volume}{\mkbibemph{#1}}
+		\DeclareFieldFormat[inbook, inproceedings, incollection, article]%
+			{title}{\bbx@mybibquote{\mkbibemph{#1}}}
 	}%
 }
 
-\newcommand*{\bbx@cepunct}[2]{\iffieldequalstr{userf}{zh}{#1}{#2}}
 \newcommand*{\bbx@cetext}[2]{\iffieldequalstr{userf}{zh}{#1}{#2}}
 \newcommand*{\bbx@cecomma}{\bbx@cepunct{\bbx@cncomma}{\addcomma\addspace}}
 \newcommand*{\bbx@cecolon}{\bbx@cepunct{\bbx@cncolon}{\addcolon\addspace}}
@@ -63,33 +87,14 @@
 	\renewcommand*{\finalandcomma}{}%
 }
 
-% The alternative settings in comments can be used in case a really plain style
-% (without quotes, italic and bold) is demanded; be prepared that the style
-% might look really ugly.
 \DefineBibliographyStrings{english}{
 	andmore = {\bbx@cetext{\bbx@cnetal}{\mkbibemph{et\addabbrvspace al\adddot}}},
 	andothers = {\bbx@cetext{\bbx@cnetal}{\mkbibemph{et\addabbrvspace al\adddot}}},
-%	andmore = {\bbx@cetext{\bbx@cnetal}{et\addabbrvspace al\adddot}},
-%	andothers = {\bbx@cetext{\bbx@cnetal}{et\addabbrvspace al\adddot}},
 	bibliography = {\bbx@cnbib}, references = {\bbx@cnbib}
 }
-\DeclareFieldFormat*{booktitle}{\mkbibemph{#1}}
-\DeclareFieldFormat*{journaltitle}{\mkbibemph{#1}}
-\DeclareFieldFormat*{title}{\mkbibemph{#1}}
-\DeclareFieldFormat*{year}{\mkbibbold{#1}}
-\DeclareFieldFormat*{volume}{\mkbibemph{#1}}
-%\DeclareFieldFormat*{booktitle}{#1}
-%\DeclareFieldFormat*{journaltitle}{#1}
-%\DeclareFieldFormat*{title}{#1}
-%\DeclareFieldFormat*{year}{#1}
-%\DeclareFieldFormat*{volume}{#1}
 \DeclareFieldFormat*{pages}{#1}
 \DeclareFieldFormat*{url}{\url{#1}}
 \DeclareFieldFormat*{urldate}{#1}
-\DeclareFieldFormat[inbook, inproceedings, incollection, article]%
-	{title}{\bbx@mybibquote{\mkbibemph{#1}}}
-%\DeclareFieldFormat[inbook, inproceedings, incollection, article]%
-%	{title}{#1}
 \DeclareFieldFormat*{type}{\mkbibbrackets{#1}}
 \DeclareFieldFormat*{number}{\mkbibparens{#1}}
 \DeclareFieldFormat[patent]{number}{#1}
