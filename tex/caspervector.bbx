@@ -44,6 +44,10 @@
 	}
 	\iftoggle{bbx:ugly}{
 		\newcommand*{\bbx@cepunct}[2]{#2}
+		\DefineBibliographyStrings{english}{
+			andmore = {\bbx@cetext{\bbx@cnetal}{et\addabbrvspace al\adddot}},
+			andothers = {\bbx@cetext{\bbx@cnetal}{et\addabbrvspace al\adddot}},
+		}
 		\DeclareFieldFormat*{booktitle}{#1}
 		\DeclareFieldFormat*{journaltitle}{#1}
 		\DeclareFieldFormat*{title}{#1}
@@ -54,8 +58,10 @@
 	}{
 		\newcommand*{\bbx@cepunct}[2]{\iffieldequalstr{userf}{zh}{#1}{#2}}
 		\DefineBibliographyStrings{english}{
-			andmore = {\bbx@cetext{\bbx@cnetal}{et\addabbrvspace al\adddot}},
-			andothers = {\bbx@cetext{\bbx@cnetal}{et\addabbrvspace al\adddot}},
+			andmore =
+				{\bbx@cetext{\bbx@cnetal}{\mkbibemph{et\addabbrvspace al\adddot}}},
+			andothers =
+				{\bbx@cetext{\bbx@cnetal}{\mkbibemph{et\addabbrvspace al\adddot}}},
 		}
 		\DeclareFieldFormat*{booktitle}{\mkbibemph{#1}}
 		\DeclareFieldFormat*{journaltitle}{\mkbibemph{#1}}
@@ -88,8 +94,6 @@
 }
 
 \DefineBibliographyStrings{english}{
-	andmore = {\bbx@cetext{\bbx@cnetal}{\mkbibemph{et\addabbrvspace al\adddot}}},
-	andothers = {\bbx@cetext{\bbx@cnetal}{\mkbibemph{et\addabbrvspace al\adddot}}},
 	bibliography = {\bbx@cnbib}, references = {\bbx@cnbib}
 }
 \DeclareFieldFormat*{pages}{#1}
