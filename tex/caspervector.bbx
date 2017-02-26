@@ -53,8 +53,6 @@
 		\DeclareFieldFormat*{title}{#1}
 		\DeclareFieldFormat*{year}{#1}
 		\DeclareFieldFormat*{volume}{#1}
-		\DeclareFieldFormat[inbook, inproceedings, incollection, article]%
-			{title}{#1}
 	}{
 		\newcommand*{\bbx@cepunct}[2]{\iffieldequalstr{userf}{zh}{#1}{#2}}
 		\DefineBibliographyStrings{english}{
