@@ -1,6 +1,6 @@
 #!/usr/bin/make -f
 #
-# Copyright (c) 2012,2014 Casper Ti. Vector
+# Copyright (c) 2012,2014,2017 Casper Ti. Vector
 # Public domain.
 
 FIND_GBK = '(' -name '*gbk*' ')'
@@ -44,6 +44,7 @@ blank:
 tail:
 	@echo '======================================================================'
 	@echo '$@: remember to update documentation after modifications'
+	@echo '$@: remember to update copyright lines'
 	@echo '$@: remember to review `git diff`'
 	@echo '======================================================================'
 
