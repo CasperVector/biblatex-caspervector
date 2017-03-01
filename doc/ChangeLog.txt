@@ -1,3 +1,21 @@
+2017-03-01. v0.2.7
+
+	* API changes:
+	- caspervector.bbx: provide undocumented option for uglification.
+
+	* Changes to package code:
+	- caspervector.bbx: fix "et al" and `\final*delim'.
+	- caspervector.bbx: make switch between C/E punctuations easier.
+	- caspervector.bbx: remove niche feature.
+
+	* Changes to documentation:
+	- readme.bib: double brace institution names.
+	- readme.tex: remove manual loading of CJKspace.
+
+	* Misc:
+	- utils/qa: add notice about copyright line updates.
+	- Minor fixes and cosmetics.
+
 2016-05-24. v0.2.6
 
 	* Changes to package code:
@@ -73,7 +91,7 @@
 
 2014-05-24, v0.2.0
 
-	* Changes to API:
+	* API changes:
 	- Chinese references now (only) require language == {chinese}.
 	- `userf' becomes an internal entry field (backward compatible for now).
 
@@ -139,7 +157,7 @@
 
 2012-05-13, v0.1.3
 
-	* Changes to API:
+	* API changes:
 	- Chinese references now require (userf == 'zh' || userf == 'cn').
 	- Add {ce,ec}nty sorting scheme, default to ecnty.
 
