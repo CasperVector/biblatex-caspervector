@@ -100,7 +100,7 @@
 
 	* Changes to documentation:
 	- No longer recommend the CTeX Suite.
-	- Remove install hints (already included in TeX Live).
+	- Remove installation hints (already included in TeX Live).
 	- Use `%' for comments in `.bib' files, now supported by biber.
 
 	* Misc:
