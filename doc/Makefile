@@ -1,9 +1,9 @@
-# Copyright (c) 2011-2013 Casper Ti. Vector
+# Copyright (c) 2011-2013,2015-2016,2018 Casper Ti. Vector
 # Public domain.
 
 doc:
 	latex readme
-	biber -l zh__pinyin readme
+	biber -l zh__pinyin --output-safechars readme
 	xelatex readme
 	xelatex readme
 
