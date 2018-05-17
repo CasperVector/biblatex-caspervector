@@ -1,6 +1,6 @@
 % Casper Ti. Vector's biblatex style
 %
-% Copyright (c) 2012-2017 Casper Ti. Vector
+% Copyright (c) 2012-2018 Casper Ti. Vector
 %
 % This work may be distributed and/or modified under the conditions of the
 % LaTeX Project Public License, either version 1.3 of this license or (at
@@ -86,7 +86,8 @@
 \renewcommand*{\multilistdelim}{\bbx@cecomma}
 \renewcommand*{\multinamedelim}{\bbx@cecomma}
 \renewcommand*{\postnotedelim}{\bbx@cecomma}
-\renewcommand*{\finentrypunct}{\bbx@cepunct{\bbx@cnperiod}{.}}
+\renewcommand*{\finentrypunct}%
+	{\iffieldundef{addendum}{\bbx@cepunct{\bbx@cnperiod}{.}}{}}
 \DefineBibliographyExtras{english}{%
 	\renewcommand*{\finalandcomma}{}%
 }
@@ -104,9 +105,8 @@
 \newbibmacro*{type}{\iffieldundef{type}{}{\printfield{type}}}
 \newbibmacro*{number}{\iffieldundef{number}{}{\printfield{number}}}
 \newbibmacro*{cein:}{\printtext{\bbx@cetext{\bbx@cnin}{In}\bbx@cecolon}}
-\newcommand*{\bbx@byspace}[1]{%
-	\ifnumgreater{\value{#1}}{\value{maxnames}}{}{\addspace}%
-}
+\newcommand*{\bbx@byspace}[1]%
+	{\ifnumgreater{\value{#1}}{\value{maxnames}}{}{\addspace}}
 
 \newbibmacro*{cebyauthor}{%
 	\ifnameundef{author}{}{%
@@ -167,7 +167,7 @@
 }
 
 \DeclareBibliographyDriver{book}{%
-	\usebibmacro{bibindex}%
+	\usebibmacro{bibindex}\usebibmacro{begentry}%
 	\newblock
 	\usebibmacro{author+others}\setunit{\bbx@ceperiod}%
 	\newblock
@@ -180,13 +180,13 @@
 	\printfield{pages}\setunit{\bbx@ceperiod}%
 	\newblock
 	\printfield{url}\setunit*{\bbx@cecomma}%
-	\usebibmacro{urldate}\usebibmacro{finentry}%
+	\usebibmacro{urldate}\setunit{\bbx@ceperiod}%
 	\newblock
-	\printfield{addendum}%
+	\printfield{addendum}\usebibmacro{finentry}%
 }
 
 \DeclareBibliographyDriver{incollection}{%
-	\usebibmacro{bibindex}%
+	\usebibmacro{bibindex}\usebibmacro{begentry}%
 	\newblock
 	\usebibmacro{author+others}\setunit{\bbx@ceperiod}%
 	\newblock
@@ -205,13 +205,13 @@
 	\printfield{pages}\setunit{\bbx@ceperiod}%
 	\newblock
 	\printfield{url}\setunit*{\bbx@cecomma}%
-	\usebibmacro{urldate}\usebibmacro{finentry}%
+	\usebibmacro{urldate}\setunit{\bbx@ceperiod}%
 	\newblock
-	\printfield{addendum}%
+	\printfield{addendum}\usebibmacro{finentry}%
 }
 
 \DeclareBibliographyDriver{periodical}{%
-	\usebibmacro{bibindex}%
+	\usebibmacro{bibindex}\usebibmacro{begentry}%
 	\newblock
 	\usebibmacro{author+others}\setunit{\bbx@ceperiod}%
 	\newblock
@@ -224,13 +224,13 @@
 	\printlist{publisher}\setunit{\bbx@ceperiod}%
 	\newblock
 	\printfield{url}\setunit*{\bbx@cecomma}%
-	\usebibmacro{urldate}\usebibmacro{finentry}%
+	\usebibmacro{urldate}\setunit{\bbx@ceperiod}%
 	\newblock
-	\printfield{addendum}%
+	\printfield{addendum}\usebibmacro{finentry}%
 }
 
 \DeclareBibliographyDriver{article}{%
-	\usebibmacro{bibindex}%
+	\usebibmacro{bibindex}\usebibmacro{begentry}%
 	\newblock
 	\printnames{author}\setunit{\bbx@ceperiod}%
 	\newblock
@@ -242,13 +242,13 @@
 	\printfield{pages}\setunit{\bbx@ceperiod}%
 	\newblock
 	\printfield{url}\setunit*{\bbx@cecomma}%
-	\usebibmacro{urldate}\usebibmacro{finentry}%
+	\usebibmacro{urldate}\setunit{\bbx@ceperiod}%
 	\newblock
-	\printfield{addendum}%
+	\printfield{addendum}\usebibmacro{finentry}%
 }
 
 \DeclareBibliographyDriver{patent}{%
-	\usebibmacro{bibindex}%
+	\usebibmacro{bibindex}\usebibmacro{begentry}%
 	\newblock
 	\usebibmacro{author}\setunit{\bbx@ceperiod}%
 	\newblock
@@ -261,15 +261,15 @@
 	\usebibmacro{year/date}\setunit{\bbx@ceperiod}%
 	\newblock
 	\printfield{url}\setunit*{\bbx@cecomma}%
-	\usebibmacro{urldate}\usebibmacro{finentry}%
+	\usebibmacro{urldate}\setunit{\bbx@ceperiod}%
 	\newblock
-	\printfield{addendum}%
+	\printfield{addendum}\usebibmacro{finentry}%
 }
 
 \DeclareBibliographyDriver{customf}{%
-	\usebibmacro{bibindex}%
+	\usebibmacro{bibindex}\usebibmacro{begentry}%
 	\newblock
-	\printfield{addendum}%
+	\printfield{addendum}\usebibmacro{finentry}%
 }
 
 \DeclareBibliographyAlias{booklet}{book}
