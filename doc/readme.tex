@@ -222,7 +222,7 @@ pdflatex texfile
 	\item \verb|type|：文献类型和电子文献载体标志代码\supercite{gbt7714-2005}。
 	\item \verb|location|：出版地，或（在 \verb|@patent| 类条目中）专利申请地。
 	\item \verb|publisher|：出版者，或学位论文作者申请学位的单位。
-	\item \verb|journal|/\verb|journaltitle|：连续出版物题名，这两个字段是等价的。
+	\item \verb|journal|/\verb|journaltitle|：连续出版物题名，两个字段互相等价。
 	\item \verb|year|/\verb|date|：出版年、日期，这两个字段只需填写一个即可。
 	\item \verb|volume|：期刊中文献所处的卷号。
 	\item \verb|number|：期刊中文献所处的期号，或专利的申请号。
@@ -238,6 +238,7 @@ pdflatex texfile
 	\item \verb|language|：
 		值为 \verb|chinese| 时，相应条目在文献列表中用中文排版；
 		否则（为其他值或未定义时）用英文排版。
+	\item \verb|note|：用于排版一些特殊内容，参考第 \ref{sec:faq} 部分。
 	\item \verb|userf|：\verb|caspervector| 样式内部使用。
 	\item 其它通用特殊字段，见 biblatex 手册\supercite{biblatex}。
 \end{itemize}
@@ -377,21 +378,36 @@ biblatex 3.0--3.3 中有一个 bug\footnote{\ %
 	可以参考 \url{https://tex.stackexchange.com/questions/250548/}。%
 } 导致分类排序失效，此问题基本无解。
 
-\section{FAQ 和其它使用提示}
+\section{FAQ 和其它使用提示}\label{sec:faq}
 
 用户可以通过省略可选字段的方式来避免排版相应的内容。
 例如，省略 \verb|type| 字段便可使相应条目不排版文献类型和电子文献载体标志代码。
-
-用户可以通过手动调用格式化命令来临时覆盖预设的格式设定，
-例如文献 \parencite{1-7} 中的出版年便是通过以下设定得到的
-（\verb|sortyear| 字段的用法请参考 biblatex 手册\supercite{biblatex}）：
-\begin{Verbatim}[frame = single]
-sortyear = {1845},
-year = {1845\textmd{（\emph{清同治四年}）}},
-\end{Verbatim}
-
 \verb|caspervector| 样式不支持 \verb|edition| 字段，
 用户可以在 \verb|title| 等字段中手动标注。
+
+用户在很多时候可以通过手动调用格式化命令来临时覆盖预设的格式设定，
+例如对于一个 \verb|@article| 类型的条目，
+\begin{Verbatim}[frame = single]
+year = {2018},
+volume = {14},
+number = {\hologo{TeX} 特刊},
+\end{Verbatim}
+将使年卷期号排版为类似于“\textbf{2018}，\textit{14}(\hologo{TeX} 特刊)”的形式。
+
+因为 biblatex 内部实现的缘故，\verb|year|/\verb|date|
+字段被设为一些特殊内容时可能导致其出错。如果的确有这样的排版需求，
+可以使用 \verb|note| 字段，例如文献 \parencite{1-7}
+中的出版年便是通过以下设定得到的（\verb|origdate| 字段不会被排版出来，
+但会在排序时被 \verb|caspervector| 样式考虑；
+其具体用法请参考 biblatex 手册\supercite{biblatex}）\footnote{\ %
+	v0.2.x 和更早版本的 \texttt{caspervector} 样式支持直接在
+	\texttt{year} 字段中设定特殊内容；在之后的版本中，为了支持著者--年编码制，
+	\texttt{caspervector} 的内部实现进行了调整，导致其不再支持这样的用法。%
+}：
+\begin{Verbatim}[frame = single]
+origdate = {1845},
+note = {\textbf{1845}（\emph{清同治四年}）},
+\end{Verbatim}
 
 直接使用 \verb|userf| 字段是否等于 \verb|zh| 或 \verb|cn|
 来区分中英文文献的功能在近期仍将被支持，但在将来可能被去掉或修改。
@@ -401,18 +417,17 @@ year = {1845\textmd{（\emph{清同治四年}）}},
 如第 \ref{sec:catsort} 部分所述，biblatex 3.0--3.3 的功能调整导致分类排序失效。
 \verb|caspervector| 样式的作者对此表示遗憾，希望用户能谅解。
 
-因为 biblatex 现有功能的限制，一些需求无法直接实现。
-例如类似于文献 \parencite{3-2} 中同时有出版起止年和起止期号的情况就无法自动排版，
-只能通过用户手动实现。
-下面两种方式均可实现上述需求
-（\verb|sortyear| 字段的用法请参考 biblatex 手册\supercite{biblatex}）：
+因为 biblatex 现有功能的限制，一些需求无法直接实现。例如类似于文献
+\parencite{3-2} 中同时有出版起止年和起止期号的情况就无法自动排版，
+只能通过用户手动实现。下面两种方式均可实现上述需求
+（\verb|origdate| 字段的用法请参考第 \ref{sec:faq} 部分）：
 \begin{Verbatim}[frame = single]
 @periodical{3-2,
 	author = {中国图书馆学会},
 	title = {图书馆学通讯},
 	type = {J},
-	sortyear = {1957},
-	year = {\textmd{\textbf{1957}(1) -- \textbf{1990}(4)}},
+	origdate = {1957/1990},
+	note = {\textbf{1957}(1) -- \textbf{1990}(4)},
 	location = {北京},
 	publisher = {北京图书馆},
 	language = {chinese},
@@ -423,7 +438,7 @@ year = {1845\textmd{（\emph{清同治四年}）}},
 @customf{3-2,
 	author = {中国图书馆学会},
 	title = {图书馆学通讯},
-	sortyear = {1957},
+	date = {1957/1990},
 	addendum = {中国图书馆学会。
 		\textit{图书馆学通讯} [J]。
 		\textbf{1957}(1) -- \textbf{1990}(4)。

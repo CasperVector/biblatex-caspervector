@@ -51,8 +51,8 @@
 		\DeclareFieldFormat*{booktitle}{#1}
 		\DeclareFieldFormat*{journaltitle}{#1}
 		\DeclareFieldFormat*{title}{#1}
-		\DeclareFieldFormat*{year}{#1}
 		\DeclareFieldFormat*{volume}{#1}
+		\DeclareFieldFormat*{date}{#1}
 	}{
 		\newcommand*{\bbx@cepunct}[2]{\iffieldequalstr{userf}{zh}{#1}{#2}}
 		\DefineBibliographyStrings{english}{
@@ -64,8 +64,11 @@
 		\DeclareFieldFormat*{booktitle}{\mkbibemph{#1}}
 		\DeclareFieldFormat*{journaltitle}{\mkbibemph{#1}}
 		\DeclareFieldFormat*{title}{\mkbibemph{#1}}
-		\DeclareFieldFormat*{year}{\mkbibbold{#1}}
 		\DeclareFieldFormat*{volume}{\mkbibemph{#1}}
+		\DeclareFieldFormat*{date}{%
+			\ifboolexpr{test {\iffieldundef{month}} and test {\iffieldundef{day}}}%
+				{\mkbibbold{#1}}{#1}%
+		}
 		\DeclareFieldFormat[inbook, inproceedings, incollection, article]%
 			{title}{\bbx@mybibquote{\mkbibemph{#1}}}
 	}%
@@ -147,17 +150,9 @@
 \newbibmacro*{journaltitle/title}{%
 	\iffieldundef{journaltitle}{\usebibmacro{title}}{\printfield{journaltitle}}%
 }
-\newbibmacro*{year/date}{%
-	\ifthenelse{\iffieldundef{month} \and \iffieldundef{day}}%
-	{\printfield{year}}{\printdate}%
-}
-\newbibmacro*{(year+volume+number)/date}{%
-	\ifthenelse{\iffieldundef{month} \and \iffieldundef{day}}%
-	{%
-		\printfield{year}\setunit*{\bbx@cecomma}%
-		\printfield{volume}%
-		\usebibmacro{number}%
-	}{\printdate}%
+\newbibmacro*{date+volume+number}{%
+	\usebibmacro{date}\setunit*{\bbx@cecomma}%
+	\printfield{volume}\usebibmacro{number}%
 }
 \renewbibmacro*{urldate}{%
 	\iffieldundef{urlyear}{}{%
@@ -176,7 +171,8 @@
 	\newblock
 	\printlist{location}\setunit*{\bbx@cecolon}%
 	\printlist{publisher}\setunit{\bbx@cecomma}%
-	\usebibmacro{year/date}\setunit*{\bbx@cecolon}%
+	\usebibmacro{date}\setunit*{\bbx@cecomma}%
+	\printfield{note}\setunit*{\bbx@cecolon}%
 	\printfield{pages}\setunit{\bbx@ceperiod}%
 	\newblock
 	\printfield{url}\setunit*{\bbx@cecomma}%
@@ -201,7 +197,8 @@
 	\newblock
 	\printlist{location}\setunit*{\bbx@cecolon}%
 	\printlist{publisher}\setunit{\bbx@cecomma}%
-	\usebibmacro{year/date}\setunit*{\bbx@cecolon}%
+	\usebibmacro{date}\setunit*{\bbx@cecomma}%
+	\printfield{note}\setunit*{\bbx@cecolon}%
 	\printfield{pages}\setunit{\bbx@ceperiod}%
 	\newblock
 	\printfield{url}\setunit*{\bbx@cecomma}%
@@ -218,7 +215,8 @@
 	\usebibmacro{journaltitle/title}\setunit*{\addspace}%
 	\usebibmacro{type}\setunit{\bbx@ceperiod}%
 	\newblock
-	\usebibmacro{(year+volume+number)/date}\setunit{\bbx@ceperiod}%
+	\usebibmacro{date+volume+number}\setunit*{\bbx@cecomma}%
+	\printfield{note}\setunit{\bbx@ceperiod}%
 	\newblock
 	\printlist{location}\setunit*{\bbx@cecolon}%
 	\printlist{publisher}\setunit{\bbx@ceperiod}%
@@ -238,7 +236,8 @@
 	\usebibmacro{type}\setunit{\bbx@ceperiod}%
 	\newblock
 	\printfield{journaltitle}\setunit*{\bbx@cecomma}%
-	\usebibmacro{(year+volume+number)/date}\setunit{\bbx@cecolon}%
+	\usebibmacro{date+volume+number}\setunit*{\bbx@cecomma}%
+	\printfield{note}\setunit{\bbx@cecolon}%
 	\printfield{pages}\setunit{\bbx@ceperiod}%
 	\newblock
 	\printfield{url}\setunit*{\bbx@cecomma}%
@@ -258,7 +257,8 @@
 	\printlist{location}\setunit*{\bbx@cecolon}%
 	\usebibmacro{number}\setunit{\bbx@ceperiod}%
 	\newblock
-	\usebibmacro{year/date}\setunit{\bbx@ceperiod}%
+	\usebibmacro{date}\setunit*{\bbx@cecomma}%
+	\printfield{note}\setunit{\bbx@ceperiod}%
 	\newblock
 	\printfield{url}\setunit*{\bbx@cecomma}%
 	\usebibmacro{urldate}\setunit{\bbx@ceperiod}%
@@ -329,6 +329,7 @@
 	}
 	\sort{
 		\field{sortyear}
+		\field{origyear}
 		\field{year}
 	}
 	\sort{
