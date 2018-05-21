@@ -285,7 +285,7 @@
 \DeclareBibliographyAlias{inproceedings}{incollection}
 \DeclareBibliographyAlias{*}{book}
 
-\DeclareSortingScheme{ecnty}{
+\DeclareSortingScheme{ecnyt}{
 	\sort{\field{presort}}
 	\sort[final]{\field{sortkey}}
 	\sort{
@@ -300,16 +300,20 @@
 		\field{title}
 	}
 	\sort{
+		\field{sortyear}
+		\field{year}
+	}
+	\sort{
 		\field{sorttitle}
 		\field{title}
 	}
 	\sort{
-		\field{sortyear}
-		\field{year}
+		\field{volume}
+		\literal{0}
 	}
 }
 
-\DeclareSortingScheme{centy}{
+\DeclareSortingScheme{cenyt}{
 	\sort{\field{presort}}
 	\sort[final]{\field{sortkey}}
 	\sort[direction = descending]{
@@ -324,12 +328,16 @@
 		\field{title}
 	}
 	\sort{
+		\field{sortyear}
+		\field{year}
+	}
+	\sort{
 		\field{sorttitle}
 		\field{title}
 	}
 	\sort{
-		\field{sortyear}
-		\field{year}
+		\field{volume}
+		\literal{0}
 	}
 }
 
