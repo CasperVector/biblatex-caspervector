@@ -111,44 +111,47 @@
 \newcommand*{\bbx@byspace}[1]%
 	{\ifnumgreater{\value{#1}}{\value{maxnames}}{}{\addspace}}
 
-\newbibmacro*{cebyauthor}{%
-	\ifnameundef{author}{}{%
-		\bbx@cetext%
-		{\printnames{author}\printtext{\bbx@byspace{author}\bbx@cnauth}}%
-		% `\usebibmacro{byauthor}' does not print with `useauthor' enabled.
-		{\printnames[byauthor]{author}}%
-	}%
+\newbibmacro*{ceedtrans}[1]{%
+	\ifboolexpr{test {\iftoggle{blx@use#1}} and not test {\ifnameundef{#1}}}{%
+		\printnames{#1}\bbx@cetext{%
+			\printtext{\bbx@byspace{#1}\@nameuse{bbx@cn#1}}%
+		}{%
+			\setunit{\printdelim{#1typedelim}}%
+			\usebibmacro{#1strg}\clearname{#1}%
+		}%
+	}{}%
 }
-\newbibmacro*{cebyeditor}{%
-	\ifnameundef{editor}{}{%
-		\bbx@cetext%
-		{\printnames{editor}\printtext{\bbx@byspace{editor}\bbx@cnedit}}%
-		{\usebibmacro{byeditor}}%
-	}%
-}
-\newbibmacro*{cebytranslator}{%
-	\ifnameundef{translator}{}{%
-		\bbx@cetext%
-		{\printnames{translator}\printtext{\bbx@byspace{translator}\bbx@cntrans}}%
-		{\usebibmacro{bytranslator}}%
-	}%
-}
-\newbibmacro*{author+others}{%
-	\ifthenelse%
-	{\ifnameundef{author} \and \ifnameundef{editor} \and \ifnameundef{translator}}%
-	{}%
-	{%
-		\ifthenelse{\ifnameundef{editor} \and \ifnameundef{translator}}%
-		{\printnames{author}}%
-		{%
-			\usebibmacro{cebyauthor}\setunit*{\bbx@cescolon}%
-			\usebibmacro{cebyeditor}\setunit*{\bbx@cescolon}%
-			\usebibmacro{cebytranslator}%
+\renewbibmacro{editor}{\usebibmacro{ceedtrans}{editor}}
+\renewbibmacro{translator}{\usebibmacro{ceedtrans}{translator}}
+\newbibmacro*{bookauthor/editor}%
+	{\ifnameundef{bookauthor}{\usebibmacro{editor}}{\printnames{bookauthor}}}
+
+\newbibmacro*{cebyauthx}[1]{%
+	\ifboolexpr{
+		test {\ifnameundef{#1}} or
+		(test {\ifstrequal{#1}{author}} and test {\ifuseauthor})
+	}{}{%
+		\bbx@cetext{%
+			\printnames[by#1]{#1}%
+			\printtext{\bbx@byspace{#1}\@nameuse{bbx@cn#1}}%
+		}{%
+			\bibstring{by#1}\setunit{\addspace}%
+			\printnames[by#1]{#1}%
 		}%
 	}%
 }
+\renewbibmacro*{byauthor}{\usebibmacro{cebyauthx}{author}}
+\renewbibmacro*{byeditor}{\usebibmacro{cebyauthx}{editor}}
+\renewbibmacro*{bytranslator}{\usebibmacro{cebyauthx}{translator}}
+\newbibmacro*{byauthor+byeditor+bytranslator}{%
+	\usebibmacro{byauthor}\setunit*{\bbx@cescolon}%
+	\usebibmacro{byeditor}\setunit*{\bbx@cescolon}%
+	\usebibmacro{bytranslator}%
+}
+
 \newbibmacro*{journaltitle/title}{%
-	\iffieldundef{journaltitle}{\usebibmacro{title}}{\printfield{journaltitle}}%
+	\iffieldundef{journaltitle}%
+		{\usebibmacro{title}}{\printfield[title]{journaltitle}}%
 }
 \newbibmacro*{date+volume+number}{%
 	\usebibmacro{date}\setunit*{\bbx@cecomma}%
@@ -164,10 +167,12 @@
 \DeclareBibliographyDriver{book}{%
 	\usebibmacro{bibindex}\usebibmacro{begentry}%
 	\newblock
-	\usebibmacro{author+others}\setunit{\bbx@ceperiod}%
+	\usebibmacro{author/editor/translator}\setunit{\bbx@ceperiod}%
 	\newblock
 	\usebibmacro{title}\setunit*{\addspace}%
 	\usebibmacro{type}\setunit{\bbx@ceperiod}%
+	\newblock
+	\usebibmacro{byauthor+byeditor+bytranslator}\setunit{\bbx@ceperiod}%
 	\newblock
 	\printlist{location}\setunit*{\bbx@cecolon}%
 	\printlist{publisher}\setunit{\bbx@cecomma}%
@@ -184,16 +189,21 @@
 \DeclareBibliographyDriver{incollection}{%
 	\usebibmacro{bibindex}\usebibmacro{begentry}%
 	\newblock
-	\usebibmacro{author+others}\setunit{\bbx@ceperiod}%
+	\usebibmacro{author/translator}\setunit{\bbx@ceperiod}%
 	\newblock
 	\usebibmacro{title}\setunit*{\bbx@cespace}%
 	\usebibmacro{type}\setunit{\bbx@ceperiod}%
 	\newblock
+	\usebibmacro{byauthor}\setunit*{\bbx@cescolon}%
+	\usebibmacro{bytranslator}\setunit{\bbx@ceperiod}%
+	\newblock
 	\usebibmacro{cein:}%
 	\newblock
-	\printnames{bookauthor}\setunit*{\bbx@ceperiod}%
+	\usebibmacro{bookauthor/editor}\setunit*{\bbx@ceperiod}%
 	\newblock
 	\printfield{booktitle}\setunit{\bbx@ceperiod}%
+	\newblock
+	\usebibmacro{byeditor}\setunit{\bbx@ceperiod}%
 	\newblock
 	\printlist{location}\setunit*{\bbx@cecolon}%
 	\printlist{publisher}\setunit{\bbx@cecomma}%
@@ -210,10 +220,12 @@
 \DeclareBibliographyDriver{periodical}{%
 	\usebibmacro{bibindex}\usebibmacro{begentry}%
 	\newblock
-	\usebibmacro{author+others}\setunit{\bbx@ceperiod}%
+	\usebibmacro{author/editor/translator}\setunit{\bbx@ceperiod}%
 	\newblock
 	\usebibmacro{journaltitle/title}\setunit*{\addspace}%
 	\usebibmacro{type}\setunit{\bbx@ceperiod}%
+	\newblock
+	\usebibmacro{byauthor+byeditor+bytranslator}\setunit{\bbx@ceperiod}%
 	\newblock
 	\usebibmacro{date+volume+number}\setunit*{\bbx@cecomma}%
 	\printfield{note}\setunit{\bbx@ceperiod}%
@@ -230,10 +242,12 @@
 \DeclareBibliographyDriver{article}{%
 	\usebibmacro{bibindex}\usebibmacro{begentry}%
 	\newblock
-	\printnames{author}\setunit{\bbx@ceperiod}%
+	\usebibmacro{author/translator}\setunit{\bbx@ceperiod}%
 	\newblock
 	\usebibmacro{title}\setunit*{\bbx@cespace}%
 	\usebibmacro{type}\setunit{\bbx@ceperiod}%
+	\newblock
+	\usebibmacro{byauthor+byeditor+bytranslator}\setunit{\bbx@ceperiod}%
 	\newblock
 	\printfield{journaltitle}\setunit*{\bbx@cecomma}%
 	\usebibmacro{date+volume+number}\setunit*{\bbx@cecomma}%
@@ -249,10 +263,12 @@
 \DeclareBibliographyDriver{patent}{%
 	\usebibmacro{bibindex}\usebibmacro{begentry}%
 	\newblock
-	\usebibmacro{author}\setunit{\bbx@ceperiod}%
+	\usebibmacro{author/editor/translator}\setunit{\bbx@ceperiod}%
 	\newblock
 	\usebibmacro{title}\setunit*{\addspace}%
 	\usebibmacro{type}\setunit{\bbx@ceperiod}%
+	\newblock
+	\usebibmacro{byauthor+byeditor+bytranslator}\setunit{\bbx@ceperiod}%
 	\newblock
 	\printlist{location}\setunit*{\bbx@cecolon}%
 	\usebibmacro{number}\setunit{\bbx@ceperiod}%
