@@ -33,7 +33,7 @@
 \DeclareBibliographyOption{gbk}[true]{\toggletrue{bbx:gbk}}
 \DeclareBibliographyOption{ugly}[true]{\settoggle{bbx:ugly}{#1}}
 \ExecuteBibliographyOptions%
-	{gbk, ugly = false, alldates = iso8601, minnames = 3, minitems = 3}
+	{gbk, ugly = false, alldates = iso, minnames = 3, minitems = 3}
 \AtEndOfPackage{%
 	\iftoggle{bbx:gbk}{
 		\input{blx-caspervector-gbk.def}
@@ -285,7 +285,7 @@
 \DeclareBibliographyAlias{inproceedings}{incollection}
 \DeclareBibliographyAlias{*}{book}
 
-\DeclareSortingScheme{ecnyt}{
+\DeclareSortingTemplate{ecnyt}{
 	\sort{\field{presort}}
 	\sort[final]{\field{sortkey}}
 	\sort{
@@ -313,7 +313,7 @@
 	}
 }
 
-\DeclareSortingScheme{cenyt}{
+\DeclareSortingTemplate{cenyt}{
 	\sort{\field{presort}}
 	\sort[final]{\field{sortkey}}
 	\sort[direction = descending]{
