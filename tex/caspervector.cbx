@@ -1,6 +1,6 @@
 % Casper Ti. Vector's biblatex style
 %
-% Copyright (c) 2012-2014 Casper Ti. Vector
+% Copyright (c) 2012-2014,2018 Casper Ti. Vector
 %
 % This work may be distributed and/or modified under the conditions of the
 % LaTeX Project Public License, either version 1.3 of this license or (at
@@ -16,6 +16,8 @@
 % This work consists of the following files:
 %   caspervector.bbx
 %   caspervector.cbx
+%   caspervector-ay.bbx
+%   caspervector-ay.cbx
 %   blx-caspervector-base.def
 %   blx-caspervector-gbk.def
 %   blx-caspervector-utf8.def
@@ -24,11 +26,7 @@
 	[2017/03/01 v0.2.7 Casper Ti. Vector's numeric biblatex citestyle]
 
 \RequireCitationStyle{numeric-comp}
-\ExecuteBibliographyOptions{
-	autocite = superscript,
-	autopunct = false
-}
-
+\ExecuteBibliographyOptions{autocite = superscript, autopunct = false}
 \newcommand*{\cbx@mksuperbrackets}[1]{\mkbibsuperscript{\mkbibbrackets{#1}}}
 
 \DeclareCiteCommand{\cite}

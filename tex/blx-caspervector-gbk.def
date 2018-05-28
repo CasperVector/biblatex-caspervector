@@ -16,6 +16,8 @@
 % This work consists of the following files:
 %   caspervector.bbx
 %   caspervector.cbx
+%   caspervector-ay.bbx
+%   caspervector-ay.cbx
 %   blx-caspervector-base.def
 %   blx-caspervector-gbk.def
 %   blx-caspervector-utf8.def
