@@ -1,6 +1,6 @@
 #!/usr/bin/make -f
 #
-# Copyright (c) 2012,2015-2016 Casper Ti. Vector
+# Copyright (c) 2012,2015-2016,2018 Casper Ti. Vector
 # Public domain.
 
 NUMDATE = $(shell date '+%Y/%m/%d')
@@ -9,7 +9,7 @@ revbump:
 	sed -i '/\\Provides/,+1 s;\[[^ ]* [^ ]*;[$(NUMDATE) v$(VERSION);' tex/*
 	sed -i -e '/^\\date/ s;^.*$$;\\date{$(NUMDATE)};' \
 		-e '/^\\title/ s/v[0-9.]\+}}$$/v$(VERSION)}}/' \
-		doc/readme.tex
+		doc/caspervector.tex doc/caspervector-ay.tex
 	@echo '$@: remember to update the change log and copyright lines'
 	@echo '$@: remember to tag the commit and push tags'
 	@echo '$@: remember to add new download on project homepage'

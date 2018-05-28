@@ -14,7 +14,8 @@
 % The current maintainer of this work is Casper Ti. Vector.
 %
 % This work consists of the following files:
-%   readme.tex
+%   caspervector.tex
+%   caspervector-ay.tex
 
 \documentclass[UTF8]{ctexart}
 \usepackage[margin = 2cm, centering, includefoot]{geometry}
@@ -31,7 +32,7 @@
 
 \DeclareBibliographyCategory{cited}
 \AtEveryCitekey{\addtocategory{cited}{\thefield{entrykey}}}
-\addbibresource{readme.bib}
+\addbibresource{caspervector.bib}
 
 \setlength{\hfuzz}{3pt}
 \ctexset{linestretch = {\maxdimen}}
@@ -63,14 +64,13 @@ biblatex\supercite{biblatex}/biber\supercite{biber}
 使用 \hologo{LaTeX} 编写，便于学习；
 同时，其支持根据 locale 进行排序。
 
-目前 \hologo{TeX} 社区中尚无人发布为中文用户设计的 biblatex 样式。
 为了个人需要，同时也是为了给社区提供一个有益的参考，
 本文作者根据实际应用中遇到的常见需求编写了
-\verb|caspervector| 这个用于顺序编码制的中英文 biblatex 样式。
-其逻辑框架基于
-国家标准 GB/T 7714--2005\supercite{gbt7714-2005}，
+\verb|caspervector| 这个中英文 biblatex 样式。
+其逻辑框架基于国家标准 GB/T 7714--2005\supercite{gbt7714-2005}，
 但在其基础上根据个人审美趣味和 biblatex 所能实现的功能而
 对参考文献和引用格式进行了较大幅度的修改。
+用户如果需要更严格符合国家标准的样式，可以参考 \parencite{blx-gbt7714-2015}。
 
 \section{许可协议}
 
@@ -100,7 +100,8 @@ biblatex\supercite{biblatex}/biber\supercite{biber}
 \section{使用简介}
 \subsection{样式调用}
 
-用户应当通过以下命令调用 \verb|caspervector| 样式：
+用户应当通过以下命令调用 \verb|caspervector| 样式（如果需要使用
+著者--年编码制，需要将 \verb|caspervector| 换成 \verb|caspervector-ay|）：
 \begin{Verbatim}[frame = single]
 % “utf8”可能需要改为“gbk”，根据用户使用的字符编码而定。
 % “...” 代表其它选项。
@@ -128,14 +129,14 @@ biblatex\supercite{biblatex}/biber\supercite{biber}
 \myemph{注意不要省略扩展名 \texttt{.bib}}。
 例如，本文的参考文献数据库就是通过下述命令导入的：
 \begin{Verbatim}[frame = single]
-\addbibresource{readme.bib}
+\addbibresource{caspervector.bib}
 \end{Verbatim}
 用户可以多次使用 \verb|\addbibresource| 命令，
 从多个参考文献数据库中导入参考文献。
 
 \subsection{引用命令}
 
-\verb|caspervector| 样式支持 biblatex 所提供的引用命令，
+\verb|caspervector| 样式在顺序编码制下支持 biblatex 所提供的引用命令，
 其中最常用的是 \verb|\supercite|、\verb|\parencite| 和 \verb|\cite|。
 三个命令的用法类似：
 \begin{Verbatim}[frame = single]
@@ -149,7 +150,8 @@ biblatex\supercite{biblatex}/biber\supercite{biber}
 而 \verb|\supercite| 产生上标且带方括号的引用标记\footnote{\ %
 	biblatex 的默认设置是只上标、不带方括号，
 	而 \texttt{caspervector} 样式中根据作者见到的常见需求加上了方括号。%
-}。
+}。著者--年编码制下引用命令的用法请参考随 \verb|caspervector|
+样式附带的 \verb|caspervector-ay.pdf|（可用 \verb|texdoc| 命令查看）。
 
 例如，在本文中，%
 \verb|\parencite{gbt7714-2005}| 的输出是“\parencite{gbt7714-2005}”，
@@ -255,7 +257,7 @@ pdflatex texfile
 除必需字段之外，\verb|@book| 类条目也支持以下基本字段：%
 \verb|author|、\verb|editor|、\verb|translator|、%
 \verb|type|、\verb|location|、\verb|publisher|、%
-\verb|year|/\verb|date|、\verb|pages|、%
+\verb|year|/\verb|date|（著者--年编码制中必需）、\verb|pages|、%
 \verb|url|、\verb|urldate|、\verb|addendum|。
 
 \subsection{\texttt{@incollection} 类型}
@@ -269,7 +271,7 @@ pdflatex texfile
 除必需字段之外，\verb|@incollection| 类条目也支持以下基本字段：%
 \verb|author|、\verb|editor|、\verb|translator|、\verb|bookauthor|、%
 \verb|type|、\verb|location|、\verb|publisher|、%
-\verb|year|/\verb|date|、\verb|pages|、%
+\verb|year|/\verb|date|（著者--年编码制中必需）、\verb|pages|、%
 \verb|url|、\verb|urldate|、\verb|addendum|。
 
 \subsection{\texttt{@periodical} 类型}
@@ -282,7 +284,8 @@ pdflatex texfile
 除必需字段之外，\verb|@periodical| 类条目也支持以下基本字段：%
 \verb|author|/\verb|editor|/\verb|translator|、%
 \verb|type|、\verb|location|、\verb|publisher|、%
-\verb|year|/\verb|date|、\verb|volume|、\verb|number|、\verb|pages|、%
+\verb|year|/\verb|date|（著者--年编码制中必需）、%
+\verb|volume|、\verb|number|、\verb|pages|、%
 \verb|url|、\verb|urldate|、\verb|addendum|。
 
 \subsection{\texttt{@article} 类型}
@@ -324,7 +327,7 @@ pdflatex texfile
 	这样虽不能自动根据这些字段排版，
 	但仍可以根据它们
 	（主要是 \texttt{language}、\texttt{author}、\texttt{title}
-	和 \texttt{year} 四个字段）
+	和 \texttt{year}/\texttt{date} 五个字段）
 	进行排序。 %
 }
 

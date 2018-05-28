@@ -1,6 +1,6 @@
 #!/usr/bin/make -f
 #
-# Copyright (c) 2012,2014,2017 Casper Ti. Vector
+# Copyright (c) 2012,2014,2017-2018 Casper Ti. Vector
 # Public domain.
 
 FIND_GBK = '(' -name '*gbk*' ')'
@@ -30,8 +30,8 @@ sync:
 	@echo '======================================================================'
 	@echo '$@: keep GBK and UTF-8 files synchronised'
 	@echo '----------------------------------------------------------------------'
-	iconv -f GBK tex/biblatex-caspervector-gbk.def | \
-		diff - tex/biblatex-caspervector-utf8.def
+	iconv -f GBK tex/blx-caspervector-gbk.def | \
+		diff - tex/blx-caspervector-utf8.def
 	@echo
 
 blank:

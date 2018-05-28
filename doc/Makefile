@@ -1,16 +1,20 @@
 # Copyright (c) 2011-2013,2015-2016,2018 Casper Ti. Vector
 # Public domain.
 
+PROJECT = caspervector
+
 doc:
-	latex readme
-	biber -l zh__pinyin --output-safechars readme
-	xelatex readme
-	xelatex readme
+	latex $(PROJECT)
+	biber -l zh__pinyin --output-safechars $(PROJECT)
+	xelatex $(PROJECT)
+	xelatex $(PROJECT)
 
 clean:
-	rm -f readme.{aux,bbl,bcf,blg,dvi,log,run.xml,out} {missfont,texput}.log
+	rm -f $(PROJECT).aux $(PROJECT).bbl $(PROJECT).bcf $(PROJECT).blg \
+		$(PROJECT).dvi $(PROJECT).log $(PROJECT).run.xml $(PROJECT).out \
+		missfont.log texput.log
 
 distclean: clean
-	rm -f readme.pdf
+	rm -f $(PROJECT).pdf
 
 # vim:ts=4:sw=4
