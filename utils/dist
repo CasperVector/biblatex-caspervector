@@ -21,8 +21,8 @@ dist:
 
 doc-pdf: doc/
 	cd doc/ && $(MAKE) && $(MAKE) clean
-	cd doc/ && $(MAKE) PROJECT=caspervector-ay && \
-		$(MAKE) PROJECT=caspervector-ay clean
+	cd doc/ && $(MAKE) JOBNAME=caspervector-ay && \
+		$(MAKE) JOBNAME=caspervector-ay clean
 
 dir-tds: tex/ doc/
 	$(MD) $@/tex/latex/ $@/doc/latex/
@@ -44,7 +44,7 @@ $(TITLE)-$(VERSION).zip: dir-ctan
 		$(ZIP) -y ../$@ $(TITLE)/ $(TITLE).tds.zip
 
 clean:
-	cd doc/ && $(MAKE) distclean && $(MAKE) PROJECT=caspervector-ay distclean
+	cd doc/ && $(MAKE) distclean && $(MAKE) JOBNAME=caspervector-ay distclean
 	$(RM) dir-ctan/ dir-tds/
 
 distclean:

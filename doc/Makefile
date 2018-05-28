@@ -1,20 +1,20 @@
 # Copyright (c) 2011-2013,2015-2016,2018 Casper Ti. Vector
 # Public domain.
 
-PROJECT = caspervector
+JOBNAME = caspervector
 
 doc:
-	latex $(PROJECT)
-	biber -l zh__pinyin --output-safechars $(PROJECT)
-	xelatex $(PROJECT)
-	xelatex $(PROJECT)
+	latex $(JOBNAME)
+	biber -l zh__pinyin --output-safechars $(JOBNAME)
+	xelatex $(JOBNAME)
+	xelatex $(JOBNAME)
 
 clean:
-	rm -f $(PROJECT).aux $(PROJECT).bbl $(PROJECT).bcf $(PROJECT).blg \
-		$(PROJECT).dvi $(PROJECT).log $(PROJECT).run.xml $(PROJECT).out \
+	rm -f $(JOBNAME).aux $(JOBNAME).bbl $(JOBNAME).bcf $(JOBNAME).blg \
+		$(JOBNAME).dvi $(JOBNAME).log $(JOBNAME).run.xml $(JOBNAME).out \
 		missfont.log texput.log
 
 distclean: clean
-	rm -f $(PROJECT).pdf
+	rm -f $(JOBNAME).pdf
 
 # vim:ts=4:sw=4
