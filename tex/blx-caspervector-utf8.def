@@ -16,24 +16,25 @@
 % This work consists of the following files:
 %   caspervector.bbx
 %   caspervector.cbx
-%   biblatex-caspervector-gbk.def
-%   biblatex-caspervector-utf8.def
+%   blx-caspervector-base.def
+%   blx-caspervector-gbk.def
+%   blx-caspervector-utf8.def
 
-\ProvidesFile{biblatex-caspervector-gbk.def}%
-	[2017/03/01 v0.2.7 Chinese punctuations and captions in GBK]
+\ProvidesFile{blx-caspervector-utf8.def}%
+	[2017/03/01 v0.2.7 Chinese punctuations and captions in UTF-8]
 
-\newcommand*\bbx@cnldquot{¡°}
-\newcommand*\bbx@cnrdquot{¡±}
-\newcommand*\bbx@cncomma{£¬}
-\newcommand*\bbx@cnscolon{£»}
-\newcommand*\bbx@cncolon{£º}
-\newcommand*\bbx@cnperiod{¡£}
-\newcommand*\bbx@cnetal{µÈ}
-\newcommand*\bbx@cnauthor{Öø}
-\newcommand*\bbx@cneditor{±à}
-\newcommand*\bbx@cntranslator{Òë}
-\newcommand*\bbx@cnin{³ö×Ô}
-\newcommand*\bbx@cnretr{¼ìË÷ÓÚ}
-\newcommand*\bbx@cnbib{²Î¿¼ÎÄÏ×}
+\newcommand*\bbx@cnldquot{â€œ}
+\newcommand*\bbx@cnrdquot{â€}
+\newcommand*\bbx@cncomma{ï¼Œ}
+\newcommand*\bbx@cnscolon{ï¼›}
+\newcommand*\bbx@cncolon{ï¼š}
+\newcommand*\bbx@cnperiod{ã€‚}
+\newcommand*\bbx@cnetal{ç­‰}
+\newcommand*\bbx@cnauthor{è‘—}
+\newcommand*\bbx@cneditor{ç¼–}
+\newcommand*\bbx@cntranslator{è¯‘}
+\newcommand*\bbx@cnin{å‡ºè‡ª}
+\newcommand*\bbx@cnretr{æ£€ç´¢äº}
+\newcommand*\bbx@cnbib{å‚è€ƒæ–‡çŒ®}
 
 % vim:ft=tex:ts=2:sw=2
