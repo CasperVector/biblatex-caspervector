@@ -1,3 +1,25 @@
+2018-05-28. v0.3.0
+
+	* API changes:
+	- Added the caspervector-ay style (`dashed' and `mergedate' supported).
+	- sorting: nty -> nyt.
+	- Reduced tolerance in `year'/`date'; `note' added for compensation.
+	- Support `useauthor'-related functionalities.
+
+	* Changes to package code:
+	- caspervector.bbx mostly refactored into blx-caspervector-base.def.
+	- biblatex-caspervector-*.def -> blx-caspervector-*.def.
+	- blx-caspervector-base.def: improve the punctuation handling.
+	- blx-caspervector-base.def: fix some deprecation warnings.
+
+	* Changes to documentation:
+	- readme.* -> caspervector.*; document the caspervector-ay style.
+	- doc/Makefile: fix missing accented characters with xelatex.
+
+	* Misc:
+	- utils: update wrt the author-year style.
+	- Minor fixes and cosmetics.
+
 2017-03-01. v0.2.7
 
 	* API changes:

@@ -23,7 +23,7 @@
 %   blx-caspervector-utf8.def
 
 \ProvidesFile{blx-caspervector-base.def}%
-	[2017/03/01 v0.2.7 Casper Ti. Vector's biblatex library]
+	[2018/05/28 v0.3.0 Casper Ti. Vector's biblatex library]
 
 \RequireBiber[3]
 \newtoggle{bbx:gbk}
