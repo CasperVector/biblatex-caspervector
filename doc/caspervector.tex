@@ -227,7 +227,13 @@ pdflatex texfile
 	\item \verb|volume|：期刊中文献所处的卷号。
 	\item \verb|number|：期刊中文献所处的期号，或专利的申请号。
 	\item \verb|pages|：文献页码。
-	\item \verb|url|：文献的 URL。
+	\item \verb|url|/\verb|eid|：
+		文献的 URL 和（arXiv 等网站的）电子标识符。\\\myemph{%
+			注：%
+			\texttt{url} 字段会被自动排版成链接，
+			但 \texttt{eid} 字段需要用户手工定义格式；
+			后者的一个示例见第 \ref{sec:faq} 部分。%
+		}
 	\item \verb|urldate|：检索日期，或 URL 的访问日期。
 	\item \verb|addendum|：补充说明，排版在文献列表中相应条目的最后。
 \end{itemize}
@@ -386,6 +392,17 @@ biblatex 3.0--3.3 中有一个 bug\footnote{\ %
 \verb|caspervector| 样式不支持 \verb|edition| 字段，
 用户可以在 \verb|title| 等字段中手动标注。
 
+biblatex 的标准格式支持通过 \verb|eprint|、\verb|eprintclass|、\verb|eprinttype|
+等字段排版 arXiv 等的电子标识符；但本文作者因认为其用法僵化、实现繁琐，
+故使用了自由格式的 \verb|eid| 字段。用户可以使用 \verb|\printtext|
+命令调用 biblatex 中设定的相应排版功能，例如文献 \parencite{perelman}
+中的电子标识符便是通过以下设定得到的：
+\begin{Verbatim}[frame = single]
+eid = {\printtext[eprint:arxiv]{math/0211159}},
+\end{Verbatim}
+其中 \verb|arxiv| 可以替换为其它在标准格式中被 \verb|eprinttype|
+字段支持的字符串，详见 biblatex 手册\supercite{biblatex}。
+
 用户在很多时候可以通过手动调用格式化命令来临时覆盖预设的格式设定，
 例如对于一个 \verb|@article| 类型的条目，
 \begin{Verbatim}[frame = single]
@@ -400,7 +417,7 @@ number = {\hologo{TeX} 特刊},
 可以使用 \verb|note| 字段，例如文献 \parencite{1-7}
 中的出版年便是通过以下设定得到的（\verb|origdate| 字段不会被排版出来，
 但会在排序时被 \verb|caspervector| 样式考虑；
-其具体用法请参考 biblatex 手册\supercite{biblatex}）\footnote{\ %
+其具体用法请参考 biblatex 手册）\footnote{\ %
 	v0.2.x 和更早版本的 \texttt{caspervector} 样式支持直接在
 	\texttt{year} 字段中设定特殊内容；在之后的版本中，为了支持作者--年编码制，
 	\texttt{caspervector} 的内部实现进行了调整，导致其不再支持这样的用法。%

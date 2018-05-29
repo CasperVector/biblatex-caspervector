@@ -176,7 +176,9 @@
 	}{}{\setunit{\bbx@cecolon}}%
 	\printfield{pages}%
 }
-\renewbibmacro*{urldate}{%
+\newbibmacro*{eid+url+urldate}{%
+	\printfield{eid}\setunit*{\bbx@cecomma}%
+	\printfield{url}\setunit*{\bbx@cecomma}%
 	\iffieldundef{urlyear}{}{%
 		\printtext{\bbx@cetext{\bbx@cnretr}{retrieved on}\addspace}%
 		\printurldate%
@@ -193,8 +195,7 @@
 	\printunit{\bbx@ceperiod}\newblock
 	\usebibmacro{location+publisher+date+note+pages}%
 	\printunit{\bbx@ceperiod}\newblock
-	\printfield{url}\setunit*{\bbx@cecomma}%
-	\usebibmacro{urldate}\printunit{\bbx@ceperiod}\newblock
+	\usebibmacro{eid+url+urldate}\printunit{\bbx@ceperiod}\newblock
 	\printfield{addendum}\usebibmacro{finentry}%
 }
 
@@ -211,8 +212,7 @@
 	\usebibmacro{byeditor}\printunit{\bbx@ceperiod}\newblock
 	\usebibmacro{location+publisher+date+note+pages}%
 	\printunit{\bbx@ceperiod}\newblock
-	\printfield{url}\setunit*{\bbx@cecomma}%
-	\usebibmacro{urldate}\printunit{\bbx@ceperiod}\newblock
+	\usebibmacro{eid+url+urldate}\printunit{\bbx@ceperiod}\newblock
 	\printfield{addendum}\usebibmacro{finentry}%
 }
 
@@ -228,8 +228,7 @@
 	\printunit{\bbx@ceperiod}\newblock
 	\printlist{location}\setunit*{\bbx@cecolon}%
 	\printlist{publisher}\printunit{\bbx@ceperiod}\newblock
-	\printfield{url}\setunit*{\bbx@cecomma}%
-	\usebibmacro{urldate}\printunit{\bbx@ceperiod}\newblock
+	\usebibmacro{eid+url+urldate}\printunit{\bbx@ceperiod}\newblock
 	\printfield{addendum}\usebibmacro{finentry}%
 }
 
@@ -243,8 +242,7 @@
 	\printfield{journaltitle}\setunit*{\bbx@cecomma}%
 	\usebibmacro{date+volume+number+note+pages}%
 	\printunit{\bbx@ceperiod}\newblock
-	\printfield{url}\setunit*{\bbx@cecomma}%
-	\usebibmacro{urldate}\printunit{\bbx@ceperiod}\newblock
+	\usebibmacro{eid+url+urldate}\printunit{\bbx@ceperiod}\newblock
 	\printfield{addendum}\usebibmacro{finentry}%
 }
 
@@ -260,8 +258,7 @@
 	\printfield{number}\printunit{\bbx@ceperiod}\newblock
 	\usebibmacro{date}\setunit*{\bbx@cecomma}%
 	\printfield{note}\printunit{\bbx@ceperiod}\newblock
-	\printfield{url}\setunit*{\bbx@cecomma}%
-	\usebibmacro{urldate}\printunit{\bbx@ceperiod}\newblock
+	\usebibmacro{eid+url+urldate}\printunit{\bbx@ceperiod}\newblock
 	\printfield{addendum}\usebibmacro{finentry}%
 }
 
