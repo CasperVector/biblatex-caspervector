@@ -59,10 +59,11 @@
 	\ifboolexpr{test {\iftoggle{blx@use#1}} and not test {\ifnameundef{#1}}}{%
 		\usebibmacro{bbx:dashcheck}{\bibnamedash}{%
 			\printnames{#1}%
-			\setunit{\bbx@cetext{\bbx@byspace{#1}}{\printdelim{#1typedelim}}}%
+			\bbx@cetext%
+				{\printtext{\bbx@byspace{#1}}}{\setunit{\printdelim{#1typedelim}}}%
 			\usebibmacro{bbx:savehash}%
-		}\bbx@cetext{\@nameuse{bbx@cn#1}}{\usebibmacro{#1strg}}%
-		\clearname{#1}\setunit{\printdelim{nameyeardelim}}%
+		}\bbx@cetext{\printtext{\@nameuse{bbx@cn#1}}}{\usebibmacro{#1strg}}%
+		\setunit{\printdelim{nameyeardelim}}\clearname{#1}%
 	}{%
 		\global\undef\bbx@lasthash
 		\usebibmacro{labeltitle}\setunit*{\printdelim{nonameyeardelim}}%
