@@ -166,9 +166,9 @@
 	\printfield{pages}%
 }
 \newbibmacro*{date+volume+number+note+pages}{%
-	\usebibmacro{date}\setunit*{\bbx@cecomma}%
-	\printfield{volume}\bbx@print{number}\setunit*{\bbx@cecomma}%
-	\printfield{note}%
+	\usebibmacro{date}%
+	\iffieldundef{volume}{}{\setunit*{\bbx@cecomma}\printfield{volume}}%
+	\bbx@print{number}\setunit*{\bbx@cecomma}\printfield{note}%
 	\ifboolexpr{%
 		(test {\usebibmacro{bbx:ifnodate}} or test {\ifdateunknown}) and
 		test {\iffieldundef{volume}} and test {\iffieldundef{number}} and
