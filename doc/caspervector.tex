@@ -68,7 +68,7 @@
 其逻辑框架基于国家标准 GB/T 7714--2005\supercite{gbt7714-2005}，
 但在其基础上根据个人审美趣味和 biblatex 所能实现的功能而
 对参考文献和引用格式进行了较大幅度的修改。
-用户如果需要更严格符合国家标准的样式，可以参考 \parencite{blx-gb7714-2015}。
+用户如果需要更严格符合国家标准的样式，可以参考文献 \parencite{blx-gb7714-2015}。
 
 \section{许可协议}
 
@@ -153,11 +153,10 @@
 
 例如，在本文中，%
 \verb|\parencite{gbt7714-2005}| 的输出是“\parencite{gbt7714-2005}”，
-而
+而以下代码的输出是“\cite[文献][第 4 页]{gbt7714-2005}”：
 \begin{Verbatim}[frame = single]
 \cite[文献][第 4 页]{gbt7714-2005}
 \end{Verbatim}
-的输出是“\cite[文献][第 4 页]{gbt7714-2005}”。
 
 \subsection{文献列表}
 
@@ -174,16 +173,14 @@
 		参考文献列表参与章节编号（当然也会被自动加入目录中）。
 \end{itemize}
 
-例如，用
+例如，以下代码可以将文献列表的标题改为 “文献”，并使文献列表参与章节编号：
 \begin{Verbatim}[frame = single]
 \printbibliography[title = {文献}, heading = bibnumbered]
 \end{Verbatim}
-可以将文献列表的标题改为 “文献”，
-并使文献列表参与章节编号。
 
 \subsection{编译方法}
 
-一般情况下，依次执行
+一般情况下，依次执行以下代码即可实现正确的排版：
 \begin{Verbatim}[frame = single]
 # “texfile”是被 TeX 编译的文件名中除去“.tex”的部分。
 # “pdflatex”可改为其它 TeX 程序，使用纯 latex 编译时可能还需要运行 dvipdfmx。
@@ -192,7 +189,6 @@ biber -l zh__pinyin texfile
 pdflatex texfile
 pdflatex texfile
 \end{Verbatim}
-即可实现正确的排版。
 
 上述执行 \verb|biber| 的一行命令中，%
 \verb|-l| 的参数 \verb|zh__pinyin| 可改为其它
@@ -208,8 +204,7 @@ pdflatex texfile
 
 \begin{itemize}
 	\item \verb|author|、\verb|editor|、\verb|translator|：
-		作者、编者、译者。\\
-		\myemph{%
+		作者、编者、译者。\\\myemph{%
 			注：
 			在析出文献条目中，%
 			\texttt{author}、\texttt{editor}、\texttt{translator}
@@ -404,13 +399,13 @@ eid = {\printtext[eprint:arxiv]{math/0211159}},
 字段支持的字符串，详见 biblatex 手册\supercite{biblatex}。
 
 用户在很多时候可以通过手动调用格式化命令来临时覆盖预设的格式设定，
-例如对于一个 \verb|@article| 类型的条目，
+例如对于一个 \verb|@article| 类型的条目，以下代码将使年卷期号排版为类似于
+“\textbf{2018}，\textit{14}(\hologo{TeX} 特刊)”的形式：
 \begin{Verbatim}[frame = single]
 year = {2018},
 volume = {14},
 number = {\hologo{TeX} 特刊},
 \end{Verbatim}
-将使年卷期号排版为类似于“\textbf{2018}，\textit{14}(\hologo{TeX} 特刊)”的形式。
 
 因为 biblatex 内部实现的缘故，\verb|year|/\verb|date|
 字段被设为一些特殊内容时可能导致其出错。如果的确有这样的排版需求，
