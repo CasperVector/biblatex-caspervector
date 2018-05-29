@@ -112,12 +112,11 @@
 
 \newbibmacro*{ceedtrans}[1]{%
 	\ifboolexpr{test {\iftoggle{blx@use#1}} and not test {\ifnameundef{#1}}}{%
-		\printnames{#1}\bbx@cetext{%
-			\printtext{\bbx@byspace{#1}\@nameuse{bbx@cn#1}}%
-		}{%
-			\setunit{\printdelim{#1typedelim}}%
-			\usebibmacro{#1strg}\clearname{#1}%
-		}%
+		\printnames{#1}%
+		\bbx@cetext%
+			{\printtext{\bbx@byspace{#1}\@nameuse{bbx@cn#1}}}%
+			{\setunit{\printdelim{#1typedelim}}\usebibmacro{#1strg}}%
+		\clearname{#1}%
 	}{}%
 }
 \renewbibmacro*{editor}{\usebibmacro{ceedtrans}{editor}}
