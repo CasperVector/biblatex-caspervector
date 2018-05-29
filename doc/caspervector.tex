@@ -390,13 +390,19 @@ biblatex 3.0--3.3 中有一个 bug\footnote{\ %
 biblatex 的标准格式支持通过 \verb|eprint|、\verb|eprintclass|、\verb|eprinttype|
 等字段排版 arXiv 等的电子标识符；但本文作者因认为其用法僵化、实现繁琐，
 故使用了自由格式的 \verb|eid| 字段。用户可以使用 \verb|\printtext|
-命令调用 biblatex 中设定的相应排版功能，例如文献 \parencite{perelman}
+命令调用 biblatex 中内置的相应排版功能，例如文献 \parencite{perelman}
 中的电子标识符便是通过以下设定得到的：
 \begin{Verbatim}[frame = single]
 eid = {\printtext[eprint:arxiv]{math/0211159}},
 \end{Verbatim}
 其中 \verb|arxiv| 可以替换为其它在标准格式中被 \verb|eprinttype|
-字段支持的字符串，详见 biblatex 手册\supercite{biblatex}。
+字段支持的字符串，详见 biblatex 手册\supercite{biblatex}；
+如果需要排版 DOI，需要将方括号中的整个字符串替换为 \verb|doi|。%
+\myemph{%
+	需要特别注意的是，如果电子标识符中有特殊字符如
+	“\texttt{\_}”“\texttt{\%}”等时，需要将相应字符用反斜杠转义为
+	“\texttt{\textbackslash\_}”“\texttt{\textbackslash\%}”等。%
+}
 
 用户在很多时候可以通过手动调用格式化命令来临时覆盖预设的格式设定，
 例如对于一个 \verb|@article| 类型的条目，以下代码将使年卷期号排版为类似于
