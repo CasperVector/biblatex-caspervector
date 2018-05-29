@@ -99,7 +99,7 @@
 \subsection{样式调用}
 
 用户应当通过以下命令调用 \verb|caspervector| 样式（如果需要使用
-著者--年编码制，需要将 \verb|caspervector| 换成 \verb|caspervector-ay|）：
+作者--年编码制，需要将 \verb|caspervector| 换成 \verb|caspervector-ay|）：
 \begin{Verbatim}[frame = single]
 % “utf8”可能需要改为“gbk”，根据用户使用的字符编码而定。
 % “...” 代表其它选项。
@@ -114,11 +114,11 @@
 表示依次按文献语言
 （\textbf{ce}nyt 表示中文文献在前，\textbf{ec}nyt 表示英文文献在前；
 文献语言根据 \verb|language| 字段进行区分，详见第 \ref{sec:fields} 部分）、
-编著者姓名（\textbf{n}ame）、出版年（\textbf{y}ear）
+编作者姓名（\textbf{n}ame）、出版年（\textbf{y}ear）
 和标题（\textbf{t}itle）排序\footnote{\ %
 	v0.2.x 和更早版本的 \texttt{caspervector}
 	样式支持的额外排序方案为 \texttt{centy} 和 \texttt{ecnty}；
-	为了支持著者--年编码制，之后的版本不再支持这两种方案。%
+	为了支持作者--年编码制，之后的版本不再支持这两种方案。%
 }。
 
 参考文献数据库
@@ -148,7 +148,7 @@
 而 \verb|\supercite| 产生上标且带方括号的引用标记\footnote{\ %
 	biblatex 的默认设置是只上标、不带方括号，
 	而 \texttt{caspervector} 样式中根据作者见到的常见需求加上了方括号。%
-}。著者--年编码制下引用命令的用法请参考随 \verb|caspervector|
+}。作者--年编码制下引用命令的用法请参考随 \verb|caspervector|
 样式附带的 \verb|caspervector-ay.pdf|（可用 \verb|texdoc| 命令查看）。
 
 例如，在本文中，%
@@ -255,7 +255,7 @@ pdflatex texfile
 除必需字段之外，\verb|@book| 类条目也支持以下基本字段：%
 \verb|author|、\verb|editor|、\verb|translator|、%
 \verb|type|、\verb|location|、\verb|publisher|、%
-\verb|year|/\verb|date|（著者--年编码制中必需）、\verb|pages|、%
+\verb|year|/\verb|date|（作者--年编码制中必需）、\verb|pages|、%
 \verb|url|、\verb|urldate|、\verb|addendum|。
 
 \subsection{\texttt{@incollection} 类型}
@@ -269,7 +269,7 @@ pdflatex texfile
 除必需字段之外，\verb|@incollection| 类条目也支持以下基本字段：%
 \verb|author|、\verb|editor|、\verb|translator|、\verb|bookauthor|、%
 \verb|type|、\verb|location|、\verb|publisher|、%
-\verb|year|/\verb|date|（著者--年编码制中必需）、\verb|pages|、%
+\verb|year|/\verb|date|（作者--年编码制中必需）、\verb|pages|、%
 \verb|url|、\verb|urldate|、\verb|addendum|。
 
 \subsection{\texttt{@periodical} 类型}
@@ -282,7 +282,7 @@ pdflatex texfile
 除必需字段之外，\verb|@periodical| 类条目也支持以下基本字段：%
 \verb|author|/\verb|editor|/\verb|translator|、%
 \verb|type|、\verb|location|、\verb|publisher|、%
-\verb|year|/\verb|date|（著者--年编码制中必需）、%
+\verb|year|/\verb|date|（作者--年编码制中必需）、%
 \verb|volume|、\verb|number|、\verb|pages|、%
 \verb|url|、\verb|urldate|、\verb|addendum|。
 
@@ -402,7 +402,7 @@ number = {\hologo{TeX} 特刊},
 但会在排序时被 \verb|caspervector| 样式考虑；
 其具体用法请参考 biblatex 手册\supercite{biblatex}）\footnote{\ %
 	v0.2.x 和更早版本的 \texttt{caspervector} 样式支持直接在
-	\texttt{year} 字段中设定特殊内容；在之后的版本中，为了支持著者--年编码制，
+	\texttt{year} 字段中设定特殊内容；在之后的版本中，为了支持作者--年编码制，
 	\texttt{caspervector} 的内部实现进行了调整，导致其不再支持这样的用法。%
 }：
 \begin{Verbatim}[frame = single]
