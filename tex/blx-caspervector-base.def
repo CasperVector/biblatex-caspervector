@@ -65,7 +65,7 @@
 		\DeclareFieldFormat*{title}{\mkbibemph{#1}}
 		\DeclareFieldFormat*{volume}{\mkbibemph{#1}}
 		\DeclareFieldFormat[inbook, inproceedings, incollection, article]%
-			{title}{\bbx@mybibquote{\mkbibemph{#1}}}
+			{title}{\bbx@bibquote{\mkbibemph{#1}}}
 	}%
 	\ifboolexpr{not test {\iftoggle{bbx:bfdate}} or test {\iftoggle{bbx:ugly}}}%
 		{\DeclareFieldFormat*{date}{#1}}%
@@ -80,7 +80,7 @@
 \newcommand*{\bbx@cecolon}{\bbx@cepunct{\bbx@cncolon}{\addcolon\addspace}}
 \newcommand*{\bbx@cescolon}{\bbx@cepunct{\bbx@cnscolon}{\addsemicolon\addspace}}
 \newcommand*{\bbx@ceperiod}{\bbx@cepunct{\bbx@cnperiod}{\addperiod\addspace}}
-\newcommand*{\bbx@mybibquote}[1]%
+\newcommand*{\bbx@bibquote}[1]%
 	{\bbx@cepunct{\bbx@cnldquot{#1}\bbx@cnrdquot}{\mkbibquote{#1}}}
 \renewcommand*{\finallistdelim}%
 	{\bbx@cetext{\bbx@cecomma}{\addspace\bibstring{and}\space}}
@@ -105,10 +105,10 @@
 \DeclareFieldFormat*{number}{\mkbibparens{#1}}
 \DeclareFieldFormat[patent]{number}{#1}
 \newcommand*{\bbx@print}[1]{\iffieldundef{#1}{}{\printfield{#1}}}
-\newbibmacro*{cein:}%
-	{\printtext{\bbx@cetext{\bbx@cnin}{In}\bbx@cecolon}\printtext{}}
 \newcommand*{\bbx@byspace}[1]%
 	{\ifnumgreater{\value{#1}}{\value{maxnames}}{}{\addspace}}
+\newbibmacro*{cein:}%
+	{\printtext{\bbx@cetext{\bbx@cnin}{In}\bbx@cecolon}\printtext{}}
 
 \newbibmacro*{ceedtrans}[1]{%
 	\ifboolexpr{test {\iftoggle{blx@use#1}} and not test {\ifnameundef{#1}}}{%
