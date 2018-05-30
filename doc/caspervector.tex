@@ -64,7 +64,7 @@
 
 为了个人需要，同时也是为了给社区提供一个有益的参考，
 本文作者根据实际应用中遇到的常见需求编写了
-\verb|caspervector| 这个中英文 biblatex 样式。
+\verb|caspervector| 这个中西文 biblatex 样式。
 其逻辑框架基于国家标准 GB/T 7714--2005\supercite{gbt7714-2005}，
 但在其基础上根据个人审美趣味和 biblatex 所能实现的功能而
 对参考文献和引用格式进行了较大幅度的修改。
@@ -112,7 +112,7 @@
 \verb|caspervector| 样式还提供 \verb|cenyt| 和 \verb|ecnyt| 两种排序方案
 （\verb|caspervector| 默认设置为 \verb|none| 排序方案，即按引用顺序排序），
 表示依次按文献语言
-（\textbf{ce}nyt 表示中文文献在前，\textbf{ec}nyt 表示英文文献在前；
+（\textbf{ce}nyt 表示中文文献在前，\textbf{ec}nyt 表示西文文献在前；
 文献语言根据 \verb|language| 字段进行区分，详见第 \ref{sec:fields} 部分）、
 编作者姓名（\textbf{n}ame）、出版年（\textbf{y}ear）
 和标题（\textbf{t}itle）排序\footnote{\ %
@@ -223,7 +223,7 @@ pdflatex texfile
 	\item \verb|number|：期刊中文献所处的期号，或专利的申请号。
 	\item \verb|pages|：文献页码。
 	\item \verb|url|/\verb|eid|：
-		文献的 URL 和（arXiv 等网站的）电子标识符。\\\myemph{%
+		文献的 URL 和（arXiv 等平台的）电子标识码。\\\myemph{%
 			注：%
 			\texttt{url} 字段会被自动排版成链接，
 			但 \texttt{eid} 字段需要用户手工定义格式；
@@ -238,7 +238,7 @@ pdflatex texfile
 \begin{itemize}
 	\item \verb|language|：
 		值为 \verb|chinese| 时，相应条目在文献列表中用中文排版；
-		否则（为其他值或未定义时）用英文排版。
+		否则（为其他值或未定义时）用西文排版。
 	\item \verb|note|：用于排版一些特殊内容，参考第 \ref{sec:faq} 部分。
 	\item \verb|userf|：\verb|caspervector| 样式内部使用。
 	\item 其它通用特殊字段，见 biblatex 手册\supercite{biblatex}。
@@ -335,7 +335,7 @@ pdflatex texfile
 使用 biblatex 3.4 或更新版本的用户可以通过对不同的 \verb|\printbibliography|
 命令采用不同的调用环境来实现对不同部分文献按不同方案排序。
 例如，如需对被引用的文献按照引用顺序排序，
-而对未引用的文献按照英文文献在前、中文文献在后排序，
+而对未引用的文献按照西文文献在前、中文文献在后排序，
 则可以在导言区中加入下列几行代码：
 \begin{Verbatim}[frame = single]
 % 新建条目分类（category）用于区分被引用和未引用的文献条目。
@@ -349,7 +349,7 @@ pdflatex texfile
 \begin{refcontext}[sorting = none]
 \printbibliography[category = cited, ..., title = {References}]
 \end{refcontext}
-% 按英文文献在前、中文文献在后排版“cited”分类之外，即未被引用的文献条目。
+% 按西文文献在前、中文文献在后排版“cited”分类之外，即未被引用的文献条目。
 \begin{refcontext}[sorting = ecnyt]
 \printbibliography[notcategory = cited, ..., title = {Works Not Cited}]
 \end{refcontext}
@@ -372,7 +372,7 @@ pdflatex texfile
 \begin{Verbatim}[frame = single]
 % 按引用顺序排版“cited”分类，即被引用的文献条目。
 \printbibliography[category = cited, ..., sorting = none, title = {References}]
-% 按英文文献在前、中文文献在后排版“cited”分类之外，即未被引用的文献条目。
+% 按西文文献在前、中文文献在后排版“cited”分类之外，即未被引用的文献条目。
 \printbibliography%
 	[notcategory = cited, ..., sorting = ecnyt, title = {Works Not Cited}]
 \end{Verbatim}
@@ -388,10 +388,10 @@ biblatex 3.0--3.3 中有一个 bug\footnote{\ %
 用户可以在 \verb|title| 等字段中手动标注。
 
 biblatex 的标准格式支持通过 \verb|eprint|、\verb|eprintclass|、\verb|eprinttype|
-等字段排版 arXiv 等的电子标识符；但本文作者因认为其用法僵化、实现繁琐，
+等字段排版 arXiv 等平台的电子标识码；但本文作者因认为其用法死板、实现繁琐，
 故使用了自由格式的 \verb|eid| 字段。用户可以使用 \verb|\printtext|
 命令调用 biblatex 中内置的相应排版功能，例如文献 \parencite{perelman}
-中的电子标识符便是通过以下设定得到的：
+中的电子标识码便是通过以下设定得到的：
 \begin{Verbatim}[frame = single]
 eid = {\printtext[eprint:arxiv]{math/0211159}},
 \end{Verbatim}
@@ -399,7 +399,7 @@ eid = {\printtext[eprint:arxiv]{math/0211159}},
 字段支持的字符串，详见 biblatex 手册\supercite{biblatex}；
 如果需要排版 DOI，需要将方括号中的整个字符串替换为 \verb|doi|。%
 \myemph{%
-	需要特别注意的是，如果电子标识符中有特殊字符如
+	需要特别注意的是，如果电子标识码中有特殊字符如
 	“\texttt{\_}”“\texttt{\%}”等时，需要将相应字符用反斜杠转义为
 	“\texttt{\textbackslash\_}”“\texttt{\textbackslash\%}”等。%
 }
@@ -429,11 +429,14 @@ note = {\textbf{1845}（\emph{清同治四年}）},
 \end{Verbatim}
 
 直接使用 \verb|userf| 字段是否等于 \verb|zh| 或 \verb|cn|
-来区分中英文文献的功能在近期仍将被支持，但在将来可能被去掉或修改。
+来区分中西文文献的功能在近期仍将被支持，但在将来可能被去掉或修改。
 
 \section{存在的问题}
 
-如第 \ref{sec:catsort} 部分所述，biblatex 3.0--3.3 的功能调整导致分类排序失效。
+如第 \ref{sec:faq} 部分所述，%
+\verb|year|/\verb|date| 字段被设为一些特殊内容时可能导致出错。
+此外如第 \ref{sec:catsort} 部分所述，%
+biblatex 3.0--3.3 的功能调整导致分类排序失效。
 \verb|caspervector| 样式的作者对此表示遗憾，希望用户能谅解。
 
 因为 biblatex 现有功能的限制，一些需求无法直接实现。例如类似于文献
