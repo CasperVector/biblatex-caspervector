@@ -1,3 +1,20 @@
+2018-05-30. v0.3.0
+
+	* API changes:
+	- Support eprint/doi using `eid'.
+
+	* Changes to package code:
+	- blx-caspervector-base.def: fix misplaced `\clearname'.
+	- caspervector-ay.bbx: fix missing byspace.
+	- blx-caspervector-base.def: support the "date(number)" format.
+	- Remove support for `userf' set to `cn'.
+
+	* Changes to documentation:
+	- "著者" -> "作者"; "英文" -> "西文".
+
+	* Misc:
+	- Minor fixes and cosmetics.
+
 2018-05-28. v0.3.0
 
 	* API changes:
