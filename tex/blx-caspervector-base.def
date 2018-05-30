@@ -149,7 +149,7 @@
 	\usebibmacro{bytranslator}%
 }
 
-\newbibmacro*{bbx:ifnodate}[2]{#2}
+\providebibmacro*{bbx:ifnodate}[2]{#2}
 \newbibmacro*{journaltitle/title}{%
 	\iffieldundef{journaltitle}%
 		{\bbx@print{title}}{\printfield[title]{journaltitle}}%
