@@ -340,14 +340,11 @@
 
 \DeclareStyleSourcemap{
 	\maps{
-		\map[overwrite]{
+		\map{
 			\step[
 				fieldsource = language, match = \regexp{chinese},
 				fieldset = userf, fieldvalue = {zh}
 			]
-		}
-		\map[overwrite]{
-			\step[fieldsource = userf, match = \regexp{^cn$}, replace = \regexp{zh}]
 		}
 		\map{
 			\step[fieldset = userf, fieldvalue = {en}]
