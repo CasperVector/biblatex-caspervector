@@ -25,19 +25,18 @@
 ]{biblatex}
 \usepackage{fancyhdr, hyperref, enumitem, fancyvrb, hologo}
 
+\hypersetup{colorlinks = true, allcolors = blue}
 \pagestyle{fancy}\fancyhf{}\cfoot{\thepage}
 \renewcommand{\headrulewidth}{0pt}
 \setlist{nolistsep}
-\hypersetup{colorlinks = true, allcolors = blue}
-
-\DeclareBibliographyCategory{cited}
-\AtEveryCitekey{\addtocategory{cited}{\thefield{entrykey}}}
-\addbibresource{caspervector.bib}
-
 \setlength{\hfuzz}{3pt}
 \ctexset{linestretch = {\maxdimen}}
 \renewcommand{\bibfont}{\small}
 \newcommand{\myemph}[1]{\emph{\textcolor{red}{#1}}}
+
+\DeclareBibliographyCategory{cited}
+\AtEveryCitekey{\addtocategory{cited}{\thefield{entrykey}}}
+\addbibresource{caspervector.bib}
 
 \begin{document}
 \title{\textbf{biblatex 参考文献和引用样式：\texttt{caspervector} v0.3.1}}

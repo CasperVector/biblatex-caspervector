@@ -27,10 +27,13 @@
 
 \pagestyle{fancy}\fancyhf{}\cfoot{\thepage}
 \renewcommand{\headrulewidth}{0pt}
-\addbibresource{caspervector.bib}
 \setlength{\hfuzz}{3pt}
 \ctexset{linestretch = {\maxdimen}}
 \renewcommand{\bibfont}{\small}
+
+\DeclareBibliographyCategory{cited}
+\AtEveryCitekey{\addtocategory{cited}{\thefield{entrykey}}}
+\addbibresource{caspervector.bib}
 
 \begin{document}
 \title{\textbf{\texttt{caspervector-ay} 作者--年编码制示例}}
@@ -40,19 +43,21 @@
 \vspace*{-1em}
 
 \begin{center}
-\begin{tabular}{ll}
-\hline
+\begin{tabular}{ll}\hline
 引用命令 &	排版结果 \\\hline
-\verb|\cite{gbt7714-2005}| &	\cite{gbt7714-2005} \\
+\verb|\cite{10-5, 10-6}| &	\cite{10-5, 10-6} \\
 \verb|\cite[文献][第 4 页]{perelman}| &	\cite[文献][第 4 页]{perelman} \\
-\verb|\parencite{biblatex, 6-1}| &	\parencite{biblatex, 6-1} \\
-\verb|\textcite{biber}| &	\textcite{biber} \\\hline
+\verb|\parencite{6-1, blx-gb7714-2015}| &	\parencite{6-1, blx-gb7714-2015} \\
+\verb|\textcite{biblatex, biber}| &	\textcite{biblatex, biber} \\\hline
 \multicolumn{2}{l}{（更多用法请参考 \texttt{texdoc 50-style-authoryear}。）} \\
 \end{tabular}
 \end{center}
-\vspace*{1em}
 
-\printbibliography
+\printbibliography[category = cited, title = {本文参考文献}]
+\printbibliography[notcategory = cited, title = {%
+	其它参考文献示例
+	（引自\texorpdfstring{文献 \parencite{gbt7714-2005}}{ GB/T 7714-2005}）%
+}]
 \nocite{*}
 \end{document}
 
