@@ -28,6 +28,7 @@
 \newcommand*\bbx@cnldquot{“}
 \newcommand*\bbx@cnrdquot{”}
 \newcommand*\bbx@cncomma{，}
+\newcommand*\bbx@cnbcomma{、}
 \newcommand*\bbx@cnscolon{；}
 \newcommand*\bbx@cncolon{：}
 \newcommand*\bbx@cnperiod{。}

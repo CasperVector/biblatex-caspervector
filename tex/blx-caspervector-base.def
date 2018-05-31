@@ -43,6 +43,9 @@
 		\ExecuteBibliographyOptions{texencoding = UTF-8}
 	}%
 	\iftoggle{bbx:ugly}{
+		\newcommand*{\bbx@citecomma}{\addcomma\space}
+		\newcommand*{\bbx@citebcomma}{\addcomma\space}
+		\newcommand*{\bbx@citescolon}{\addsemicolon\space}
 		\newcommand*{\bbx@cepunct}[2]{#2}
 		\DefineBibliographyStrings{english}{
 			andmore = {\bbx@cetext{\bbx@cnetal}{et\addabbrvspace al\adddot}},
@@ -53,6 +56,9 @@
 		\DeclareFieldFormat*{title}{#1}
 		\DeclareFieldFormat*{volume}{#1}
 	}{
+		\newcommand*{\bbx@citecomma}{\bbx@cncomma}
+		\newcommand*{\bbx@citebcomma}{\bbx@cnbcomma}
+		\newcommand*{\bbx@citescolon}{\bbx@cnscolon}
 		\newcommand*{\bbx@cepunct}[2]{\iffieldequalstr{userf}{zh}{#1}{#2}}
 		\DefineBibliographyStrings{english}{
 			andmore =
@@ -82,13 +88,15 @@
 \newcommand*{\bbx@ceperiod}{\bbx@cepunct{\bbx@cnperiod}{\addperiod\addspace}}
 \newcommand*{\bbx@bibquote}[1]%
 	{\bbx@cepunct{\bbx@cnldquot{#1}\bbx@cnrdquot}{\mkbibquote{#1}}}
+\DeclareDelimFormat*{finalnamedelim}{\bbx@citebcomma}
+\DeclareDelimFormat[bib, biblist]{finalnamedelim}%
+	{\bbx@cetext{\bbx@cecomma}{\addspace\bibstring{and}\space}}
 \renewcommand*{\finallistdelim}%
 	{\bbx@cetext{\bbx@cecomma}{\addspace\bibstring{and}\space}}
-\renewcommand*{\finalnamedelim}%
-	{\bbx@cetext{\bbx@cecomma}{\addspace\bibstring{and}\space}}
+\DeclareDelimFormat*{multinamedelim}{\bbx@citebcomma}
+\DeclareDelimFormat[bib, biblist]{multinamedelim}{\bbx@cecomma}
 \renewcommand*{\multilistdelim}{\bbx@cecomma}
-\renewcommand*{\multinamedelim}{\bbx@cecomma}
-\renewcommand*{\postnotedelim}{\bbx@cecomma}
+\renewcommand*{\postnotedelim}{\bbx@citecomma}
 \renewcommand*{\finentrypunct}%
 	{\iffieldundef{addendum}{\bbx@cepunct{\bbx@cnperiod}{.}}{}}
 \DefineBibliographyExtras{english}{%
