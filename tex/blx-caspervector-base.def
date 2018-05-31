@@ -207,7 +207,7 @@
 	\usebibmacro{byauthor}\setunit*{\bbx@cescolon}%
 	\usebibmacro{bytranslator}\printunit{\bbx@ceperiod}\newblock
 	\usebibmacro{cein:}\newblock
-	\usebibmacro{bookauthor/editor}\printunit{\bbx@ceperiod}\newblock
+	\usebibmacro{bookauthor/editor}\printunit*{\bbx@ceperiod}\newblock
 	\printfield{booktitle}\printunit{\bbx@ceperiod}\newblock
 	\usebibmacro{byeditor}\printunit{\bbx@ceperiod}\newblock
 	\usebibmacro{location+publisher+date+note+pages}%
