@@ -58,7 +58,7 @@
 	}{
 		\newcommand*{\bbx@citecomma}{\bbx@cncomma}
 		\newcommand*{\bbx@citebcomma}{\bbx@cnbcomma}
-		\newcommand*{\bbx@citescolon}{\bbx@cnscolon}
+		\newcommand*{\bbx@citescolon}{\bbx@cncomma}
 		\newcommand*{\bbx@cepunct}[2]{\iffieldequalstr{userf}{zh}{#1}{#2}}
 		\DefineBibliographyStrings{english}{
 			andmore =
