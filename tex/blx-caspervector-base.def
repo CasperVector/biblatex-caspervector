@@ -106,9 +106,8 @@
 	\renewcommand*{\finalandcomma}{}%
 }
 
-\DefineBibliographyStrings{english}{
-	bibliography = {\bbx@cnbib}, references = {\bbx@cnbib}
-}
+\DefineBibliographyStrings{english}%
+	{bibliography = {\bbx@cnbib}, references = {\bbx@cnbib}}
 \DeclareFieldFormat*{pages}{#1}
 \DeclareFieldFormat*{url}{\url{#1}}
 \DeclareFieldFormat*{urldate}{#1}
