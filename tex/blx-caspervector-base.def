@@ -93,12 +93,11 @@
 \newcommand*{\bbx@ceperiod}{\bbx@cepunct{\bbx@cnperiod}{\addperiod\addspace}}
 \newcommand*{\bbx@bibquote}[1]%
 	{\bbx@cepunct{\bbx@cnldquot{#1}\bbx@cnrdquot}{\mkbibquote{#1}}}
-\renewcommand*{\finalnamedelim}{\ifcitation{\bbx@citebcomma}%
-	{\bbx@cetext{\bbx@cecomma}{\addspace\bibstring{and}\space}}}
 \renewcommand*{\finallistdelim}%
 	{\bbx@cetext{\bbx@cecomma}{\addspace\bibstring{and}\space}}
-\renewcommand*{\multinamedelim}{\ifcitation{\bbx@citebcomma}{\bbx@cecomma}}
 \renewcommand*{\multilistdelim}{\bbx@cecomma}
+\renewcommand*{\finalnamedelim}{\ifcitation{\bbx@citebcomma}{\finallistdelim}}
+\renewcommand*{\multinamedelim}{\ifcitation{\bbx@citebcomma}{\multilistdelim}}
 \renewcommand*{\postnotedelim}{\bbx@citecomma}
 \renewcommand*{\finentrypunct}%
 	{\iffieldundef{addendum}{\bbx@cepunct{\bbx@cnperiod}{.}}{}}
