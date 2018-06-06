@@ -33,7 +33,7 @@
 \DeclareBibliographyOption{gbk}[true]{\toggletrue{bbx:gbk}}
 \DeclareBibliographyOption{ugly}[true]{\settoggle{bbx:ugly}{#1}}
 \ExecuteBibliographyOptions{%
-	gbk, ugly = false, alldates = iso,
+	gbk, ugly = false, autopunct = false, alldates = iso,
 	minnames = 3, minitems = 3, maxcitenames = 2, mincitenames = 1%
 }
 \AtEndOfPackage{%
