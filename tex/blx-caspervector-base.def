@@ -195,7 +195,7 @@
 }
 
 \DeclareBibliographyDriver{book}{%
-	\usebibmacro{bibindex}\usebibmacro{begentry}\newblock
+	\usebibmacro{bibindex}\usebibmacro{begentry}%
 	\usebibmacro{author/editor/translator}%
 	\printunit*{\bbx@ceperiod}\newblock
 	\bbx@print{title}\setunit*{\addspace}%
@@ -209,7 +209,7 @@
 }
 
 \DeclareBibliographyDriver{incollection}{%
-	\usebibmacro{bibindex}\usebibmacro{begentry}\newblock
+	\usebibmacro{bibindex}\usebibmacro{begentry}%
 	\usebibmacro{author/translator}\printunit*{\bbx@ceperiod}\newblock
 	\bbx@print{title}\setunit*{\addspace}%
 	\bbx@print{type}\printunit{\bbx@ceperiod}\newblock
@@ -226,7 +226,7 @@
 }
 
 \DeclareBibliographyDriver{periodical}{%
-	\usebibmacro{bibindex}\usebibmacro{begentry}\newblock
+	\usebibmacro{bibindex}\usebibmacro{begentry}%
 	\usebibmacro{author/editor/translator}%
 	\printunit*{\bbx@ceperiod}\newblock
 	\usebibmacro{journaltitle/title}\setunit*{\addspace}%
@@ -242,7 +242,7 @@
 }
 
 \DeclareBibliographyDriver{article}{%
-	\usebibmacro{bibindex}\usebibmacro{begentry}\newblock
+	\usebibmacro{bibindex}\usebibmacro{begentry}%
 	\usebibmacro{author/translator}\printunit*{\bbx@ceperiod}\newblock
 	\bbx@print{title}\setunit*{\addspace}%
 	\bbx@print{type}\printunit{\bbx@ceperiod}\newblock
@@ -256,7 +256,7 @@
 }
 
 \DeclareBibliographyDriver{patent}{%
-	\usebibmacro{bibindex}\usebibmacro{begentry}\newblock
+	\usebibmacro{bibindex}\usebibmacro{begentry}%
 	\usebibmacro{author/editor/translator}%
 	\printunit*{\bbx@ceperiod}\newblock
 	\bbx@print{title}\setunit*{\addspace}%
@@ -272,8 +272,7 @@
 }
 
 \DeclareBibliographyDriver{customf}{%
-	\usebibmacro{bibindex}%
-	\usebibmacro{begentry}\newblock
+	\usebibmacro{bibindex}\usebibmacro{begentry}%
 	\printfield{addendum}\usebibmacro{finentry}%
 }
 
