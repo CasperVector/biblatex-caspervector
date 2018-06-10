@@ -350,7 +350,7 @@
 	\maps{
 		\map{
 			\step[
-				fieldsource = language, match = \regexp{chinese},
+				fieldsource = language, match = \regexp{^chinese$},
 				fieldset = userf, fieldvalue = {zh}
 			]
 		}
