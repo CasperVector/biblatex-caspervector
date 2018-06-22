@@ -29,35 +29,19 @@
 \ExecuteBibliographyOptions{autocite = superscript}
 \newcommand*{\cbx@mksuperbrackets}[1]{\mkbibsuperscript{\mkbibbrackets{#1}}}
 
-\DeclareCiteCommand{\cite}
-{%
-	\usebibmacro{cite:init}%
-	\usebibmacro{prenote}%
-}
-{%
-	\usebibmacro{citeindex}%
-	\usebibmacro{cite:comp}%
-}
-{}
-{%
-	\usebibmacro{cite:dump}%
-	\usebibmacro{postnote}%
-}
+\DeclareCiteCommand{\cite}%
+	{\usebibmacro{cite:init}\usebibmacro{prenote}}%
+	{\usebibmacro{citeindex}\usebibmacro{cite:comp}}{}%
+	{\usebibmacro{cite:dump}\usebibmacro{postnote}}
 
-\DeclareCiteCommand{\supercite}[\cbx@mksuperbrackets]
-{%
-	\usebibmacro{cite:init}%
-	\let\multicitedelim=\supercitedelim
-	\usebibmacro{prenote}%
-}
-{%
-	\usebibmacro{citeindex}%
-	\usebibmacro{cite:comp}%
-}%
-{}
-{%
-	\usebibmacro{cite:dump}%
-	\usebibmacro{postnote}%
-}
+\DeclareCiteCommand{\supercite}[\cbx@mksuperbrackets]{%
+		\usebibmacro{cite:init}%
+		\let\multicitedelim=\supercitedelim
+		\iffieldundef{prenote}{}%
+			{\BibliographyWarning{Ignoring prenote argument}}%
+		\iffieldundef{postnote}{}%
+			{\BibliographyWarning{Ignoring postnote argument}}%
+	}{\usebibmacro{citeindex}\usebibmacro{cite:comp}}{}%
+	{\usebibmacro{cite:dump}\usebibmacro{postnote}}
 
 % vim:ft=tex:ts=2:sw=2
