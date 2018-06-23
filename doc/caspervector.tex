@@ -98,10 +98,10 @@
 \section{使用简介}
 \subsection{样式调用}
 
-用户应当通过以下命令调用 \verb|caspervector| 样式（如果需要使用
-作者--年编码制，需要将 \verb|caspervector| 换成 \verb|caspervector-ay|）：
+用户应当通过以下命令调用 \verb|caspervector| 样式（如果须要使用
+作者--年编码制，应将 \verb|caspervector| 换成 \verb|caspervector-ay|）：
 \begin{Verbatim}[frame = single]
-% “utf8”可能需要改为“gbk”，根据用户使用的字符编码而定。
+% “utf8”可能须要改为“gbk”，根据用户使用的字符编码而定。
 % “...” 代表其它选项。
 \usepackage[
 	backend = biber, style = caspervector, utf8, sorting = cenyt, ...
@@ -183,7 +183,7 @@
 一般情况下，依次执行以下代码即可实现正确的排版：
 \begin{Verbatim}[frame = single]
 # “texfile”是被 TeX 编译的文件名中除去“.tex”的部分。
-# “pdflatex”可改为其它 TeX 程序，使用纯 latex 编译时可能还需要运行 dvipdfmx。
+# “pdflatex”可改为其它 TeX 程序，使用纯 latex 编译时可能还须要运行 dvipdfmx。
 pdflatex texfile
 biber -l zh__pinyin texfile
 pdflatex texfile
@@ -218,7 +218,7 @@ pdflatex texfile
 	\item \verb|location|：出版地，或（在 \verb|@patent| 类条目中）专利申请地。
 	\item \verb|publisher|：出版者，或学位论文作者申请学位的单位。
 	\item \verb|journal|/\verb|journaltitle|：连续出版物题名，两个字段互相等价。
-	\item \verb|year|/\verb|date|：出版年、日期，这两个字段只需填写一个即可。
+	\item \verb|year|/\verb|date|：出版年、日期，这两个字段只须填写一个即可。
 	\item \verb|volume|：期刊中文献所处的卷号。
 	\item \verb|number|：期刊中文献所处的期号，或专利的申请号。
 	\item \verb|pages|：文献页码。
@@ -226,7 +226,7 @@ pdflatex texfile
 		文献的 URL 和（arXiv 等平台的）电子标识码。\\\myemph{%
 			注：%
 			\texttt{url} 字段会被自动排版成链接，
-			但 \texttt{eid} 字段需要用户手工定义格式；
+			但 \texttt{eid} 字段须要用户手工定义格式；
 			后者的一个示例见第 \ref{sec:faq} 部分。%
 		}
 	\item \verb|urldate|：检索日期，或 URL 的访问日期。
@@ -334,7 +334,7 @@ pdflatex texfile
 
 使用 biblatex 3.4 或更新版本的用户可以通过对不同的 \verb|\printbibliography|
 命令采用不同的调用环境来实现对不同部分文献按不同方案排序。
-例如，如需对被引用的文献按照引用顺序排序，
+例如，如须对被引用的文献按照引用顺序排序，
 而对未引用的文献按照西文文献在前、中文文献在后排序，
 则可以在导言区中加入下列几行代码：
 \begin{Verbatim}[frame = single]
@@ -367,7 +367,7 @@ pdflatex texfile
 \nocite{*}
 \end{Verbatim}
 
-使用 biblatex 2.x 或更旧版本的用户需要
+使用 biblatex 2.x 或更旧版本的用户须要
 将在正文中准备排版文献列表的位置使用的代码改为：
 \begin{Verbatim}[frame = single]
 % 按引用顺序排版“cited”分类，即被引用的文献条目。
@@ -397,10 +397,10 @@ eid = {\printtext[eprint:arxiv]{math/0211159}},
 \end{Verbatim}
 其中 \verb|arxiv| 可以替换为其它在标准格式中被 \verb|eprinttype|
 字段支持的字符串，详见 biblatex 手册\supercite{biblatex}；
-如果需要排版 DOI，需要将方括号中的整个字符串替换为 \verb|doi|。%
+如果须要排版 DOI，应将方括号中的整个字符串替换为 \verb|doi|。%
 \myemph{%
-	需要特别注意的是，如果电子标识码中有特殊字符如
-	“\texttt{\_}”“\texttt{\%}”等时，需要将相应字符用反斜杠转义为
+	须要特别注意的是，如果电子标识码中有特殊字符如
+	“\texttt{\_}”“\texttt{\%}”等时，应将相应字符用反斜杠转义为
 	“\texttt{\textbackslash\_}”“\texttt{\textbackslash\%}”等。%
 }
 
@@ -465,7 +465,7 @@ biblatex 3.0--3.3 的功能调整导致分类排序失效。%
 	language = {chinese},
 }
 \end{Verbatim}
-这两种方法中更加推荐使用前者，因为前者只需手动实现出版年和期号的排版。
+这两种方法中更加推荐使用前者，因为前者只须手动实现出版年和期号的排版。
 
 \begin{refcontext}[sorting = none]
 \printbibliography[category = cited, heading = bibnumbered, title = {本文参考文献}]
