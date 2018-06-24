@@ -113,6 +113,11 @@
 \DeclareFieldFormat*{type}{\mkbibbrackets{#1}}
 \DeclareFieldFormat*{number}{\mkbibparens{#1}}
 \DeclareFieldFormat[patent]{number}{#1}
+\DeclareFieldFormat*{edition}{%
+	\bbx@cetext%
+		{\ifinteger{#1}{{\bbx@cnnr} {#1} {\bbx@cnedn}}{#1}}%
+		{\ifinteger{#1}{\mkbibordedition{#1}~\bibstring{edition}}{#1\isdot}}%
+}
 \newcommand*{\bbx@print}[1]{\iffieldundef{#1}{}{\printfield{#1}}}
 \newcommand*{\bbx@byspace}[1]%
 	{\ifnumgreater{\value{#1}}{\value{maxnames}}{}{\addspace}}
@@ -202,6 +207,7 @@
 	\bbx@print{type}\printunit{\bbx@ceperiod}\newblock
 	\usebibmacro{byauthor+byeditor+bytranslator}%
 	\printunit{\bbx@ceperiod}\newblock
+	\printfield{edition}\printunit{\bbx@ceperiod}\newblock
 	\usebibmacro{location+publisher+date+note+pages}%
 	\printunit{\bbx@ceperiod}\newblock
 	\usebibmacro{eid+url+urldate}\printunit{\bbx@ceperiod}\newblock
@@ -219,6 +225,7 @@
 	\usebibmacro{bookauthor/editor}\printunit*{\bbx@ceperiod}\newblock
 	\printfield{booktitle}\printunit{\bbx@ceperiod}\newblock
 	\usebibmacro{byeditor}\printunit{\bbx@ceperiod}\newblock
+	\printfield{edition}\printunit{\bbx@ceperiod}\newblock
 	\usebibmacro{location+publisher+date+note+pages}%
 	\printunit{\bbx@ceperiod}\newblock
 	\usebibmacro{eid+url+urldate}\printunit{\bbx@ceperiod}\newblock

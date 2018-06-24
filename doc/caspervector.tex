@@ -214,6 +214,10 @@ pdflatex texfile
 		}
 	\item \verb|bookauthor|、\verb|booktitle|：析出文献所出自文献的作者和题名。
 	\item \verb|title|：文献题名。
+	\item \verb|edition|：文献版本\footnote{\ %
+		v0.3.2 和更早版本的 \texttt{caspervector} 样式不支持 \texttt{edition}
+		字段，但可手动在 \texttt{title} 字段中标注相应信息。%
+	}，若为整数则会自动排版为“第 2 版”或“2nd ed.”等形式。
 	\item \verb|type|：文献类型和电子文献载体标志代码\supercite{gbt7714-2005}。
 	\item \verb|location|：出版地，或（在 \verb|@patent| 类条目中）专利申请地。
 	\item \verb|publisher|：出版者，或学位论文作者申请学位的单位。
@@ -254,7 +258,7 @@ pdflatex texfile
 \verb|@book| 类条目必需的基本字段为 \verb|title|。
 
 除必需字段之外，\verb|@book| 类条目也支持以下基本字段：%
-\verb|author|、\verb|editor|、\verb|translator|、%
+\verb|author|、\verb|editor|、\verb|translator|、\verb|edition|、%
 \verb|type|、\verb|location|、\verb|publisher|、%
 \verb|year|/\verb|date|（作者--年编码制中必需）、\verb|pages|、%
 \verb|url|/\verb|eid|、\verb|urldate|、\verb|addendum|。
@@ -269,7 +273,7 @@ pdflatex texfile
 
 除必需字段之外，\verb|@incollection| 类条目也支持以下基本字段：%
 \verb|author|、\verb|editor|、\verb|translator|、\verb|bookauthor|、%
-\verb|type|、\verb|location|、\verb|publisher|、%
+\verb|edition|、\verb|type|、\verb|location|、\verb|publisher|、%
 \verb|year|/\verb|date|（作者--年编码制中必需）、\verb|pages|、%
 \verb|url|/\verb|eid|、\verb|urldate|、\verb|addendum|。
 
@@ -383,9 +387,7 @@ biblatex 3.0--3.3 中有一个 bug\footnote{\ %
 \section{FAQ 和其它使用提示}\label{sec:faq}
 
 用户可以通过省略可选字段的方式来避免排版相应的内容。
-例如，省略 \verb|type| 字段便可使相应条目不排版文献类型和电子文献载体标志代码。%
-\verb|caspervector| 样式不支持 \verb|edition| 字段，
-用户可以在 \verb|title| 等字段中手动标注。
+例如，省略 \verb|type| 字段便可使相应条目不排版文献类型和电子文献载体标志代码。
 
 biblatex 的标准格式支持通过 \verb|eprint|、\verb|eprintclass|、\verb|eprinttype|
 等字段排版 arXiv 等平台的电子标识码；但本文作者因认为其用法死板、实现繁琐，
