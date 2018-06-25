@@ -7,7 +7,7 @@ FIND_GBK = '(' -name '*gbk*' ')'
 FIND_VCS = '(' -type d -name '.git' -prune ')'
 
 # IGNORE "error"s intentionally.
-.IGNORE qa: enc lt sync blank tail
+.IGNORE qa: enc lt sync spell blank tail
 
 enc:
 	@echo '======================================================================'
@@ -32,6 +32,13 @@ sync:
 	@echo '----------------------------------------------------------------------'
 	iconv -f GBK tex/blx-caspervector-gbk.def | \
 		diff - tex/blx-caspervector-utf8.def
+	@echo
+
+spell:
+	@echo '======================================================================'
+	@echo '$@: maybe "需" -> "须"'
+	@echo '----------------------------------------------------------------------'
+	grep -r --exclude-dir=.git '需' .
 	@echo
 
 blank:
