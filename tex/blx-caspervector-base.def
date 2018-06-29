@@ -57,6 +57,7 @@
 		\DeclareFieldFormat*{journaltitle}{#1}
 		\DeclareFieldFormat*{title}{#1}
 		\DeclareFieldFormat*{volume}{#1}
+		\newbibmacro*{typespace}{\setunit*{\addspace}}
 	}{
 		\newcommand*{\bbx@citecomma}{\bbx@cncomma}
 		\newcommand*{\bbx@citebcomma}{\bbx@cnbcomma}
@@ -74,6 +75,10 @@
 		\DeclareFieldFormat*{volume}{\mkbibemph{#1}}
 		\DeclareFieldFormat[inbook, inproceedings, incollection, article]%
 			{title}{\bbx@bibquote{\mkbibemph{#1}}}
+		\newbibmacro*{typespace}{\ifboolexpr{test {\bbx@cepunct} and (
+			test {\ifentrytype{inbook}} or test {\ifentrytype{inproceedings}} or
+			test {\ifentrytype{incollection}} or test {\ifentrytype{article}}
+		)}{}{\setunit*{\addspace}}}
 	}%
 	\ifboolexpr{not test {\iftoggle{bbx:bfdate}} or test {\iftoggle{bbx:ugly}}}%
 		{\DeclareFieldFormat*{date}{#1}}%
@@ -203,7 +208,7 @@
 	\usebibmacro{bibindex}\usebibmacro{begentry}%
 	\usebibmacro{author/editor/translator}%
 	\printunit*{\bbx@ceperiod}\newblock
-	\bbx@print{title}\setunit*{\addspace}%
+	\bbx@print{title}\usebibmacro{typespace}%
 	\bbx@print{type}\printunit{\bbx@ceperiod}\newblock
 	\usebibmacro{byauthor+byeditor+bytranslator}%
 	\printunit{\bbx@ceperiod}\newblock
@@ -217,7 +222,7 @@
 \DeclareBibliographyDriver{incollection}{%
 	\usebibmacro{bibindex}\usebibmacro{begentry}%
 	\usebibmacro{author/translator}\printunit*{\bbx@ceperiod}\newblock
-	\bbx@print{title}\setunit*{\addspace}%
+	\bbx@print{title}\usebibmacro{typespace}%
 	\bbx@print{type}\printunit{\bbx@ceperiod}\newblock
 	\usebibmacro{byauthor}\setunit*{\bbx@cescolon}%
 	\usebibmacro{bytranslator}\printunit{\bbx@ceperiod}\newblock
@@ -236,7 +241,7 @@
 	\usebibmacro{bibindex}\usebibmacro{begentry}%
 	\usebibmacro{author/editor/translator}%
 	\printunit*{\bbx@ceperiod}\newblock
-	\usebibmacro{journaltitle/title}\setunit*{\addspace}%
+	\usebibmacro{journaltitle/title}\usebibmacro{typespace}%
 	\bbx@print{type}\printunit{\bbx@ceperiod}\newblock
 	\usebibmacro{byauthor+byeditor+bytranslator}%
 	\printunit{\bbx@ceperiod}\newblock
@@ -251,7 +256,7 @@
 \DeclareBibliographyDriver{article}{%
 	\usebibmacro{bibindex}\usebibmacro{begentry}%
 	\usebibmacro{author/translator}\printunit*{\bbx@ceperiod}\newblock
-	\bbx@print{title}\setunit*{\addspace}%
+	\bbx@print{title}\usebibmacro{typespace}%
 	\bbx@print{type}\printunit{\bbx@ceperiod}\newblock
 	\usebibmacro{byauthor+byeditor+bytranslator}%
 	\printunit{\bbx@ceperiod}\newblock
@@ -266,7 +271,7 @@
 	\usebibmacro{bibindex}\usebibmacro{begentry}%
 	\usebibmacro{author/editor/translator}%
 	\printunit*{\bbx@ceperiod}\newblock
-	\bbx@print{title}\setunit*{\addspace}%
+	\bbx@print{title}\usebibmacro{typespace}%
 	\bbx@print{type}\printunit{\bbx@ceperiod}\newblock
 	\usebibmacro{byauthor+byeditor+bytranslator}%
 	\printunit{\bbx@ceperiod}\newblock
