@@ -46,8 +46,8 @@
 
 	* API changes:
 	- Added the caspervector-ay style (`dashed' and `mergedate' supported).
-	- sorting: nty -> nyt.
-	- Reduced tolerance in `year'/`date'; `note' added for compensation.
+	- Sorting: nty -> nyt.
+	- Reduced tolerance in `year'/`date'; `note' added in compensation.
 	- Support `useauthor'-related functionalities.
 
 	* Changes to package code:
