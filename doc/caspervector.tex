@@ -23,7 +23,7 @@
 	backend = biber, style = caspervector, utf8,
 	giveninits = true, sortgiveninits = true
 ]{biblatex}
-\usepackage{fancyhdr, hyperref, enumitem, fancyvrb, hologo}
+\usepackage{iftex, fancyhdr, hyperref, enumitem, fancyvrb, hologo}
 
 \hypersetup{colorlinks = true, allcolors = blue}
 \pagestyle{fancy}\fancyhf{}\cfoot{\thepage}
@@ -33,6 +33,12 @@
 \ctexset{linestretch = {\maxdimen}}
 \renewcommand{\bibfont}{\small}
 \newcommand{\myemph}[1]{\emph{\textcolor{red}{#1}}}
+\RecustomVerbatimEnvironment{Verbatim}{Verbatim}%
+	{frame = single, tabsize = 4, formatcom = {\ifXeTeX\xeCJKVerbAddon\fi}}
+\RecustomVerbatimCommand{\VerbatimInput}{VerbatimInput}{
+	fontsize = {\small}, baselinestretch = 1,
+	tabsize = 4, formatcom = {\ifXeTeX\xeCJKVerbAddon\fi}
+}
 
 \DeclareBibliographyCategory{cited}
 \AtEveryCitekey{\addtocategory{cited}{\thefield{entrykey}}}
@@ -100,7 +106,7 @@
 
 用户应当通过以下命令调用 \verb|caspervector| 样式（如果须要使用
 作者--年编码制，应将 \verb|caspervector| 换成 \verb|caspervector-ay|）：
-\begin{Verbatim}[frame = single]
+\begin{Verbatim}
 % “utf8”可能须要改为“gbk”，根据用户使用的字符编码而定。
 % “...” 代表其它选项。
 \usepackage[
@@ -126,7 +132,7 @@
 通过 \verb|\addbibresource| 命令导入，%
 \myemph{注意不要省略扩展名 \texttt{.bib}}。
 例如，本文的参考文献数据库就是通过下述命令导入的：
-\begin{Verbatim}[frame = single]
+\begin{Verbatim}
 \addbibresource{caspervector.bib}
 \end{Verbatim}
 用户可以多次使用 \verb|\addbibresource| 命令，
@@ -137,7 +143,7 @@
 \verb|caspervector| 样式在顺序编码制下支持 biblatex 所提供的引用命令，
 其中最常用的是 \verb|\supercite|、\verb|\parencite| 和 \verb|\cite|。
 三个命令的用法类似：
-\begin{Verbatim}[frame = single]
+\begin{Verbatim}
 % 可选参数 prenote 和 postnote 分别用于设定引用记号前、后的注释。
 \citecommand[prenote][postnote]{key}
 \end{Verbatim}
@@ -154,7 +160,7 @@
 例如，在本文中，%
 \verb|\parencite{gbt7714-2005}| 的输出是“\parencite{gbt7714-2005}”，
 而以下代码的输出是“\cite[文献][第 4 页]{gbt7714-2005}”：
-\begin{Verbatim}[frame = single]
+\begin{Verbatim}
 \cite[文献][第 4 页]{gbt7714-2005}
 \end{Verbatim}
 
@@ -174,14 +180,14 @@
 \end{itemize}
 
 例如，以下代码可以将文献列表的标题改为 “文献”，并使文献列表参与章节编号：
-\begin{Verbatim}[frame = single]
+\begin{Verbatim}
 \printbibliography[title = {文献}, heading = bibnumbered]
 \end{Verbatim}
 
 \subsection{编译方法}
 
 一般情况下，依次执行以下代码即可实现正确的排版：
-\begin{Verbatim}[frame = single]
+\begin{Verbatim}
 # “texfile”是被 TeX 编译的文件名中除去“.tex”的部分。
 # “pdflatex”可改为其它 TeX 程序，使用纯 latex 编译时可能还须要运行 dvipdfmx。
 pdflatex texfile
@@ -341,14 +347,14 @@ pdflatex texfile
 例如，如须对被引用的文献按照引用顺序排序，
 而对未引用的文献按照西文文献在前、中文文献在后排序，
 则可以在导言区中加入下列几行代码：
-\begin{Verbatim}[frame = single]
+\begin{Verbatim}
 % 新建条目分类（category）用于区分被引用和未引用的文献条目。
 \DeclareBibliographyCategory{cited}
 % 每执行一次除 \nocite 之外的 \cite 类命令，将被引用的文献加到“cited”分类中。
 \AtEveryCitekey{\addtocategory{cited}{\thefield{entrykey}}}
 \end{Verbatim}
 在正文中准备排版文献列表的位置使用如下代码：
-\begin{Verbatim}[frame = single]
+\begin{Verbatim}
 % 按引用顺序排版“cited”分类，即被引用的文献条目。
 \begin{refcontext}[sorting = none]
 \printbibliography[category = cited, ..., title = {References}]
@@ -365,7 +371,7 @@ pdflatex texfile
 	\texttt{\string\cite} 类命令的引用顺序。
 }（例如，在本说明文档中，就是在 \verb|\end{document}| 之前一行）
 加入以下代码：
-\begin{Verbatim}[frame = single]
+\begin{Verbatim}
 % 将 .bib 文件中所有的参考文献都加到引用列表中，但不将它们加到“cited”分类中，
 % 也不会排版引用标号，只是在最后的 \printbibliography 命令中排版相应的文献条目。
 \nocite{*}
@@ -373,7 +379,7 @@ pdflatex texfile
 
 使用 biblatex 2.x 或更旧版本的用户须要
 将在正文中准备排版文献列表的位置使用的代码改为：
-\begin{Verbatim}[frame = single]
+\begin{Verbatim}
 % 按引用顺序排版“cited”分类，即被引用的文献条目。
 \printbibliography[category = cited, ..., sorting = none, title = {References}]
 % 按西文文献在前、中文文献在后排版“cited”分类之外，即未被引用的文献条目。
@@ -394,7 +400,7 @@ biblatex 的标准格式支持通过 \verb|eprint|、\verb|eprintclass|、\verb|
 故使用了自由格式的 \verb|eid| 字段。用户可以使用 \verb|\printtext|
 命令调用 biblatex 中内置的相应排版功能，例如文献 \parencite{perelman}
 中的电子标识码便是通过以下设定得到的：
-\begin{Verbatim}[frame = single]
+\begin{Verbatim}
 eid = {\printtext[eprint:arxiv]{math/0211159}},
 \end{Verbatim}
 其中 \verb|arxiv| 可以替换为其它在标准格式中被 \verb|eprinttype|
@@ -409,7 +415,7 @@ eid = {\printtext[eprint:arxiv]{math/0211159}},
 用户在很多时候可以通过手动调用格式化命令来临时覆盖预设的格式设定，
 例如对于一个 \verb|@article| 类型的条目，以下代码将使年卷期号排版为类似于
 “\textbf{2018}，\textit{14}(\hologo{TeX} 特刊)”的形式：
-\begin{Verbatim}[frame = single]
+\begin{Verbatim}
 year = {2018},
 volume = {14},
 number = {\hologo{TeX} 特刊},
@@ -425,7 +431,7 @@ number = {\hologo{TeX} 特刊},
 	\texttt{year} 字段中设定特殊内容；在之后的版本中，为了支持作者--年编码制，
 	\texttt{caspervector} 的内部实现进行了调整，导致其不再支持这样的用法。%
 }：
-\begin{Verbatim}[frame = single]
+\begin{Verbatim}
 origdate = {1845},
 note = {\textbf{1845}（\emph{清同治四年}）},
 \end{Verbatim}
@@ -442,7 +448,7 @@ biblatex 3.0--3.3 的功能调整导致分类排序失效。%
 \parencite{3-2} 中同时有出版起止年和起止期号的情况就无法自动排版，
 只能通过用户手动实现。下面两种方式均可实现上述需求
 （\verb|origdate| 字段的用法请参考第 \ref{sec:faq} 部分）：
-\begin{Verbatim}[frame = single]
+\begin{Verbatim}
 @periodical{3-2,
 	author = {中国图书馆学会},
 	title = {图书馆学通讯},
@@ -455,7 +461,7 @@ biblatex 3.0--3.3 的功能调整导致分类排序失效。%
 }
 \end{Verbatim}
 或
-\begin{Verbatim}[frame = single]
+\begin{Verbatim}
 @customf{3-2,
 	author = {中国图书馆学会},
 	title = {图书馆学通讯},
@@ -480,7 +486,7 @@ biblatex 3.0--3.3 的功能调整导致分类排序失效。%
 \end{refcontext}
 
 \section{更新记录}
-\VerbatimInput[tabsize = 4, fontsize = {\small}, baselinestretch = 1]{ChangeLog.txt}
+\VerbatimInput{ChangeLog.txt}
 
 \nocite{*}
 \end{document}
