@@ -28,12 +28,14 @@
 \RequireBiber[3]
 \newtoggle{bbx:gbk}
 \newtoggle{bbx:ugly}
+\newtoggle{bbx:cparen}
 \newtoggle{bbx:bfdate}\toggletrue{bbx:bfdate}
 \DeclareBibliographyOption{utf8}[true]{\togglefalse{bbx:gbk}}
 \DeclareBibliographyOption{gbk}[true]{\toggletrue{bbx:gbk}}
 \DeclareBibliographyOption{ugly}[true]{\settoggle{bbx:ugly}{#1}}
+\DeclareBibliographyOption{cparen}[true]{\settoggle{bbx:cparen}{#1}}
 \ExecuteBibliographyOptions{%
-	gbk, ugly = false, autopunct = false, alldates = iso,
+	gbk, ugly = false, cparen = false, autopunct = false, alldates = iso,
 	minnames = 3, minitems = 3, maxcitenames = 2, mincitenames = 1%
 }
 \AtEndOfPackage{%
@@ -92,6 +94,9 @@
 \newcommand*{\bbx@cietext}[2]{\ifboolexpr{
 	test {\ifcitation} or test {\iffieldequalstr{userf}{zh}}
 }{#1}{#2}}
+\newcommand*{\bbx@cieparen}[2]{\ifboolexpr{
+	test {\ifcitation} and test {\iftoggle{bbx:cparen}}
+}{#1}{#2}}
 \newcommand*{\bbx@cecomma}{\bbx@cepunct{\bbx@cncomma}{\addcomma\addspace}}
 \newcommand*{\bbx@cecolon}{\bbx@cepunct{\bbx@cncolon}{\addcolon\addspace}}
 \newcommand*{\bbx@cescolon}{\bbx@cepunct{\bbx@cnscolon}{\addsemicolon\addspace}}
@@ -109,6 +114,11 @@
 \DefineBibliographyExtras{english}{%
 	\renewcommand*{\finalandcomma}{}%
 }
+\renewcommand*{\bibleftparen}{\bbx@cieparen{\bbx@cnlparen}{\blx@postpunct(}}
+\renewcommand*{\bibrightparen}%
+	{\bbx@cieparen{\bbx@cnrparen}{\blx@postpunct)\midsentence}}
+\DeclareDelimFormat[textcite]{nameyeardelim}{\bbx@cieparen{}{\addspace}}
+\DeclareDelimFormat[textcite]{nonameyeardelim}{\bbx@cieparen{}{\addspace}}
 
 \DefineBibliographyStrings{english}%
 	{bibliography = {\bbx@cnbib}, references = {\bbx@cnbib}}

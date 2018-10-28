@@ -32,6 +32,8 @@
 \newcommand*\bbx@cnscolon{；}
 \newcommand*\bbx@cncolon{：}
 \newcommand*\bbx@cnperiod{。}
+\newcommand*\bbx@cnlparen{（}
+\newcommand*\bbx@cnrparen{）}
 \newcommand*\bbx@cnetal{等}
 \newcommand*\bbx@cnauthor{著}
 \newcommand*\bbx@cneditor{编}

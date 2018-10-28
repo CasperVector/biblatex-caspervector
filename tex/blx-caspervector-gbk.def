@@ -32,6 +32,8 @@
 \newcommand*\bbx@cnscolon{£»}
 \newcommand*\bbx@cncolon{£º}
 \newcommand*\bbx@cnperiod{¡£}
+\newcommand*\bbx@cnlparen{£¨}
+\newcommand*\bbx@cnrparen{£©}
 \newcommand*\bbx@cnetal{µÈ}
 \newcommand*\bbx@cnauthor{Öø}
 \newcommand*\bbx@cneditor{±à}
