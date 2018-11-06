@@ -27,27 +27,27 @@
 
 \RequireBibliographyStyle{authoryear-comp}
 \input{blx-caspervector-base.def}
-\appto\bbx@opt@mergedate@maximum{\renewbibmacro*{bbx:ifnodate}[2]{%
+\appto\bbx@opt@mergedate@maximum{\renewbibmacro*{bbx:ifmergeddate}[2]{%
 	\iflabeldateisdate{#1}{#2}%
 }\togglefalse{bbx:bfdate}}
-\appto\bbx@opt@mergedate@compact{\renewbibmacro*{bbx:ifnodate}[2]{%
+\appto\bbx@opt@mergedate@compact{\renewbibmacro*{bbx:ifmergeddate}[2]{%
 	\iflabeldateisdate{#1}{#2}%
 }\togglefalse{bbx:bfdate}}
-\appto\bbx@opt@mergedate@basic{\renewbibmacro*{bbx:ifnodate}[2]{%
+\appto\bbx@opt@mergedate@basic{\renewbibmacro*{bbx:ifmergeddate}[2]{%
 	\ifboolexpr{
 		test {\iflabeldateisdate} and
 		not test {\ifdateshavedifferentprecision{label}{}}
 	}{#1}{#2}%
 }\toggletrue{bbx:bfdate}}
-\appto\bbx@opt@mergedate@minimum{\renewbibmacro*{bbx:ifnodate}[2]{%
+\appto\bbx@opt@mergedate@minimum{\renewbibmacro*{bbx:ifmergeddate}[2]{%
 	\ifboolexpr{
 		test {\iflabeldateisdate} and test {\iffieldundef{extradate}} and
 		not test {\ifdateshavedifferentprecision{label}{}}
 	}{#1}{#2}%
 }\toggletrue{bbx:bfdate}}
 \appto\bbx@opt@mergedate@false%
-	{\renewbibmacro*{bbx:ifnodate}[2]{#2}\toggletrue{bbx:bfdate}}
-\renewbibmacro*{date}{\usebibmacro{bbx:ifnodate}{}{\printdate}}
+	{\renewbibmacro*{bbx:ifmergeddate}[2]{#2}\toggletrue{bbx:bfdate}}
+\renewbibmacro*{date}{\usebibmacro{bbx:ifmergeddate}{}{\printdate}}
 
 \ExecuteBibliographyOptions%
 	{labeldate = year, mergedate = basic, dashed = false, sorting = ecnyt}

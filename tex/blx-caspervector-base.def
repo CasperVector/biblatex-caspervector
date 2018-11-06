@@ -178,7 +178,7 @@
 	\usebibmacro{bytranslator}%
 }
 
-\providebibmacro*{bbx:ifnodate}[2]{#2}
+\providebibmacro*{bbx:ifmergeddate}[2]{#2}
 \newbibmacro*{journaltitle/title}{%
 	\iffieldundef{journaltitle}%
 		{\bbx@print{title}}{\printfield[title]{journaltitle}}%
@@ -189,7 +189,7 @@
 		{}{\setunit{\bbx@cecomma}}%
 	\usebibmacro{date}\setunit*{\bbx@cecomma}\printfield{note}%
 	\ifboolexpr{
-		(test {\usebibmacro{bbx:ifnodate}} or test {\ifdateunknown}) and
+		(test {\usebibmacro{bbx:ifmergeddate}} or test {\ifdateunknown}) and
 		test {\iffieldundef{note}}
 	}{}{\setunit{\bbx@cecolon}}%
 	\printfield{pages}%
@@ -199,7 +199,7 @@
 	\iffieldundef{volume}{}{\setunit*{\bbx@cecomma}\printfield{volume}}%
 	\bbx@print{number}\setunit*{\bbx@cecomma}\printfield{note}%
 	\ifboolexpr{
-		(test {\usebibmacro{bbx:ifnodate}} or test {\ifdateunknown}) and
+		(test {\usebibmacro{bbx:ifmergeddate}} or test {\ifdateunknown}) and
 		test {\iffieldundef{volume}} and test {\iffieldundef{number}} and
 		test {\iffieldundef{note}}
 	}{}{\setunit{\bbx@cecolon}}%
