@@ -27,11 +27,12 @@
 
 \hypersetup{colorlinks = true, allcolors = blue}
 \pagestyle{fancy}\fancyhf{}\cfoot{\thepage}
-\renewcommand{\headrulewidth}{0pt}
-\setlist{nolistsep}
-\setlength{\hfuzz}{3pt}
+\renewcommand*{\headrulewidth}{0pt}
 \ctexset{linestretch = {\maxdimen}}
-\renewcommand{\bibfont}{\small}
+\setlength{\hfuzz}{3pt}
+\setlist{nolistsep}
+\renewcommand*{\bibfont}{\small}
+
 \newcommand{\myemph}[1]{\emph{\textcolor{red}{#1}}}
 \RecustomVerbatimEnvironment{Verbatim}{Verbatim}%
 	{frame = single, tabsize = 4, formatcom = {\ifXeTeX\xeCJKVerbAddon\fi}}
