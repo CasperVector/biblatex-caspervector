@@ -33,6 +33,7 @@
 \setlist{nolistsep}
 \renewcommand*{\bibfont}{\small}
 
+\newcommand*{\cupercite}[1]{\mbox{\supercite{#1}}}
 \newcommand{\myemph}[1]{\emph{\textcolor{red}{#1}}}
 \RecustomVerbatimEnvironment{Verbatim}{Verbatim}%
 	{frame = single, tabsize = 4, formatcom = {\ifXeTeX\xeCJKVerbAddon\fi}}
@@ -62,7 +63,7 @@
 使开发者难以入门和精通，更不便于一般用户进行自定义；
 其次，其排序方式很单一，
 无法直接实现中文 \hologo{TeX} 用户常常遇到的按汉语拼音排序等需求。
-与此相对应，biblatex\supercite{biblatex}/biber\supercite{biber}
+与此相对应，biblatex\cupercite{biblatex}/biber\cupercite{biber}
 是一套新兴的 \hologo{TeX} 参考文献排版引擎，
 其样式文件（设定参考文献样式的 \verb|bbx| 文件和设定引用样式的 \verb|cbx| 文件）
 使用 \hologo{LaTeX} 编写，便于学习；
@@ -71,11 +72,11 @@
 为了个人需要，同时也是为了给社区提供一个有益的参考，
 本文作者根据实际应用中遇到的常见需求编写了
 \verb|caspervector| 这个中西文 biblatex 样式。
-其逻辑框架基于国家标准 GB/T 7714--2005\supercite{gbt7714-2005}，
+其逻辑框架基于国家标准 GB/T 7714--2005\cupercite{gbt7714-2005}，
 但在后者基础上根据个人审美趣味和 biblatex 所能实现的功能而
 对参考文献和引用格式进行了较大幅度的修改。
 用户如果需要更严格符合国家标准的样式，可以参考
-\verb|gb7714-2015|\supercite{blx-gb7714-2015}。
+\verb|gb7714-2015|\cupercite{blx-gb7714-2015}。
 
 \section{许可协议}
 
@@ -115,7 +116,7 @@
 ]{biblatex}
 \end{Verbatim}
 其中 \verb|sorting| 选项用于（全局）指定按哪些字段排序，
-除 biblatex 提供的标准选项\supercite{biblatex}外，%
+除 biblatex 提供的标准选项\cupercite{biblatex}外，%
 \verb|caspervector| 样式还提供 \verb|cenyt| 和 \verb|ecnyt| 两种排序方案
 （\verb|caspervector| 默认设置为 \verb|none| 排序方案，即按引用顺序排序），
 表示依次按文献语言
@@ -168,7 +169,7 @@
 \subsection{文献列表}
 
 使用 \verb|\printbibliography| 命令可以在相应位置排版文献列表。
-其可（在方括号内）带一些可选参数\supercite{biblatex}，
+其可（在方括号内）带一些可选参数\cupercite{biblatex}，
 常见的有：
 \begin{itemize}
 	\item \verb|title = 标题|：
@@ -225,7 +226,7 @@ pdflatex texfile
 		v0.3.2 和更早版本的 \texttt{caspervector} 样式不支持 \texttt{edition}
 		字段，但可手动在 \texttt{title} 字段中标注相应信息。%
 	}，若为整数则会自动排版为“第 2 版”或“2nd ed.”等形式。
-	\item \verb|type|：文献类型和电子文献载体标志代码\supercite{gbt7714-2005}。
+	\item \verb|type|：文献类型和电子文献载体标志代码\cupercite{gbt7714-2005}。
 	\item \verb|location|：出版地，或（在 \verb|@patent| 类条目中）专利申请地。
 	\item \verb|publisher|：出版者，或学位论文作者申请学位的单位。
 	\item \verb|journal|/\verb|journaltitle|：连续出版物题名，两个字段互相等价。
@@ -252,7 +253,7 @@ pdflatex texfile
 		否则（为其他值或未定义时）用西文排版。
 	\item \verb|note|：用于排版一些特殊内容，参考第 \ref{sec:faq} 部分。
 	\item \verb|userf|：\verb|caspervector| 样式内部使用。
-	\item 其它通用特殊字段，见 biblatex 手册\supercite{biblatex}。
+	\item 其它通用特殊字段，见 biblatex 手册\cupercite{biblatex}。
 \end{itemize}
 
 \section{条目类型}\label{sec:entries}
@@ -405,7 +406,7 @@ biblatex 的标准格式支持通过 \verb|eprint|、\verb|eprintclass|、\verb|
 eid = {\printtext[eprint:arxiv]{math/0211159}},
 \end{Verbatim}
 其中 \verb|arxiv| 可以替换为其它在标准格式中被 \verb|eprinttype|
-字段支持的字符串，详见 biblatex 手册\supercite{biblatex}；
+字段支持的字符串，详见 biblatex 手册\cupercite{biblatex}；
 如果须要排版 DOI，应将方括号中的整个字符串替换为 \verb|doi|。%
 \myemph{%
 	须要特别注意的是，如果电子标识码中有特殊字符如
