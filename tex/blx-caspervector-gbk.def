@@ -41,7 +41,7 @@
 \newcommand*\bbx@cnnr{第}
 \newcommand*\bbx@cnedition{版}
 \newcommand*\bbx@cnin{出自}
-\newcommand*\bbx@cnretr{检索于}
+\newcommand*\bbx@cnretr{访问于}
 \newcommand*\bbx@cnbib{参考文献}
 
 % vim:ft=tex:ts=2:sw=2

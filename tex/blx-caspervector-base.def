@@ -209,7 +209,7 @@
 	\printfield{eid}\setunit*{\bbx@cecomma}%
 	\printfield{url}\setunit*{\bbx@cecomma}%
 	\iffieldundef{urlyear}{}{%
-		\printtext{\bbx@cetext{\bbx@cnretr}{retrieved on}\addspace}%
+		\printtext{\bbx@cetext{\bbx@cnretr}{accessed on}\addspace}%
 		\printurldate%
 	}%
 }
