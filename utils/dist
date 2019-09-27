@@ -8,7 +8,7 @@ MV = mv -f
 MD = mkdir -p
 RM = rm -rf
 ZIP = zip -rT
-MAKE = make
+LMK = latexmk
 SELF = utils/dist
 PERM = find . -type d -exec chmod 755 '{}' + && \
 	find . -type f -exec chmod 644 '{}' +
@@ -20,8 +20,7 @@ dist:
 	$(SELF) clean
 
 doc-pdf: doc/
-	cd doc/ && $(MAKE) && $(MAKE) clean
-	cd doc/ && $(MAKE) JOB=caspervector-ay && $(MAKE) JOB=caspervector-ay clean
+	cd doc/ && $(LMK) && $(LMK) -c && $(RM) *.xdv
 
 dir-tds: tex/ doc/
 	$(MD) $@/tex/latex/ $@/doc/latex/
@@ -43,7 +42,7 @@ $(TITLE)-$(VERSION).zip: dir-ctan
 		$(ZIP) -y ../$@ $(TITLE)/ $(TITLE).tds.zip
 
 clean:
-	cd doc/ && $(MAKE) distclean && $(MAKE) JOB=caspervector-ay distclean
+	cd doc/ && $(LMK) -C
 	$(RM) dir-ctan/ dir-tds/
 
 distclean:
