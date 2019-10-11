@@ -140,15 +140,17 @@
 \newbibmacro*{cein:}%
 	{\printtext{\bbx@cetext{\bbx@cnin}{In}\bbx@cecolon}\printtext{}}
 
-\newbibmacro*{cntypestrg}[1]{%
-	\printtext[#1type]{\iffieldundef{#1type}{\bibstring{cn#1}}{%
+\newbibmacro*{cntypestrg}[2]{%
+	\printtext[#1type]{\iffieldundef{#1type}{\bibstring{cn#2}}{%
 		\ifbibxstring{cn\thefield{#1type}}%
 			{\bibstring{cn\thefield{#1type}}}{\thefield{#1type}}%
 	}}%
 }
-\newbibmacro*{cnauthorstrg}{\usebibmacro{cntypestrg}{author}}
-\newbibmacro*{cneditorstrg}{\usebibmacro{cntypestrg}{editor}}
-\newbibmacro*{cntranslatorstrg}{\usebibmacro{cntypestrg}{translator}}
+\newbibmacro*{cnauthorstrg}{\usebibmacro{cntypestrg}{author}{author}}
+\newbibmacro*{cneditorstrg}{\usebibmacro{cntypestrg}{editor}{editor}}
+\newbibmacro*{cntranslatorstrg}%
+	{\usebibmacro{cntypestrg}{translator}{translator}}
+
 \newbibmacro*{ceauedtrans}[1]{%
 	\ifboolexpr{test {\iftoggle{blx@use#1}} and not test {\ifnameundef{#1}}}{%
 		\printnames{#1}\bbx@ifstrg{#1}{%
@@ -167,23 +169,41 @@
 		{\usebibmacro{ceauedtrans}{editor}}{\printnames{bookauthor}}%
 }
 
-\newbibmacro*{cebyauedtrans}[1]{%
-	\ifboolexpr{
-		test {\ifnameundef{#1}} or
-		(test {\ifstrequal{#1}{author}} and test {\ifuseauthor})
-	}{}{%
+\newbibmacro*{cebyaetbase}[2]{%
+	\bbx@cetext{%
+		\printnames[by#1]{#1}\usebibmacro{cntypedelim}{#1}%
+		\usebibmacro{cntypestrg}{#1}{#2}%
+	}{%
+		\usebibmacro{bytypestrg}{#1}{#2}%
+		\setunit{\addspace}\printnames[by#1]{#1}%
+	}%
+}
+\renewbibmacro*{byauthor}{%
+	\ifboolexpr{test {\ifuseauthor} or test {\ifnameundef{author}}}%
+		{}{\usebibmacro{cebyaetbase}{author}{author}}%
+}
+\renewbibmacro*{byeditor}{%
+	\ifnameundef{editor}{}%
+		{\usebibmacro{cebyaetbase}{editor}{editor}\setunit*{\bbx@cescolon}}%
+	\ifnameundef{editora}{}%
+		{\usebibmacro{cebyaetbase}{editora}{editor}\setunit*{\bbx@cescolon}}%
+	\ifnameundef{editorb}{}%
+		{\usebibmacro{cebyaetbase}{editorb}{editor}\setunit*{\bbx@cescolon}}%
+	\ifnameundef{editorc}{}%
+		{\usebibmacro{cebyaetbase}{editorc}{editor}\setunit*{\bbx@cescolon}}%
+}
+\renewbibmacro*{bytranslator}{%
+	\ifnameundef{translator}{}{%
 		\bbx@cetext{%
-			\printnames[by#1]{#1}\usebibmacro{cntypedelim}{#1}%
-			\usebibmacro{cn#1strg}%
+			\printnames[bytranslator]{translator}%
+			\usebibmacro{cntypedelim}{translator}%
+			\printtext{\bibstring{cntranslator}}%
 		}{%
-			\usebibmacro{bytypestrg}{#1}{#1}%
-			\setunit{\addspace}\printnames[by#1]{#1}%
+			\printtext{\bibstring{bytranslator}}%
+			\setunit{\addspace}\printnames[bytranslator]{translator}%
 		}%
 	}%
 }
-\renewbibmacro*{byauthor}{\usebibmacro{cebyauedtrans}{author}}
-\renewbibmacro*{byeditor}{\usebibmacro{cebyauedtrans}{editor}}
-\renewbibmacro*{bytranslator}{\usebibmacro{cebyauedtrans}{translator}}
 \newbibmacro*{byauthor+byeditor+bytranslator}{%
 	\usebibmacro{byauthor}\setunit*{\bbx@cescolon}%
 	\usebibmacro{byeditor}\setunit*{\bbx@cescolon}%
