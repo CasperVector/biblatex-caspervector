@@ -44,7 +44,7 @@
 		\usebibmacro{bbx:dashcheck}{\bibnamedash}{%
 			\usebibmacro{bbx:savehash}\printnames{#1}\bbx@ifstrg{#1}{%
 				\bbx@cetext%
-					{\printtext{\bbx@byspace{#1}}}{\setunit{\printdelim{#1typedelim}}}%
+					{\usebibmacro{cntypedelim}{#1}}{\setunit{\printdelim{#1typedelim}}}%
 			}{\setunit{\printdelim{nameyeardelim}}}%
 		}\bbx@ifstrg{#1}{%
 			\bbx@cetext{\usebibmacro{cn#1strg}}{\usebibmacro{#1strg}}%

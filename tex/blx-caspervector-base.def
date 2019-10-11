@@ -136,8 +136,7 @@
 		{\ifinteger{#1}{\mkbibordedition{#1}~\bibstring{edition}}{#1\isdot}}%
 }
 \newcommand*{\bbx@print}[1]{\iffieldundef{#1}{}{\printfield{#1}}}
-\newcommand*{\bbx@byspace}[1]%
-	{\ifnumgreater{\value{#1}}{\value{maxnames}}{}{\addspace}}
+\newbibmacro*{cntypedelim}[1]{\ifandothers{#1}{}{\printtext{\andothersdelim}}}
 \newbibmacro*{cein:}%
 	{\printtext{\bbx@cetext{\bbx@cnin}{In}\bbx@cecolon}\printtext{}}
 
@@ -154,7 +153,7 @@
 	\ifboolexpr{test {\iftoggle{blx@use#1}} and not test {\ifnameundef{#1}}}{%
 		\printnames{#1}\bbx@ifstrg{#1}{%
 			\bbx@cetext%
-				{\printtext{\bbx@byspace{#1}}\usebibmacro{cn#1strg}}%
+				{\usebibmacro{cntypedelim}{#1}\usebibmacro{cn#1strg}}%
 				{\setunit{\printdelim{#1typedelim}}\usebibmacro{#1strg}}%
 		}{}\ifstrequal{#1}{author}{}{\clearname{#1}}%
 	}{}%
@@ -174,8 +173,8 @@
 		(test {\ifstrequal{#1}{author}} and test {\ifuseauthor})
 	}{}{%
 		\bbx@cetext{%
-			\printnames[by#1]{#1}%
-			\printtext{\bbx@byspace{#1}}\usebibmacro{cn#1strg}%
+			\printnames[by#1]{#1}\usebibmacro{cntypedelim}{#1}%
+			\usebibmacro{cn#1strg}%
 		}{%
 			\usebibmacro{bytypestrg}{#1}{#1}%
 			\setunit{\addspace}\printnames[by#1]{#1}%
