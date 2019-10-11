@@ -90,6 +90,7 @@
 		}}%
 }
 
+\NewBibliographyString{cnauthor, cneditor, cntranslator}
 \newcommand*{\bbx@cetext}[2]{\iffieldequalstr{userf}{zh}{#1}{#2}}
 \newcommand*{\bbx@cietext}[2]{\ifboolexpr{
 	test {\ifcitation} or test {\iffieldequalstr{userf}{zh}}
@@ -123,8 +124,6 @@
 \DeclareDelimFormat[textcite]{nameyeardelim}{\bbx@cieparen{}{\addspace}}
 \DeclareDelimFormat[textcite]{nonameyeardelim}{\bbx@cieparen{}{\addspace}}
 
-\DefineBibliographyStrings{english}%
-	{bibliography = {\bbx@cnbib}, references = {\bbx@cnbib}}
 \DeclareFieldFormat*{pages}{#1}
 \DeclareFieldFormat*{url}{\url{#1}}
 \DeclareFieldFormat*{urldate}{#1}
@@ -142,11 +141,20 @@
 \newbibmacro*{cein:}%
 	{\printtext{\bbx@cetext{\bbx@cnin}{In}\bbx@cecolon}\printtext{}}
 
+\newbibmacro*{cntypestrg}[1]{%
+	\printtext[#1type]{\iffieldundef{#1type}{\bibstring{cn#1}}{%
+		\ifbibxstring{cn\thefield{#1type}}%
+			{\bibstring{cn\thefield{#1type}}}{\thefield{#1type}}%
+	}}%
+}
+\newbibmacro*{cnauthorstrg}{\usebibmacro{cntypestrg}{author}}
+\newbibmacro*{cneditorstrg}{\usebibmacro{cntypestrg}{editor}}
+\newbibmacro*{cntranslatorstrg}{\usebibmacro{cntypestrg}{translator}}
 \newbibmacro*{ceauedtrans}[1]{%
 	\ifboolexpr{test {\iftoggle{blx@use#1}} and not test {\ifnameundef{#1}}}{%
 		\printnames{#1}\bbx@ifstrg{#1}{%
 			\bbx@cetext%
-				{\printtext{\bbx@byspace{#1}\@nameuse{bbx@cn#1}}}%
+				{\printtext{\bbx@byspace{#1}}\usebibmacro{cn#1strg}}%
 				{\setunit{\printdelim{#1typedelim}}\usebibmacro{#1strg}}%
 		}{}\ifstrequal{#1}{author}{}{\clearname{#1}}%
 	}{}%
@@ -167,7 +175,7 @@
 	}{}{%
 		\bbx@cetext{%
 			\printnames[by#1]{#1}%
-			\printtext{\bbx@byspace{#1}\@nameuse{bbx@cn#1}}%
+			\printtext{\bbx@byspace{#1}}\usebibmacro{cn#1strg}%
 		}{%
 			\usebibmacro{bytypestrg}{#1}{#1}%
 			\setunit{\addspace}\printnames[by#1]{#1}%

@@ -47,7 +47,7 @@
 					{\printtext{\bbx@byspace{#1}}}{\setunit{\printdelim{#1typedelim}}}%
 			}{\setunit{\printdelim{nameyeardelim}}}%
 		}\bbx@ifstrg{#1}{%
-			\bbx@cetext{\printtext{\@nameuse{bbx@cn#1}}}{\usebibmacro{#1strg}}%
+			\bbx@cetext{\usebibmacro{cn#1strg}}{\usebibmacro{#1strg}}%
 			\setunit{\printdelim{nameyeardelim}}%
 		}{}\ifstrequal{#1}{author}{}{\clearname{#1}}%
 	}{%

@@ -1,6 +1,6 @@
 % Casper Ti. Vector's biblatex style
 %
-% Copyright (c) 2012-2016,2018 Casper Ti. Vector
+% Copyright (c) 2012-2016,2018-2019 Casper Ti. Vector
 %
 % This work may be distributed and/or modified under the conditions of the
 % LaTeX Project Public License, either version 1.3 of this license or (at
@@ -35,13 +35,17 @@
 \newcommand*\bbx@cnlparen{（}
 \newcommand*\bbx@cnrparen{）}
 \newcommand*\bbx@cnetal{等}
-\newcommand*\bbx@cnauthor{著}
-\newcommand*\bbx@cneditor{编}
-\newcommand*\bbx@cntranslator{译}
 \newcommand*\bbx@cnnr{第}
 \newcommand*\bbx@cnedition{版}
 \newcommand*\bbx@cnin{出自}
 \newcommand*\bbx@cnretr{访问于}
-\newcommand*\bbx@cnbib{参考文献}
+
+\DefineBibliographyStrings{english}{
+	cnauthor = {著},
+	cneditor = {编},
+	cntranslator = {译},
+	bibliography = {参考文献},
+	references = {参考文献},
+}
 
 % vim:ft=tex:ts=2:sw=2
