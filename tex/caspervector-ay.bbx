@@ -1,6 +1,6 @@
 % Casper Ti. Vector's biblatex style
 %
-% Copyright (c) 2012-2018 Casper Ti. Vector
+% Copyright (c) 2012-2019 Casper Ti. Vector
 %
 % This work may be distributed and/or modified under the conditions of the
 % LaTeX Project Public License, either version 1.3 of this license or (at
@@ -39,21 +39,24 @@
 \DeclareNameAlias{editor}{default}
 \DeclareNameAlias{translator}{default}
 
-\newbibmacro*{ayedtrans}[1]{%
+\newbibmacro*{ayauedtrans}[1]{%
 	\ifboolexpr{test {\iftoggle{blx@use#1}} and not test {\ifnameundef{#1}}}{%
 		\usebibmacro{bbx:dashcheck}{\bibnamedash}{%
-			\printnames{#1}%
-			\bbx@cetext%
-				{\printtext{\bbx@byspace{#1}}}{\setunit{\printdelim{#1typedelim}}}%
-			\usebibmacro{bbx:savehash}%
-		}\bbx@cetext{\printtext{\@nameuse{bbx@cn#1}}}{\usebibmacro{#1strg}}%
-		\setunit{\printdelim{nameyeardelim}}\clearname{#1}%
+			\usebibmacro{bbx:savehash}\printnames{#1}\bbx@ifstrg{#1}{%
+				\bbx@cetext%
+					{\printtext{\bbx@byspace{#1}}}{\setunit{\printdelim{#1typedelim}}}%
+			}{\setunit{\printdelim{nameyeardelim}}}%
+		}\bbx@ifstrg{#1}{%
+			\bbx@cetext{\printtext{\@nameuse{bbx@cn#1}}}{\usebibmacro{#1strg}}%
+			\setunit{\printdelim{nameyeardelim}}%
+		}{}\ifstrequal{#1}{author}{}{\clearname{#1}}%
 	}{%
 		\global\undef\bbx@lasthash
 		\usebibmacro{labeltitle}\setunit*{\printdelim{nonameyeardelim}}%
 	}\usebibmacro{date+extradate}%
 }
-\renewbibmacro*{editor}{\usebibmacro{ayedtrans}{editor}}
-\renewbibmacro*{translator}{\usebibmacro{ayedtrans}{translator}}
+\renewbibmacro*{author}{\usebibmacro{ayauedtrans}{author}}
+\renewbibmacro*{editor}{\usebibmacro{ayauedtrans}{editor}}
+\renewbibmacro*{translator}{\usebibmacro{ayauedtrans}{translator}}
 
 % vim:ft=tex:ts=2:sw=2

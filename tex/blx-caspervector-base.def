@@ -1,6 +1,6 @@
 % Casper Ti. Vector's biblatex style
 %
-% Copyright (c) 2012-2018 Casper Ti. Vector
+% Copyright (c) 2012-2019 Casper Ti. Vector
 %
 % This work may be distributed and/or modified under the conditions of the
 % LaTeX Project Public License, either version 1.3 of this license or (at
@@ -97,6 +97,9 @@
 \newcommand*{\bbx@cieparen}[2]{\ifboolexpr{
 	test {\ifcitation} and test {\iftoggle{bbx:cparen}}
 }{#1}{#2}}
+\newcommand*{\bbx@ifstrg}[3]{\ifboolexpr{%
+	test {\ifstrequal{#1}{author}} and test {\iffieldundef{authortype}}
+}{#3}{#2}}
 \newcommand*{\bbx@cecomma}{\bbx@cepunct{\bbx@cncomma}{\addcomma\addspace}}
 \newcommand*{\bbx@cecolon}{\bbx@cepunct{\bbx@cncolon}{\addcolon\addspace}}
 \newcommand*{\bbx@cescolon}{\bbx@cepunct{\bbx@cnscolon}{\addsemicolon\addspace}}
@@ -139,23 +142,25 @@
 \newbibmacro*{cein:}%
 	{\printtext{\bbx@cetext{\bbx@cnin}{In}\bbx@cecolon}\printtext{}}
 
-\newbibmacro*{ceedtrans}[1]{%
+\newbibmacro*{ceauedtrans}[1]{%
 	\ifboolexpr{test {\iftoggle{blx@use#1}} and not test {\ifnameundef{#1}}}{%
-		\printnames{#1}%
-		\bbx@cetext%
-			{\printtext{\bbx@byspace{#1}\@nameuse{bbx@cn#1}}}%
-			{\setunit{\printdelim{#1typedelim}}\usebibmacro{#1strg}}%
-		\clearname{#1}%
+		\printnames{#1}\bbx@ifstrg{#1}{%
+			\bbx@cetext%
+				{\printtext{\bbx@byspace{#1}\@nameuse{bbx@cn#1}}}%
+				{\setunit{\printdelim{#1typedelim}}\usebibmacro{#1strg}}%
+		}{}\ifstrequal{#1}{author}{}{\clearname{#1}}%
 	}{}%
 }
-\renewbibmacro*{editor}{\usebibmacro{ceedtrans}{editor}}
-\renewbibmacro*{translator}{\usebibmacro{ceedtrans}{translator}}
+\renewbibmacro*{author}{\usebibmacro{ceauedtrans}{author}}
+\renewbibmacro*{editor}{\usebibmacro{ceauedtrans}{editor}}
+\renewbibmacro*{translator}{\usebibmacro{ceauedtrans}{translator}}
 \newbibmacro*{bookauthor/editor}{%
 	\ifnameundef{bookauthor}%
-		{\usebibmacro{ceedtrans}{editor}}{\printnames{bookauthor}}%
+		% Differs from `\usebibmacro{editor}' in caspervector-ay.
+		{\usebibmacro{ceauedtrans}{editor}}{\printnames{bookauthor}}%
 }
 
-\newbibmacro*{cebyauthx}[1]{%
+\newbibmacro*{cebyauedtrans}[1]{%
 	\ifboolexpr{
 		test {\ifnameundef{#1}} or
 		(test {\ifstrequal{#1}{author}} and test {\ifuseauthor})
@@ -164,14 +169,14 @@
 			\printnames[by#1]{#1}%
 			\printtext{\bbx@byspace{#1}\@nameuse{bbx@cn#1}}%
 		}{%
-			\bibstring{by#1}\setunit{\addspace}%
-			\printnames[by#1]{#1}%
+			\usebibmacro{bytypestrg}{#1}{#1}%
+			\setunit{\addspace}\printnames[by#1]{#1}%
 		}%
 	}%
 }
-\renewbibmacro*{byauthor}{\usebibmacro{cebyauthx}{author}}
-\renewbibmacro*{byeditor}{\usebibmacro{cebyauthx}{editor}}
-\renewbibmacro*{bytranslator}{\usebibmacro{cebyauthx}{translator}}
+\renewbibmacro*{byauthor}{\usebibmacro{cebyauedtrans}{author}}
+\renewbibmacro*{byeditor}{\usebibmacro{cebyauedtrans}{editor}}
+\renewbibmacro*{bytranslator}{\usebibmacro{cebyauedtrans}{translator}}
 \newbibmacro*{byauthor+byeditor+bytranslator}{%
 	\usebibmacro{byauthor}\setunit*{\bbx@cescolon}%
 	\usebibmacro{byeditor}\setunit*{\bbx@cescolon}%
