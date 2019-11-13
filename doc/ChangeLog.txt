@@ -1,7 +1,27 @@
-2018-06-29, v0.3.3
+2019-11-13, v0.3.4
+
+	* API changes:
+	- Add support for both Chinese and English `authortype'/`editortype'/...
+	- Add the `cparen' option to use Chinese parentheses in citations.
 
 	* Changes to package code:
+	- Facilitate customisation of the character before `等', `译' etc.
+	- Use more common words ("检索"/"retrieve" -> "访问"/"access").
+
+	* Changes to documentation:
+	- Migrate to latexmk.
+	- caspervector-ay.bbx: use upstreamed `bbx:ifmergeddate'.
+
+	* Misc:
+	- README: migrate to Gitea, "for obvious reasons".
+	- Minor fixes and cosmetics.
+
+2018-06-29, v0.3.3
+
+	* API changes:
 	- Add support for the `edition' field.
+
+	* Changes to package code:
 	- Refine `maxcitenames'/`mincitenames'.
 	- blx-caspervector-base.def: fix "et al" for citations.
 	- blx-caspervector-base.def: improve spacing between `title' and `type'.
@@ -45,7 +65,7 @@
 2018-05-28. v0.3.0
 
 	* API changes:
-	- Added the caspervector-ay style (`dashed' and `mergedate' supported).
+	- Add the caspervector-ay style (`dashed' and `mergedate' supported).
 	- Sorting: nty -> nyt.
 	- Reduced tolerance in `year'/`date'; `note' added in compensation.
 	- Support `useauthor'-related functionalities.

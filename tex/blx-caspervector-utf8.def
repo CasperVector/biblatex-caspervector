@@ -23,7 +23,7 @@
 %   blx-caspervector-utf8.def
 
 \ProvidesFile{blx-caspervector-utf8.def}%
-	[2018/06/29 v0.3.3 Chinese punctuations and captions in UTF-8]
+	[2019/11/13 v0.3.4 Chinese punctuations and captions in UTF-8]
 
 \newcommand*\bbx@cnldquot{“}
 \newcommand*\bbx@cnrdquot{”}

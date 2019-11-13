@@ -1,3 +1,6 @@
+# Copyright (c) 2019 Casper Ti. Vector
+# Public domain.
+
 @default_files = ('caspervector', 'caspervector-ay');
 $pdf_mode = 5;
 $bibtex_use = 1.5;
