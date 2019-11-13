@@ -49,9 +49,12 @@
 \verb|\parencite[见][第 4 页]{perelman}| &	\parencite[见][第 4 页]{perelman} \\
 \verb|\parencite{6-1, blx-gb7714-2015}| &	\parencite{6-1, blx-gb7714-2015} \\
 \verb|\textcite{biblatex, a2-3}| &	\textcite{biblatex, a2-3} \\\hline
-\multicolumn{2}{l}{（更多用法请参考 \texttt{texdoc 50-style-authoryear}。）} \\
 \end{tabular}
 \end{center}
+
+更多用法请参考 \verb|texdoc 50-style-authoryear|。此外 v0.3.4 的
+\verb|caspervector| 样式中新加入了 \verb|cparen| 选项，可在调用样式时
+开启（\verb|cparen = true|）以将上述命令产生的括号改为中文（全角）括号。
 
 \printbibliography[category = cited, title = {本文参考文献}]
 \printbibliography[notcategory = cited, title = {%

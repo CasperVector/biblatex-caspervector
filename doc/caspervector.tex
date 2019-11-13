@@ -87,13 +87,12 @@
 }发布。%
 \verb|caspervector| 样式目前由其作者维护。
 
-\section{系统要求和安装方式}
-\subsection{系统要求}
+\section{系统要求}
 
 \begin{itemize}
 	\item biblatex 宏包（2.0 或以上版本）：%
 		\verb|caspervector| 样式基于 biblatex 宏包。
-	\item biber 程序（和 biblatex 相应的版本）：
+	\item biber 程序（和 biblatex 的相应版本）：
 		用 biber 可以方便地实现文献按字母和拼音顺序排序。
 	\item 中文环境：%
 		\verb|caspervector| 样式虽支持中文，但其本身不提供中文环境。
@@ -251,6 +250,8 @@ pdflatex texfile
 	\item \verb|language|：
 		值为 \verb|chinese| 时，相应条目在文献列表中用中文排版；
 		否则（为其他值或未定义时）用西文排版。
+	\item \verb|authortype|、\verb|editortype| 等：用于指定
+		作者、编者的具体角色，参考第 \ref{sec:editortype} 部分。
 	\item \verb|note|：用于排版一些特殊内容，参考第 \ref{sec:faq} 部分。
 	\item \verb|userf|：\verb|caspervector| 样式内部使用。
 	\item 其它通用特殊字段，见 biblatex 手册\cupercite{biblatex}。
@@ -391,6 +392,44 @@ pdflatex texfile
 biblatex 3.0--3.3 中有一个 bug\footnote{\ %
 	可以参考 \url{https://tex.stackexchange.com/questions/250548/}。%
 } 导致分类排序失效，此问题基本无解。
+
+\section{指定作者、编者的角色}\label{sec:editortype}
+
+当 \verb|author|/\verb|editor| 字段对应的贡献者并不是标准的作者/编者时，
+可以使用 \verb|authortype|/\verb|editortype| 来指定作者/编者的具体角色，
+例如文献 \parencite{liuxie} 是通过 \verb|.bib| 文件中的以下代码排版的：
+\begin{Verbatim}
+@book{liuxie,
+	author = {刘勰},
+	title = {文心雕龙译注},
+	editor = {陆侃如 and 牟世金},
+	editortype = {译注},
+	...
+}
+\end{Verbatim}
+如果有多种角色的贡献者参与了文献的编写，还可以使用同被 biblatex 支持的
+\verb|editora|/\verb|editoratype|、\verb|editorb|/\verb|editorbtype|、%
+\verb|editorc|/\verb|editorctype| 字段。
+
+上述的 \verb|editortype| 类字段还可以设为 \verb|translatoran|
+等特殊值（biblatex 中预定义的列表见其手册\supercite{biblatex}），
+它们在通过类似于以下的代码定义之后会被展开为对应的内容：
+\begin{Verbatim}
+\NewBibliographyString{translatoran, bytranslatoran}
+\DefineBibliographyStrings{english}{
+    translatoran = {trans\adddot\ and annot\adddot},
+    bytranslatoran = {trans\adddot\ and annot\adddot\ by},
+}
+\end{Verbatim}
+对于中文文献，\verb|editortype| 类字段中的特殊值在定义时须加上前缀
+\verb|cn|，例如可以使用以下代码为中文文献定义特殊值 \verb|translatoran|：
+\begin{Verbatim}
+\NewBibliographyString{cntranslatoran}
+\DefineBibliographyStrings{english}{cntranslatoran = {译注}}
+\end{Verbatim}
+因为汉语语法的缘故，中文文献不需要定义 \verb|bytranslatoran|
+之类的特殊值；此外考虑到这一用法所需的额外代码，一般而言对于
+中文文献直接将 \verb|editortype| 类字段设为“译注”等显然更加方便。
 
 \section{FAQ 和其它使用提示}\label{sec:faq}
 
