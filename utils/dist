@@ -22,10 +22,11 @@ dist:
 doc-pdf: doc/
 	cd doc/ && $(LMK) && $(LMK) -c && $(RM) *.xdv
 
-dir-tds: tex/ doc/
+dir-tds: README tex/ doc/
 	$(MD) $@/tex/latex/ $@/doc/latex/
 	$(CP) tex/ $@/tex/latex/$(TITLE)
 	$(CP) doc/ $@/doc/latex/$(TITLE)
+	$(CP) README $@/doc/latex/$(TITLE)
 
 dist-tds: $(TITLE).tds.zip
 $(TITLE).tds.zip: dir-tds
