@@ -22,19 +22,19 @@ dist:
 doc-pdf: doc/
 	cd doc/ && $(LMK) && $(LMK) -c && $(RM) *.xdv
 
-dir-tds: README tex/ doc/
+dir-tds: README.txt tex/ doc/
 	$(MD) $@/tex/latex/ $@/doc/latex/
 	$(CP) tex/ $@/tex/latex/$(TITLE)
 	$(CP) doc/ $@/doc/latex/$(TITLE)
-	$(CP) README $@/doc/latex/$(TITLE)
+	$(CP) README.txt $@/doc/latex/$(TITLE)
 
 dist-tds: $(TITLE).tds.zip
 $(TITLE).tds.zip: dir-tds
 	cd $< && $(PERM) && $(ZIP) ../$@ tex/ doc/
 
-dir-ctan: README tex/ doc/ $(TITLE).tds.zip
+dir-ctan: README.txt tex/ doc/ $(TITLE).tds.zip
 	$(MD) $@/$(TITLE)/
-	$(CP) README tex/ doc/ $@/$(TITLE)/
+	$(CP) README.txt tex/ doc/ $@/$(TITLE)/
 	$(MV) $(TITLE).tds.zip $@/
 
 dist-ctan: $(TITLE)-$(VERSION).zip

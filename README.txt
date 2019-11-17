@@ -8,6 +8,6 @@ Licence: LaTeX Project Public Licence 1.3 or later
 This package provides a simple, nice and easily extensible
 biblography/citation style for Chinese LaTeX users.
 
-This file (README) is *NOT* intended as the documentation for this
-package; please see the file `caspervector.pdf' instead.
+This file (`README.txt') is *NOT* intended as the documentation for
+this package; please see the file `caspervector.pdf' instead.
 
