@@ -23,7 +23,7 @@
 %   blx-caspervector-utf8.def
 
 \ProvidesFile{blx-caspervector-gbk.def}%
-	[2019/11/13 v0.3.4 Chinese punctuations and captions in GBK]
+	[2020/11/02 v0.3.5 Chinese punctuations and captions in GBK]
 
 \newcommand*\bbx@cnldquot{¡°}
 \newcommand*\bbx@cnrdquot{¡±}
