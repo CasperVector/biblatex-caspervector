@@ -113,8 +113,9 @@
 \renewcommand*{\finalnamedelim}{\ifcitation{\bbx@citebcomma}{\finallistdelim}}
 \renewcommand*{\multinamedelim}{\ifcitation{\bbx@citebcomma}{\multilistdelim}}
 \renewcommand*{\postnotedelim}{\bbx@citecomma}
-\renewcommand*{\finentrypunct}%
-	{\iffieldundef{addendum}{\bbx@cepunct{\bbx@cnperiod}{.}}{}}
+\renewcommand*{\finentrypunct}{\ifboolexpr{
+	test {\iffieldundef{addendum}} and test {\iflistundef{pageref}}
+}{\bbx@cepunct{\bbx@cnperiod}{.}}{}}
 \DefineBibliographyExtras{english}{%
 	\renewcommand*{\finalandcomma}{}%
 }
@@ -135,6 +136,7 @@
 		{\ifinteger{#1}{{\bbx@cnnr} {#1} {\bbx@cnedition}}{#1}}%
 		{\ifinteger{#1}{\mkbibordedition{#1}~\bibstring{edition}}{#1\isdot}}%
 }
+\DeclareFieldFormat*{mypageref}{\mkbibemph{\mkbibbrackets{$\rightarrow$~#1}}}
 \newcommand*{\bbx@print}[1]{\iffieldundef{#1}{}{\printfield{#1}}}
 \newbibmacro*{cntypedelim}[1]{\ifandothers{#1}{}{\printtext{\andothersdelim}}}
 \newbibmacro*{cein:}%
@@ -243,6 +245,11 @@
 		\printurldate%
 	}%
 }
+\newbibmacro*{addendum+pageref}{%
+	\printfield{addendum}%
+	\iflistundef{pageref}{}%
+		{\printtext[mypageref]{\printlist[pageref][-\value{listtotal}]{pageref}}}%
+}
 
 \DeclareBibliographyDriver{book}{%
 	\usebibmacro{bibindex}\usebibmacro{begentry}%
@@ -256,7 +263,7 @@
 	\usebibmacro{location+publisher+date+note+pages}%
 	\printunit{\bbx@ceperiod}\newblock
 	\usebibmacro{eid+url+urldate}\printunit{\bbx@ceperiod}\newblock
-	\printfield{addendum}\usebibmacro{finentry}%
+	\usebibmacro{addendum+pageref}\usebibmacro{finentry}%
 }
 
 \DeclareBibliographyDriver{incollection}{%
@@ -274,7 +281,7 @@
 	\usebibmacro{location+publisher+date+note+pages}%
 	\printunit{\bbx@ceperiod}\newblock
 	\usebibmacro{eid+url+urldate}\printunit{\bbx@ceperiod}\newblock
-	\printfield{addendum}\usebibmacro{finentry}%
+	\usebibmacro{addendum+pageref}\usebibmacro{finentry}%
 }
 
 \DeclareBibliographyDriver{periodical}{%
@@ -290,7 +297,7 @@
 	\printlist{location}\setunit*{\bbx@cecolon}%
 	\printlist{publisher}\printunit{\bbx@ceperiod}\newblock
 	\usebibmacro{eid+url+urldate}\printunit{\bbx@ceperiod}\newblock
-	\printfield{addendum}\usebibmacro{finentry}%
+	\usebibmacro{addendum+pageref}\usebibmacro{finentry}%
 }
 
 \DeclareBibliographyDriver{article}{%
@@ -304,7 +311,7 @@
 	\usebibmacro{date+volume+number+note+pages}%
 	\printunit{\bbx@ceperiod}\newblock
 	\usebibmacro{eid+url+urldate}\printunit{\bbx@ceperiod}\newblock
-	\printfield{addendum}\usebibmacro{finentry}%
+	\usebibmacro{addendum+pageref}\usebibmacro{finentry}%
 }
 
 \DeclareBibliographyDriver{patent}{%
@@ -320,12 +327,12 @@
 	\usebibmacro{date}\setunit*{\bbx@cecomma}%
 	\printfield{note}\printunit{\bbx@ceperiod}\newblock
 	\usebibmacro{eid+url+urldate}\printunit{\bbx@ceperiod}\newblock
-	\printfield{addendum}\usebibmacro{finentry}%
+	\usebibmacro{addendum+pageref}\usebibmacro{finentry}%
 }
 
 \DeclareBibliographyDriver{customf}{%
 	\usebibmacro{bibindex}\usebibmacro{begentry}%
-	\printfield{addendum}\usebibmacro{finentry}%
+	\usebibmacro{addendum+pageref}\usebibmacro{finentry}%
 }
 
 \DeclareBibliographyAlias{booklet}{book}
