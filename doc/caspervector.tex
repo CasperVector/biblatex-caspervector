@@ -22,7 +22,7 @@
 \usepackage[margin = 2cm, centering, includefoot]{geometry}
 \usepackage[
 	backend = biber, style = caspervector, utf8,
-	giveninits = true, sortgiveninits = true
+	giveninits = true, sortgiveninits = true, backref = true
 ]{biblatex}
 \usepackage{iftex, fancyhdr, hyperref, enumitem, fancyvrb, hologo}
 
@@ -518,7 +518,9 @@ biblatex 3.0--3.3 的功能调整导致分类排序失效。%
 这两种方法中更加推荐使用前者，因为前者只须手动实现出版年和期号的排版。
 
 \begin{refcontext}[sorting = none]
-\printbibliography[category = cited, heading = bibnumbered, title = {本文参考文献}]
+\printbibliography[category = cited, heading = bibnumbered, title = {%
+	本文参考文献（反向引用页码是设定 \texttt{backref = true} 产生的）%
+}]
 \end{refcontext}
 \begin{refcontext}[sorting = ecnyt]
 \printbibliography[notcategory = cited, heading = bibnumbered, title = {%
