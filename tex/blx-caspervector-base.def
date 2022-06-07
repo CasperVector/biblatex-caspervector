@@ -247,8 +247,10 @@
 }
 \newbibmacro*{addendum+pageref}{%
 	\printfield{addendum}%
-	\iflistundef{pageref}{}%
-		{\printtext[mypageref]{\printlist[pageref][-\value{listtotal}]{pageref}}}%
+	\iflistundef{pageref}{}{%
+		\bbx@cetext{}{\setunit{\addspace}}%
+		\printtext[mypageref]{\printlist[pageref][-\value{listtotal}]{pageref}}%
+	}%
 }
 
 \DeclareBibliographyDriver{book}{%
