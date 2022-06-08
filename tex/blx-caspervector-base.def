@@ -248,7 +248,7 @@
 \newbibmacro*{addendum+pageref}{%
 	\printfield{addendum}%
 	\iflistundef{pageref}{}{%
-		\bbx@cetext{}{\setunit{\addspace}}%
+		\bbx@cepunct{}{\setunit{\addspace}}%
 		\printtext[mypageref]{\printlist[pageref][-\value{listtotal}]{pageref}}%
 	}%
 }
