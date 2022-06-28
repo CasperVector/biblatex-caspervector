@@ -136,7 +136,7 @@
 		{\ifinteger{#1}{{\bbx@cnnr} {#1} {\bbx@cnedition}}{#1}}%
 		{\ifinteger{#1}{\mkbibordedition{#1}~\bibstring{edition}}{#1\isdot}}%
 }
-\DeclareFieldFormat*{mypageref}{\mkbibemph{\mkbibbrackets{$\rightarrow$~#1}}}
+\DeclareFieldFormat*{mypageref}{\mkbibbrackets{\^{}\,#1}}
 \newcommand*{\bbx@print}[1]{\iffieldundef{#1}{}{\printfield{#1}}}
 \newbibmacro*{cntypedelim}[1]{\ifandothers{#1}{}{\printtext{\andothersdelim}}}
 \newbibmacro*{cein:}%
