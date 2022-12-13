@@ -245,13 +245,13 @@
 		\printurldate%
 	}%
 }
-\newbibmacro*{addendum+pageref}{%
-	\printfield{addendum}%
+\renewbibmacro*{pageref}{%
 	\iflistundef{pageref}{}{%
 		\bbx@cepunct{}{\setunit{\addspace}}%
 		\printtext[mypageref]{\printlist[pageref][-\value{listtotal}]{pageref}}%
 	}%
 }
+\newbibmacro*{addendum+pageref}{\printfield{addendum}\usebibmacro{pageref}}
 
 \DeclareBibliographyDriver{book}{%
 	\usebibmacro{bibindex}\usebibmacro{begentry}%
