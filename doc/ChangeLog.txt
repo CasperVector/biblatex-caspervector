@@ -1,3 +1,11 @@
+2024-03-07, v0.3.7
+
+	* Changes to package code:
+	- blx-caspervector-base.def: fix unwanted pageref in fullcite.
+
+	* Misc:
+	- Minor fixes and cosmetics.
+
 2022-10-30, v0.3.6
 
 	* API changes:
